@@ -3,23 +3,21 @@ export interface SessionItem {
   time: string;
   title: string;
   type: 'Keynote' | 'Talk' | 'Workshop' | 'Panel' | 'Break' | 'Sprint' | 'Demo';
-  isMandatory: boolean; // Mandatory (Core) vs Optional (Elective)
-  track: 'General' | 'Ecosystem' | 'Workshops Lab' | 'Packaging' | 'QA' | 'Hackathon';
+  isMandatory: boolean;
+  track: string;
   description: string;
+  location: string;
   speakerOrLead?: string;
-  location?: string;
 }
 
-export interface PhaseItem {
-  id: string;
-  phaseNumber: string;
-  title: string;
-  badge: string;
-  description: string;
-  topics: string[];
-  duration: string;
-  iconName: string;
-}
+export const BUDGET_BREAKDOWN = [
+  { category: "Venue & Operations", amount: "₹25,000", percentage: 28 },
+  { category: "Catering & Lunch", amount: "₹25,000", percentage: 28 },
+  { category: "Geeko Swag & T-Shirts", amount: "₹18,000", percentage: 20 },
+  { category: "Technical & AV", amount: "₹10,000", percentage: 11 },
+  { category: "Hackathon Prizes", amount: "₹8,000", percentage: 9 },
+  { category: "Speaker Hospitality", amount: "₹4,000", percentage: 4 },
+];
 
 export interface TrackItem {
   id: string;
@@ -29,28 +27,9 @@ export interface TrackItem {
   tech: string[];
 }
 
-export interface BudgetCategory {
-  category: string;
-  amount: string;
-  amountInr: number;
-  percentage: number;
-  description: string;
-}
-
-export interface TeamMember {
-  name: string;
-  role: string;
-  org: string;
-  avatarSeed: string;
-  github?: string;
-  linkedin?: string;
-  bio: string;
-}
-
 export interface FAQItem {
   q: string;
   a: string;
-  category: 'Registration' | 'Event' | 'Hackathon' | 'Sponsorship';
 }
 
 export const EVENT_CONFIG = {
@@ -60,270 +39,196 @@ export const EVENT_CONFIG = {
   tagline: "Explore Open Source. Learn openSUSE. Build Together.",
   motto: "Have a lot of fun…",
   dates: "January 2027",
-  exactDatesConfirmed: false,
-  datesAnnouncementText: "Exact January 2027 dates to be confirmed following community proposal approval. Pre-register for Day 1 or apply separately for the Day 2 Hackathon to receive instant updates.",
-  duration: "2 Full Days (Day 1: Talks & Workshops • Day 2: 10H Hackathon)",
+  datesNotice: "Target: January 2027 (Exact dates announcing soon)",
+  duration: "2 Days (Day 1: Talks & Labs • Day 2: 10H Hackathon)",
   location: "Bengaluru, Karnataka, India",
   venue: "Newton School of Technology",
   venueAddress: "Bengaluru Campus, Karnataka, India",
-  expectedAttendees: "300–400 Participants",
+  expectedAttendees: "300–400 Hackers & Devs",
   totalBudgetINR: "₹90,000",
-  hackathonDuration: "10-Hour Open-Source Sprint",
   organizer: "openSUSE India Community",
-  cfpStatus: "CFP OPEN // SUBMIT YOUR TALK",
 };
 
 export const EVENT_STATS = [
-  { label: "DAY 1 PROGRAM", value: "TALKS & LABS", subtext: "Core Keynotes + Elective Workshops" },
-  { label: "DAY 2 HACKATHON", value: "10 HOURS", subtext: "Separate Team & Solo Registration" },
-  { label: "CALL FOR PROPOSALS", value: "CFP OPEN", subtext: "Submit Talks, Workshops & Lightning" },
-  { label: "EXPECTED CAPACITY", value: "300–400", subtext: "Newton School of Technology" },
-];
-
-export const PHASES: PhaseItem[] = [
-  {
-    id: "phase-1",
-    phaseNumber: "PHASE 01",
-    title: "Technical Talks & Community Engagement",
-    badge: "DAY 1 • MORNING",
-    duration: "4 Hours",
-    iconName: "Terminal",
-    description: "Introduces participants to openSUSE, its global governance, and its mission in enterprise and desktop Linux ecosystems. Featuring seasoned contributors and community advocates.",
-    topics: [
-      "Introduction to openSUSE & the global open-source ecosystem",
-      "Diving deep into openSUSE Leap vs. openSUSE Tumbleweed",
-      "Linux development, modern system administration & career pathways",
-      "Understanding transparent, community-driven software development",
-      "Step-by-step guide: How to submit your first openSUSE patch",
-      "Joining global openSUSE special interest groups and mentorship initiatives"
-    ]
-  },
-  {
-    id: "phase-2",
-    phaseNumber: "PHASE 02",
-    title: "Hands-on Technical Workshops",
-    badge: "DAY 1 • AFTERNOON",
-    duration: "4.5 Hours",
-    iconName: "Cpu",
-    description: "Interactive, guided terminal and configuration workshops. Move past theoretical knowledge and gain real muscle memory with industry-standard openSUSE tools.",
-    topics: [
-      "Installing, partitioning & tuning openSUSE systems",
-      "High-speed package management with Zypper & libzypp",
-      "Advanced system administration and control with YaST (Yet another Setup Tool)",
-      "OBS Deep-Dive: Building and distributing packages with Open Build Service",
-      "Automated OS testing and continuous integration with openQA",
-      "Modern Git workflows, collaborative pull requests & review etiquette",
-      "Packaging upstream open-source code for global distribution"
-    ]
-  },
-  {
-    id: "phase-3",
-    phaseNumber: "PHASE 03",
-    title: "10-Hour Open-Source Hackathon",
-    badge: "DAY 2 • HACKATHON SPRINT",
-    duration: "10 Hours",
-    iconName: "Code2",
-    description: "An intensive sprint where developers, designers, and system builders form teams to build functional prototypes, automation scripts, and open-source solutions.",
-    topics: [
-      "Form teams of 2–4 or hack solo with dedicated openSUSE mentors",
-      "Build real-world utilities, CLI apps, infrastructure manifests, or community tools",
-      "Live technical mentorship desk and openSUSE package maintainer reviews",
-      "Live prototype demonstrations to a jury of open-source practitioners",
-      "Top project awards, openSUSE swag hampers, and direct mentorship forward"
-    ]
-  }
+  { label: "DURATION", value: "2 DAYS", subtext: "Intensive Tech Gathering" },
+  { label: "ATTENDEES", value: "300–400", subtext: "Devs, Students & Sysadmins" },
+  { label: "HACKATHON", value: "10 HOURS", subtext: "Separate Day 2 Registration" },
+  { label: "ADMISSION", value: "100% FREE", subtext: "Open-Source Community Event" },
 ];
 
 export const DAY1_SESSIONS: SessionItem[] = [
   {
-    id: "d1-s1",
-    time: "09:00 AM – 09:30 AM",
-    title: "Badge Pickup, Welcome Kit & Morning Networking",
+    id: "d1-1",
+    time: "09:00 – 09:30",
+    title: "Badge Pickup & Welcome Kit",
     type: "Break",
     isMandatory: true,
     track: "General",
-    description: "Check-in at Newton School of Technology, collect official openSUSE Geeko sticker packs and badge lanyards.",
-    location: "Main Reception Foyer"
+    description: "Check-in at Newton School of Tech, collect badge lanyards and Geeko sticker packs.",
+    location: "Main Foyer"
   },
   {
-    id: "d1-s2",
-    time: "09:30 AM – 10:15 AM",
-    title: "Opening Keynote: openSUSE in the Global Open-Source Landscape",
+    id: "d1-2",
+    time: "09:30 – 10:15",
+    title: "Keynote: openSUSE in the Global Open-Source Ecosystem",
     type: "Keynote",
     isMandatory: true,
     track: "General",
-    description: "Mandatory Core Session. Introduction to openSUSE governance, its mission across enterprise and desktop Linux ecosystems, and open-source ethics.",
-    speakerOrLead: "Invited openSUSE Community Advocate",
-    location: "Auditorium 1"
+    description: "openSUSE governance, global community reach, and open-source infrastructure.",
+    location: "Auditorium"
   },
   {
-    id: "d1-s3",
-    time: "10:15 AM – 11:00 AM",
+    id: "d1-3",
+    time: "10:15 – 11:00",
     title: "Distribution Architecture: Leap vs. Tumbleweed",
     type: "Talk",
     isMandatory: true,
-    track: "Ecosystem",
-    description: "Mandatory Core Session. Exploring the engineering differences between rolling release (Tumbleweed) and regular enterprise-paired release (Leap), Snapper snapshots, and developer toolchains.",
-    speakerOrLead: "Linux Systems Contributor",
-    location: "Auditorium 1"
+    track: "Architecture",
+    description: "Rolling release (Tumbleweed) vs enterprise-aligned regular release (Leap) and Snapper Btrfs rollbacks.",
+    location: "Auditorium"
   },
   {
-    id: "d1-s4",
-    time: "11:00 AM – 11:15 AM",
-    title: "Tea Break & Community Hallway Track",
-    type: "Break",
-    isMandatory: false,
-    track: "General",
-    description: "Informal networking and discussion with mentors and speakers.",
-    location: "Cafeteria & Lounge"
-  },
-  {
-    id: "d1-s5",
-    time: "11:15 AM – 01:00 PM",
-    title: "Hands-on Workshop: Package Management with Zypper & YaST Control",
+    id: "d1-4",
+    time: "11:15 – 01:00",
+    title: "Lab A: Zypper Package Management & YaST System Control",
     type: "Workshop",
     isMandatory: false,
     track: "Workshops Lab",
-    description: "Optional Elective Lab. Installing openSUSE, package operations with Zypper SAT solver, repository management, Btrfs subvolumes, and YaST system control.",
-    speakerOrLead: "Community Technical Leads",
+    description: "Hands-on terminal setup: Zypper SAT solver, repo mirrors, subvolumes & YaST administration.",
     location: "Lab A (Bring Laptop)"
   },
   {
-    id: "d1-s6",
-    time: "11:15 AM – 01:00 PM",
-    title: "Parallel Session: Linux SysAdmin & Modern Open-Source Careers",
+    id: "d1-5",
+    time: "11:15 – 01:00",
+    title: "Talk B: Linux Systems Administration & Open-Source Careers",
     type: "Talk",
     isMandatory: false,
     track: "Ecosystem",
-    description: "Optional Elective Talk. How open-source systems engineering, Linux foundation certifications, and upstream contributions accelerate developer careers.",
-    speakerOrLead: "Invited Industry Professionals",
+    description: "Career opportunities in open-source systems engineering, DevOps, and Linux infrastructure.",
     location: "Seminar Hall B"
   },
   {
-    id: "d1-s7",
-    time: "01:00 PM – 02:00 PM",
-    title: "Community Lunch & Lightning Talks (5-Min Slots)",
+    id: "d1-6",
+    time: "01:00 – 02:00",
+    title: "Lunch & Community Lightning Talks",
     type: "Break",
     isMandatory: false,
     track: "General",
-    description: "Nutritious on-campus lunch with quick lightning presentations from community attendees.",
+    description: "On-campus lunch with rapid 5-minute attendee lightning presentations.",
     location: "Dining Hall"
   },
   {
-    id: "d1-s8",
-    time: "02:00 PM – 03:45 PM",
-    title: "Hands-on Workshop: Universal Packaging with Open Build Service (OBS)",
+    id: "d1-7",
+    time: "02:00 – 03:45",
+    title: "Lab A: Universal Packaging with Open Build Service (OBS)",
     type: "Workshop",
     isMandatory: false,
     track: "Packaging",
-    description: "Optional Elective Lab. Learn how to write RPM spec files, package upstream open-source code, and trigger automated builds for multiple Linux distributions using OBS.",
-    speakerOrLead: "OBS Maintainers",
+    description: "Writing RPM specs, automated multi-arch builds (x86/ARM), and multi-distro targets.",
     location: "Lab A (Bring Laptop)"
   },
   {
-    id: "d1-s9",
-    time: "02:00 PM – 03:45 PM",
-    title: "Parallel Session: Automated Operating System Testing with openQA",
+    id: "d1-8",
+    time: "02:00 – 03:45",
+    title: "Lab B: Automated Operating System Testing with openQA",
     type: "Workshop",
     isMandatory: false,
     track: "QA",
-    description: "Optional Elective Lab. Deep-dive into openQA computer vision-based visual regression testing and writing automated OS test needles.",
-    speakerOrLead: "QA Engineers",
+    description: "Visual regression testing and writing automated OS test needles with openQA.",
     location: "Lab B"
   },
   {
-    id: "d1-s10",
-    time: "04:00 PM – 05:00 PM",
-    title: "Contributor Pathways Panel & How to Submit Your First openSUSE Patch",
+    id: "d1-9",
+    time: "04:00 – 05:00",
+    title: "Contributor Pathways: Submitting Your First openSUSE Patch",
     type: "Panel",
     isMandatory: true,
     track: "General",
-    description: "Mandatory Core Wrap-up. Collaborative Git review etiquette, joining openSUSE Special Interest Groups (SIGs), and preparing for Day 2 Hackathon.",
-    speakerOrLead: "Organizing Team & Maintainers",
-    location: "Auditorium 1"
+    description: "Git review etiquette, openSUSE SIGs, and prep for the Day 2 Hackathon.",
+    location: "Auditorium"
   }
 ];
 
 export const DAY2_SESSIONS: SessionItem[] = [
   {
-    id: "d2-s1",
-    time: "08:30 AM – 09:15 AM",
-    title: "Hackathon Check-in, Team Matchmaking & Breakfast",
+    id: "d2-1",
+    time: "08:30 – 09:15",
+    title: "Hackathon Check-in & Team Matchmaking",
     type: "Break",
     isMandatory: true,
     track: "Hackathon",
-    description: "Check-in for registered hackathon participants. Solo hackers join the team formation session to form teams of 2–4.",
-    location: "Innovation Hub"
-  },
-  {
-    id: "d2-s2",
-    time: "09:15 AM – 09:45 AM",
-    title: "Hackathon Kickoff: 5 Track Challenges & Rules Announcement",
-    type: "Keynote",
-    isMandatory: true,
-    track: "Hackathon",
-    description: "Mandatory Kickoff. Briefing on the 5 open-source tracks, mentorship desk, and evaluation rubrics.",
-    location: "Main Auditorium"
-  },
-  {
-    id: "d2-s3",
-    time: "09:45 AM – 01:00 PM",
-    title: "Sprint Phase 1: Architecture, Prototyping & Mentor Reviews",
-    type: "Sprint",
-    isMandatory: true,
-    track: "Hackathon",
-    description: "10-Hour Hacking underway. On-site openSUSE mentors circulate to help with system APIs, packaging, and tooling.",
+    description: "Team check-in. Solo hackers pitch ideas and form teams of 1 to 4 members.",
     location: "Hacking Arena"
   },
   {
-    id: "d2-s4",
-    time: "01:00 PM – 02:00 PM",
-    title: "Hackers Working Lunch & Mid-Sprint Checkpoint",
+    id: "d2-2",
+    time: "09:15 – 09:45",
+    title: "Sprint Kickoff: Track Briefings & Rules",
+    type: "Keynote",
+    isMandatory: true,
+    track: "Hackathon",
+    description: "Briefing on the 5 tracks, mentor availability, code submission requirements, and judging.",
+    location: "Main Stage"
+  },
+  {
+    id: "d2-3",
+    time: "09:45 – 01:00",
+    title: "Hacking Sprint: Phase 1 & Architecture Reviews",
+    type: "Sprint",
+    isMandatory: true,
+    track: "Hackathon",
+    description: "Teams start building. Mentors circulate across tables to assist with tooling and APIs.",
+    location: "Hacking Arena"
+  },
+  {
+    id: "d2-4",
+    time: "01:00 – 02:00",
+    title: "Hackers Lunch & Progress Check-in",
     type: "Break",
     isMandatory: false,
     track: "Hackathon",
-    description: "Fuel and hydration for hacking teams.",
+    description: "Nutritious lunch and quick team check-ins.",
     location: "Dining Hall"
   },
   {
-    id: "d2-s5",
-    time: "02:00 PM – 06:00 PM",
-    title: "Sprint Phase 2: Feature Polish, Packaging & README Documentation",
+    id: "d2-5",
+    time: "02:00 – 06:00",
+    title: "Hacking Sprint: Phase 2 & Prototype Polish",
     type: "Sprint",
     isMandatory: true,
     track: "Hackathon",
-    description: "Finalizing prototypes, containerizing or writing RPM specs, and preparing repository demonstrations.",
+    description: "Finalizing implementations, writing READMEs, and testing live demos.",
     location: "Hacking Arena"
   },
   {
-    id: "d2-s6",
-    time: "06:00 PM – 06:30 PM",
-    title: "Code Freeze & Public Repository Submissions",
+    id: "d2-6",
+    time: "06:00 – 06:30",
+    title: "Code Freeze & Git Repository Submissions",
     type: "Sprint",
     isMandatory: true,
     track: "Hackathon",
-    description: "All code must be pushed to a public GitHub / GitLab / Codeberg repository under an open-source license.",
+    description: "All code committed to a public git repo under an open-source license.",
     location: "Hacking Arena"
   },
   {
-    id: "d2-s7",
-    time: "06:30 PM – 08:00 PM",
-    title: "Live Prototype Demonstrations Before Jury",
+    id: "d2-7",
+    time: "06:30 – 08:00",
+    title: "Live Project Demonstrations Before Jury",
     type: "Demo",
     isMandatory: true,
     track: "Hackathon",
-    description: "Teams present a live 4-minute working demonstration to the jury of mentors and openSUSE contributors.",
-    location: "Auditorium 1"
+    description: "4-minute working demos per team before the panel of technical judges.",
+    location: "Auditorium"
   },
   {
-    id: "d2-s8",
-    time: "08:00 PM – 08:30 PM",
-    title: "Awards Ceremony, Swag Distribution & Closing Vision",
+    id: "d2-8",
+    time: "08:00 – 08:30",
+    title: "Awards Ceremony, Swag & Closing",
     type: "Keynote",
     isMandatory: true,
     track: "Hackathon",
-    description: "Top project awards, certificates of excellence, Geeko merchandise hampers, and roadmap forward to openSUSE Conf India.",
-    location: "Auditorium 1"
+    description: "Winning project recognitions, openSUSE swag hampers, and closing roadmap.",
+    location: "Auditorium"
   }
 ];
 
@@ -332,150 +237,64 @@ export const HACKATHON_TRACKS: TrackItem[] = [
     id: "track-1",
     code: "TRACK // 01",
     title: "Linux & Developer Productivity Tools",
-    description: "Build command-line utilities, TUI tools, shell enhancements, debugging aids, or developer productivity workflows tailored for Linux.",
+    description: "CLI tools, shell enhancements, terminal utilities, or debugging aids.",
     tech: ["Bash", "Rust", "Go", "Python", "CLI / TUI"]
   },
   {
     id: "track-2",
     code: "TRACK // 02",
-    title: "Open-Source Automation & System Utilities",
-    description: "Create automated administration scripts, system monitors, backup solutions, kernel tweak tools, or YaST / systemd integration modules.",
-    tech: ["Systemd", "Ansible", "Zypper Hooks", "Btrfs Tools"]
+    title: "Automation & System Utilities",
+    description: "Automated admin scripts, system monitors, backup solutions, or systemd tools.",
+    tech: ["Systemd", "Ansible", "Zypper Hooks", "Btrfs"]
   },
   {
     id: "track-3",
     code: "TRACK // 03",
-    title: "Cloud-Native & Infrastructure Technologies",
-    description: "Develop containerized microservices, Kubernetes operators, immutable OS scripts (MicroOS), or lightweight edge deployment recipes.",
+    title: "Cloud-Native & Infrastructure",
+    description: "Containerized services, Podman/K8s operators, or immutable MicroOS recipes.",
     tech: ["Podman", "K8s", "MicroOS", "Terraform"]
   },
   {
     id: "track-4",
     code: "TRACK // 04",
-    title: "Open-Source Applications & Community Solutions",
-    description: "Engineer practical desktop apps, educational platforms, accessibility utilities, or web platforms benefiting the Indian tech community.",
+    title: "Community & Desktop Applications",
+    description: "Desktop apps, educational tools, accessibility aids, or community utilities.",
     tech: ["GTK", "Qt", "Web / Electron", "Accessibility"]
   },
   {
     id: "track-5",
     code: "TRACK // 05",
     title: "openSUSE Ecosystem Integrations",
-    description: "Build OBS packaging automations, openQA test cases, YaST extension modules, or openSUSE documentation generators.",
+    description: "OBS packaging automations, openQA test cases, or YaST module plugins.",
     tech: ["OBS API", "openQA Perl", "Ruby YaST", "RPM Spec"]
-  }
-];
-
-export const BUDGET_BREAKDOWN: BudgetCategory[] = [
-  {
-    category: "Venue & Operational Logistics",
-    amount: "₹25,000",
-    amountInr: 25000,
-    percentage: 28,
-    description: "Power infrastructure, high-density Wi-Fi routers, lab access coordination, banners, signage, badges & lanyards."
-  },
-  {
-    category: "Participant Refreshments & Catering",
-    amount: "₹25,000",
-    amountInr: 25000,
-    percentage: 28,
-    description: "Nutritious lunch, evening high-tea, midnight hackathon snacks, beverages, and hydration stations for both days."
-  },
-  {
-    category: "openSUSE Branded Merchandise & Swag",
-    amount: "₹18,000",
-    amountInr: 18000,
-    percentage: 20,
-    description: "Official Geeko stickers, t-shirts, enamel pins, keychains, and contributor welcome packs for attendees."
-  },
-  {
-    category: "Technical Infrastructure & AV",
-    amount: "₹10,000",
-    amountInr: 10000,
-    percentage: 11,
-    description: "Projectors, stage audio systems, workshop recording rigs, and streaming setup for remote viewers."
-  },
-  {
-    category: "Hackathon Prizes & Recognitions",
-    amount: "₹8,000",
-    amountInr: 8000,
-    percentage: 9,
-    description: "Trophies, certificates of excellence, tech accessories, and goodies for winning hackathon teams."
-  },
-  {
-    category: "Speaker Hospitality & Local Travel",
-    amount: "₹4,000",
-    amountInr: 4000,
-    percentage: 4,
-    description: "Local commute allowances, speaker welcome kits, and mentor mementos."
-  }
-];
-
-export const TEAM_MEMBERS: TeamMember[] = [
-  {
-    name: "Divyanshu Prakash",
-    role: "Lead Organizer",
-    org: "openSUSE India Community",
-    avatarSeed: "divyanshu",
-    github: "https://github.com/divyanshuprakas-h",
-    bio: "Passionate open-source advocate, systems enthusiast, and student community builder championing Linux and developer tooling in Bengaluru."
-  },
-  {
-    name: "Dushyant Acharya",
-    role: "Co-Organizer & Technical Coordinator",
-    org: "openSUSE India Community",
-    avatarSeed: "dushyant",
-    github: "https://github.com",
-    bio: "Linux engineer and community organizer driving hands-on workshop design, packaging tutorials, and mentor management."
-  },
-  {
-    name: "Rithull Raj Kallat",
-    role: "Co-Organizer & Operations Lead",
-    org: "openSUSE India Community",
-    avatarSeed: "rithull",
-    github: "https://github.com",
-    bio: "Open-source contributor heading logistics, venue coordination at Newton School of Technology, and hackathon execution."
   }
 ];
 
 export const FAQS: FAQItem[] = [
   {
-    category: "Registration",
-    q: "Can I register for Day 1 only, or do I have to join the Day 2 Hackathon as well?",
-    a: "You can register for Day 1 only, apply for the Day 2 Hackathon separately, or choose to attend both! Day 1 registration provides access to all technical talks and workshops. The Day 2 Hackathon has a separate registration flow for teams and solo hackers."
+    q: "Is Day 1 registration separate from the Day 2 Hackathon?",
+    a: "Yes. You can register for Day 1 (talks & workshops) independently from Day 2. If you want to participate in the hackathon, please submit a separate hackathon application (teams of 1–4 or solo)."
   },
   {
-    category: "Event",
-    q: "What is the difference between Mandatory (Core) and Optional (Elective) sessions on Day 1?",
-    a: "Mandatory Core sessions (such as the Keynote, Distribution Architecture, and Contributor Panel) provide foundational understanding for all participants in the main auditorium. Optional Elective sessions are parallel hands-on workshops (like OBS packaging vs openQA testing) where you can pick the specific track you want to dive into."
+    q: "What is the difference between Mandatory Core and Optional Elective talks on Day 1?",
+    a: "Mandatory Core sessions (keynotes, distribution architecture, contribution panel) are held in the main auditorium for all attendees. Optional Elective sessions are parallel hands-on breakout workshops (OBS vs openQA vs sysadmin) where you choose which skill to learn."
   },
   {
-    category: "Event",
-    q: "How does the Call for Proposals (CFP) work on this website?",
-    a: "Our CFP is officially open! If you are a Linux contributor, developer, or student with an interesting project, tutorial, or tool, you can submit a 30-min talk, 60-min workshop, or 10-min lightning talk directly through the CFP portal on this site."
+    q: "Is the event free to attend?",
+    a: "Yes, 100% free. Admission, workshops, food, and hackathon participation are non-profit and community-supported."
   },
   {
-    category: "Registration",
-    q: "When will the exact event dates in January 2027 be locked?",
-    a: "We are currently finalizing dates with the venue (Newton School of Technology) and community partners. Pre-registering today locks your reservation priority, and you'll receive an instant email notification as soon as the exact dates are announced."
+    q: "When will exact dates in January 2027 be announced?",
+    a: "We are currently locking exact days with Newton School of Technology. Pre-registering now reserves your priority pass and sends you an email notification the moment dates are finalized."
   },
   {
-    category: "Registration",
-    q: "Is there any registration fee to attend openSUSE Bengaluru Connect?",
-    a: "No! The event is completely free and open to everyone, true to the spirit of open source. Attendance, workshops, food, and hackathon participation are sponsored and community-supported."
-  },
-  {
-    category: "Hackathon",
-    q: "Can I participate in the 10-Hour Hackathon if I don't have a team?",
-    a: "Absolutely! You can register as a solo hacker. On the morning of Day 2, we host an in-person matchmaking session where solo participants can pitch ideas and team up (teams of 1–4)."
-  },
-  {
-    category: "Event",
-    q: "What is the connection between this event and openSUSE Conf India?",
-    a: "Bengaluru Connect 2027 is designed to build momentum, foster new contributors, and establish regional community roots leading directly up to the national openSUSE Conf India."
-  },
-  {
-    category: "Sponsorship",
-    q: "How can our organization sponsor or partner with Bengaluru Connect 2027?",
-    a: "We welcome academic institutions, tech companies, and open-source foundations. Check our transparent ₹90,000 INR budget breakdown and reach out via our sponsorship contact section to receive the partnership prospectus."
+    q: "How can I submit a talk or workshop for the CFP?",
+    a: "Click 'Submit CFP' in the navigation bar or schedule section. We accept 30-min technical talks, 60-min workshops, and 10-min lightning talks."
   }
+];
+
+export const TEAM_MEMBERS = [
+  { name: "Divyanshu Prakash", role: "Lead Organizer", github: "https://github.com/divyanshuprakas-h" },
+  { name: "Dushyant Acharya", role: "Co-Organizer & Technical Coordinator", github: "https://github.com" },
+  { name: "Rithull Raj Kallat", role: "Co-Organizer & Operations Lead", github: "https://github.com" },
 ];
