@@ -156,7 +156,7 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Chameleon Quote Banner */}
             <div className="bg-pine-900/30 border border-slate-800 p-3 flex items-center gap-3">
               <div className="w-9 h-9 shrink-0 bg-obsidian-950 border border-geeko-500 p-1">
-                <img src="/geeko.svg" alt="Geeko" className="w-full h-full object-contain" />
+                <img src={`${import.meta.env.BASE_URL}geeko.svg`} alt="Geeko" className="w-full h-full object-contain" />
               </div>
               <p className="text-xs font-mono text-slate-300">
                 <span className="text-geeko-400 font-bold">Geeko says:</span> "From your first <code className="text-white">zypper in</code> to your first kernel patch — let's build the open future together in Bengaluru."

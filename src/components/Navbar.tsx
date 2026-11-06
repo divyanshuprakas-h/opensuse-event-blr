@@ -50,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPreRegister }) => {
           <a href="#" className="flex items-center gap-3.5 group">
             <div className="w-12 h-12 bg-pine-900 border-2 border-geeko-500 flex items-center justify-center p-1.5 shadow-[3px_3px_0px_0px_#73ba25] group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-[1px_1px_0px_0px_#73ba25] transition-all">
               <img 
-                src="/geeko.svg" 
+                src={`${import.meta.env.BASE_URL}geeko.svg`} 
                 alt="openSUSE Geeko Logo" 
                 className="w-full h-full object-contain"
               />

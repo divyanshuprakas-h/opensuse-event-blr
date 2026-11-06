@@ -60,7 +60,7 @@ export const MockupViewerModal: React.FC<MockupViewerModalProps> = ({ isOpen, on
             <div className="space-y-4">
               <div className="border-2 border-slate-700 bg-black overflow-hidden">
                 <img
-                  src="/images/hero-design-mockup.jpg"
+                  src={`${import.meta.env.BASE_URL}images/hero-design-mockup.jpg`}
                   alt="Hero Section Design Mockup"
                   className="w-full h-auto object-contain"
                 />
@@ -82,7 +82,7 @@ export const MockupViewerModal: React.FC<MockupViewerModalProps> = ({ isOpen, on
             <div className="space-y-4">
               <div className="border-2 border-slate-700 bg-black overflow-hidden">
                 <img
-                  src="/images/tracks-design-mockup.jpg"
+                  src={`${import.meta.env.BASE_URL}images/tracks-design-mockup.jpg`}
                   alt="3-Phase Structure Design Mockup"
                   className="w-full h-auto object-contain"
                 />

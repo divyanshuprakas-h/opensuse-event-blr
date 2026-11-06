@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-pine-900 border-2 border-geeko-500 p-1 flex items-center justify-center">
-                <img src="/geeko.svg" alt="openSUSE Geeko" className="w-full h-full object-contain" />
+                <img src={`${import.meta.env.BASE_URL}geeko.svg`} alt="openSUSE Geeko" className="w-full h-full object-contain" />
               </div>
               <div>
                 <div className="text-white font-black text-base uppercase tracking-tight">
