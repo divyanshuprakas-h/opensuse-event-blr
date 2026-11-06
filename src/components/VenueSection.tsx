@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Wifi, Zap, Monitor, Coffee, Building } from 'lucide-react';
+import { MapPin, Wifi, Zap, Monitor, Coffee, Building, ExternalLink } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
 
 export const VenueSection: React.FC = () => {
@@ -35,15 +35,16 @@ export const VenueSection: React.FC = () => {
         <div className="bg-obsidian-900 border-2 border-slate-800 p-6 sm:p-8 shadow-[4px_4px_0px_0px_#173f35] mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            <div className="lg:col-span-8 space-y-4">
+            {/* Left Column: Campus Specs */}
+            <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center gap-2 text-geeko-400 font-bold text-xs">
                 <MapPin className="w-4 h-4" />
                 <span>CAMPUS SPECIFICATIONS</span>
               </div>
               <p className="text-sm font-sans text-slate-200 leading-relaxed">
-                Newton School of Technology serves as the proposed host venue for openSUSE India – Bengaluru Connect 2027. The campus is equipped for 300–400 attendees with dual-projection auditoriums, computer labs for workshops, and open hacking zones.
+                Newton School of Technology serves as the proposed host venue for openSUSE India – Bengaluru Connect 2027. The modern campus is equipped for 300–400 attendees with dual-projection auditoriums, computer labs for workshops, and open hacking zones with high-speed connectivity.
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs pt-2 border-t border-slate-800">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs pt-3 border-t border-slate-800">
                 <div>
                   <span className="text-slate-500 uppercase text-[10px] block">CITY</span>
                   <span className="text-white font-bold">Bengaluru, KA</span>
@@ -63,22 +64,36 @@ export const VenueSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-4 bg-obsidian-950 border border-slate-800 overflow-hidden text-center group">
-              <div className="relative h-44 overflow-hidden border-b border-slate-800">
+            {/* Right Column: College Campus Photo Card (college.png) */}
+            <div className="lg:col-span-5 bg-obsidian-950 border-2 border-slate-700/80 hover:border-geeko-500/80 transition-all rounded-lg overflow-hidden shadow-[4px_4px_0px_0px_#173f35] group">
+              <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-black/40 border-b border-slate-800">
                 <img 
                   src={`${import.meta.env.BASE_URL}college.png`} 
-                  alt="Newton School of Technology Campus" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  alt="Newton School of Technology, Bengaluru Campus" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-80" />
-                <span className="absolute bottom-2 left-2 text-[10px] font-mono font-bold bg-obsidian-950/80 border border-geeko-500/50 text-geeko-400 px-2 py-0.5">
-                  Proposed Campus
-                </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-70 pointer-events-none" />
+                <div className="absolute top-3 left-3 bg-obsidian-950/90 backdrop-blur-sm border border-geeko-500/60 text-geeko-400 text-[10px] font-mono font-bold px-2 py-0.5 rounded">
+                  PROPOSED VENUE
+                </div>
+                <div className="absolute bottom-2.5 right-3 bg-obsidian-950/90 text-slate-300 text-[10px] font-mono px-2 py-0.5 rounded border border-slate-800">
+                  Bengaluru Campus
+                </div>
               </div>
-              <div className="p-3.5 space-y-1">
-                <div className="text-sm font-black text-white uppercase">Newton School of Tech</div>
-                <div className="text-[11px] text-slate-400">Bengaluru, Karnataka, India</div>
-                <div className="text-[10px] text-geeko-400 pt-0.5 font-bold">JANUARY 2027 // DATES TBA</div>
+
+              <div className="p-4 bg-obsidian-950 flex items-center justify-between gap-3">
+                <div className="text-left">
+                  <h4 className="text-sm font-black text-white uppercase tracking-tight flex items-center gap-1.5">
+                    <Building className="w-3.5 h-3.5 text-geeko-400" />
+                    <span>Newton School of Technology</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-400 font-sans mt-0.5">Bengaluru, Karnataka, India</p>
+                </div>
+                <div className="text-right shrink-0">
+                  <span className="text-[11px] font-bold text-geeko-400 font-mono bg-pine-950 border border-geeko-500/40 px-2 py-1 rounded inline-block">
+                    JANUARY 2027
+                  </span>
+                </div>
               </div>
             </div>
 
