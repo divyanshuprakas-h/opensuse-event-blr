@@ -50,14 +50,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="w-full h-full object-contain"
             />
           </div>
-          <div className="text-left font-mono">
-            <div className="flex items-center leading-none">
+          <div className="text-left font-mono flex flex-col justify-center">
+            <div className="flex items-center leading-none translate-y-[3px]">
               <span className="font-black text-white text-base tracking-tight">
                 <span className="lowercase">open</span><span className="uppercase">SUSE</span>
               </span>
               <span className="text-geeko-400 font-bold uppercase text-xs tracking-wider ml-1.5">India</span>
             </div>
-            <div className="text-base sm:text-lg font-black tracking-tight text-white leading-tight mt-1">
+            <div className="text-base sm:text-lg font-black tracking-tight text-white leading-tight mt-0.5">
               Bengaluru Connect <span className="text-geeko-400 font-mono text-sm font-bold">'27</span>
             </div>
           </div>
