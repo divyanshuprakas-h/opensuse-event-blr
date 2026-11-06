@@ -35,21 +35,15 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Top Meta Bar */}
+        {/* Top Meta Chips: Square with green shade, no glowing dot, no 300-400 chip */}
         <div className="flex flex-wrap items-center gap-2.5 mb-6 text-xs font-mono">
-          <div className="inline-flex items-center gap-2 bg-pine-950/80 border border-geeko-500/40 text-geeko-300 px-3 py-1.5 rounded-full backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-geeko-400 animate-pulse" />
-            <span className="font-bold tracking-wide">JANUARY 2027 // DATES ANNOUNCING SHORTLY</span>
+          <div className="inline-flex items-center bg-pine-950/80 border border-geeko-500/50 text-geeko-300 px-3 py-1.5 font-bold tracking-wider">
+            <span>JANUARY 2027 // DATES ANNOUNCING SHORTLY</span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 bg-obsidian-900/80 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-full">
+          <div className="inline-flex items-center gap-1.5 bg-pine-950/80 border border-geeko-500/50 text-geeko-300 px-3 py-1.5 font-bold">
             <MapPin className="w-3.5 h-3.5 text-geeko-400" />
             <span>Newton School of Technology, Bengaluru</span>
-          </div>
-
-          <div className="hidden sm:inline-flex items-center gap-1.5 bg-obsidian-900/80 border border-slate-800 text-slate-400 px-3 py-1.5 rounded-full">
-            <Users className="w-3.5 h-3.5 text-geeko-400" />
-            <span>300–400 Community Attendees</span>
           </div>
         </div>
 
@@ -63,14 +57,13 @@ export const Hero: React.FC<HeroProps> = ({
                 [ openSUSE India Community Gathering ]
               </span>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08]">
-                <span className="font-normal text-slate-200 lowercase">open</span>
-                <span className="font-black text-white uppercase">SUSE</span>{' '}
-                <span className="font-black text-white uppercase">India</span> <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-geeko-400 via-geeko-500 to-emerald-300 font-black uppercase">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08]">
+                <span className="lowercase">open</span><span className="uppercase">SUSE</span>{' '}
+                <span className="uppercase">India</span> <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-geeko-400 via-geeko-500 to-emerald-300 uppercase">
                   Bengaluru Connect
                 </span> <br />
-                <span className="text-slate-300 font-mono font-black">2027</span>
+                <span className="text-slate-300 font-mono">2027</span>
               </h1>
             </div>
 

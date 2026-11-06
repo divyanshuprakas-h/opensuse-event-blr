@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Users, Sparkles } from 'lucide-react';
+import { Github, Mail } from 'lucide-react';
 import { TEAM_MEMBERS } from '../data/eventData';
 
 interface TeamSectionProps {
@@ -28,16 +28,16 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ onOpenPreRegister }) =
           </div>
         </div>
 
-        {/* 3 Team Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* Small Square Team Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8 max-w-5xl">
           {TEAM_MEMBERS.map((member, idx) => (
             <div
               key={idx}
-              className="bg-obsidian-900 border-2 border-slate-800 p-5 flex flex-col justify-between hover:border-geeko-500 transition-colors shadow-[3px_3px_0px_0px_#173f35]"
+              className="bg-obsidian-900 border-2 border-slate-800 p-5 flex flex-col justify-between hover:border-geeko-500 transition-colors shadow-[3px_3px_0px_0px_#173f35] min-h-[230px]"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 bg-pine-900 border border-geeko-500 flex items-center justify-center font-black text-base text-geeko-400">
+                  <div className="w-10 h-10 bg-pine-950 border border-geeko-500/60 flex items-center justify-center font-black text-base text-geeko-400">
                     {member.name.charAt(0)}
                   </div>
                   <span className="text-[10px] text-slate-400 bg-obsidian-950 px-2 py-0.5 border border-slate-800">
@@ -49,18 +49,29 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ onOpenPreRegister }) =
                   {member.role}
                 </div>
 
-                <h3 className="text-lg font-black text-white uppercase tracking-tight mb-3">
+                <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-tight mb-2">
                   {member.name}
                 </h3>
+
+                {member.email && (
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="inline-flex items-center gap-1.5 text-xs text-geeko-400 hover:text-white transition-colors break-all"
+                    title={`Email ${member.name}`}
+                  >
+                    <Mail className="w-3.5 h-3.5 shrink-0 text-geeko-400" />
+                    <span className="font-mono text-[11px]">{member.email}</span>
+                  </a>
+                )}
               </div>
 
-              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+              <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs mt-3">
                 {member.github && (
                   <a
                     href={member.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-slate-400 hover:text-geeko-400 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-slate-400 hover:text-geeko-400 transition-colors text-[11px]"
                   >
                     <Github className="w-3.5 h-3.5" />
                     <span>GitHub</span>
@@ -79,7 +90,7 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ onOpenPreRegister }) =
           </div>
           <button
             onClick={onOpenPreRegister}
-            className="px-4 py-1.5 bg-geeko-500 hover:bg-geeko-400 text-black font-bold uppercase text-[11px] whitespace-nowrap cursor-pointer"
+            className="px-4 py-1.5 bg-geeko-500 hover:bg-geeko-400 text-black font-bold uppercase text-[11px] whitespace-nowrap cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
           >
             Join as Volunteer
           </button>

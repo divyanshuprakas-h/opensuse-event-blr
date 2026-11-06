@@ -51,10 +51,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             />
           </div>
           <div className="text-left font-mono">
-            <div className="flex items-baseline tracking-wider leading-none">
-              <span className="font-normal text-slate-300 lowercase text-xs">open</span>
-              <span className="font-black text-white uppercase text-base tracking-wide ml-0.5">SUSE</span>
-              <span className="text-geeko-400 font-bold uppercase text-[10px] tracking-widest ml-1.5 font-mono">India</span>
+            <div className="flex items-center leading-none">
+              <span className="font-black text-white text-base tracking-tight">
+                <span className="lowercase">open</span><span className="uppercase">SUSE</span>
+              </span>
+              <span className="text-geeko-400 font-bold uppercase text-xs tracking-wider ml-1.5">India</span>
             </div>
             <div className="text-base sm:text-lg font-black tracking-tight text-white leading-tight mt-1">
               Bengaluru Connect <span className="text-geeko-400 font-mono text-sm font-bold">'27</span>

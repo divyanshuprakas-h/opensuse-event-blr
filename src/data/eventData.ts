@@ -284,7 +284,20 @@ export const FAQS: FAQItem[] = [
 ];
 
 export const TEAM_MEMBERS = [
-  { name: "Divyanshu Prakash", role: "Lead Organizer", github: "https://github.com/divyanshuprakas-h" },
-  { name: "Dushyant Acharya", role: "Co-Organizer & Technical Coordinator", github: "https://github.com" },
-  { name: "Rithull Raj Kallat", role: "Co-Organizer & Operations Lead", github: "https://github.com" },
+  { 
+    name: "Divyanshu Prakash", 
+    role: "Lead Organizer", 
+    github: "https://github.com/divyanshuprakas-h",
+    email: "Divyanshuprakash@opensuse.org"
+  },
+  { 
+    name: "Dushyant Acharya", 
+    role: "Co-Organizer & Technical Coordinator", 
+    github: "https://github.com" 
+  },
+  { 
+    name: "Rithull Raj Kallat", 
+    role: "Co-Organizer & Operations Lead", 
+    github: "https://github.com" 
+  },
 ];

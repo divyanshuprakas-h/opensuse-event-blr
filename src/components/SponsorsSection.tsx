@@ -5,7 +5,7 @@ export const SponsorsSection: React.FC = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const copyContact = () => {
-    navigator.clipboard.writeText('divyanshuprakash914@gmail.com');
+    navigator.clipboard.writeText('Divyanshuprakash@opensuse.org');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
@@ -52,12 +52,11 @@ export const SponsorsSection: React.FC = () => {
                 />
               </div>
               <div>
-                <h3 className="text-xl font-black text-white tracking-tight flex items-baseline justify-center">
-                  <span className="font-normal lowercase text-sm text-slate-300">open</span>
-                  <span className="font-black uppercase text-2xl text-white ml-0.5">SUSE</span>
+                <h3 className="text-2xl font-black text-white tracking-tight flex items-baseline justify-center">
+                  <span className="lowercase">open</span><span className="uppercase">SUSE</span>
                 </h3>
                 <p className="text-xs text-geeko-400 font-bold uppercase mt-1">
-                  <span className="font-normal lowercase text-[11px]">open</span><span className="font-black uppercase text-xs">SUSE</span> India & Project
+                  openSUSE India & Project
                 </p>
                 <p className="text-[11px] text-slate-400 font-sans mt-0.5">
                   Primary Community Sponsor
@@ -111,7 +110,7 @@ export const SponsorsSection: React.FC = () => {
 
             <div className="w-full pt-3 border-t border-slate-800 flex items-center justify-center gap-2">
               <a
-                href="mailto:divyanshuprakash914@gmail.com?subject=Collaboration%20Inquiry%20-%20openSUSE%20Bengaluru%20Connect%202027"
+                href="mailto:Divyanshuprakash@opensuse.org?subject=Collaboration%20Inquiry%20-%20openSUSE%20Bengaluru%20Connect%202027"
                 className="px-3 py-1.5 bg-geeko-500 hover:bg-geeko-400 text-black font-black text-xs uppercase tracking-wider transition-colors cursor-pointer"
               >
                 Collaborate
