@@ -78,7 +78,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="flex items-center justify-between mb-2 text-xs">
                 <span className="text-geeko-400 font-bold uppercase flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
-                  Day 1 Pre-Registration (Free Entry)
+                  Day 1: Talks & Workshops (Free Entry)
                 </span>
                 <span className="text-slate-400 text-[10px]">Instant Pass</span>
               </div>

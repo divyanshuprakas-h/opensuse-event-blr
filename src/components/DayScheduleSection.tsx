@@ -36,7 +36,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
               // 02. TWO-DAY PROGRAM ARCHITECTURE
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
-              Day 1 Talks & Day 2 Hackathon
+              Day 1 Talks & Workshops // Day 2 Hackathon
             </h2>
           </div>
           
@@ -207,7 +207,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
                 onClick={onOpenDay1Register}
                 className="px-5 py-2.5 bg-geeko-500 hover:bg-geeko-400 text-black font-bold text-xs uppercase tracking-wider border-2 border-black whitespace-nowrap cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
               >
-                Pre-Register for Day 1 Talks →
+                Pre-Register for Day 1 Talks & Workshops →
               </button>
             </div>
           </div>

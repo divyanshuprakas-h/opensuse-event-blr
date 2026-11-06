@@ -98,7 +98,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
         <div className="bg-geeko-500 text-black px-4 py-2.5 font-mono text-xs font-black uppercase tracking-wider flex items-center justify-between border-b-2 border-black">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 bg-black inline-block"></span>
-            <span>PRE-REGISTRATION // OFFICIAL PASS DESK</span>
+            <span>DAY 1 PASS // TALKS & WORKSHOPS PRE-REGISTRATION</span>
           </div>
           <button
             onClick={onClose}

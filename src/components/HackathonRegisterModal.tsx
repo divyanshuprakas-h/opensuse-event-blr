@@ -107,7 +107,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                   <span>SEPARATE DAY 2 HACKATHON ENTRY</span>
                 </div>
                 <p className="text-slate-300">
-                  Register your team (1 to 4 members) or enter solo for the 10-hour open-source sprint. Day 2 registration is independent from Day 1 talks.
+                  Register your team (1 to 4 members) or enter solo for the 10-hour open-source sprint. Day 2 registration is independent from Day 1 talks & workshops.
                 </p>
               </div>
 
