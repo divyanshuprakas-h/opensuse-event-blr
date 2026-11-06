@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
 import { DayScheduleSection } from './components/DayScheduleSection';
+import { PrizesSection } from './components/PrizesSection';
 import { VenueSection } from './components/VenueSection';
 import { SponsorsSection } from './components/SponsorsSection';
 import { TeamSection } from './components/TeamSection';
@@ -56,16 +57,22 @@ export function App() {
           onOpenDay1Register={handleOpenDay1Register}
         />
 
-        {/* 4. Host Venue & Campus Amenities */}
+        {/* 4. Hackathon Prizes & Community Swag (Total Pool Under ₹5,000 + Free T-Shirts) */}
+        <PrizesSection
+          onOpenDay1Register={handleOpenDay1Register}
+          onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
+        />
+
+        {/* 5. Host Venue & Campus Amenities */}
         <VenueSection />
 
-        {/* 5. Organizer & Sponsors: openSUSE Only */}
+        {/* 6. Organizer & Sponsors: openSUSE Only */}
         <SponsorsSection />
 
-        {/* 6. Organizing Committee */}
+        {/* 7. Organizing Committee */}
         <TeamSection onOpenPreRegister={handleOpenDay1Register} />
 
-        {/* 7. Frequently Asked Questions */}
+        {/* 8. Frequently Asked Questions */}
         <FAQSection />
       </main>
 

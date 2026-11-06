@@ -126,6 +126,16 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
           <p className="text-geeko-300">All repos building successfully for openSUSE Leap & Tumbleweed.</p>
         </div>
       );
+    } else if (trimmed === 'prizes' || trimmed === 'swag') {
+      res = (
+        <div className="space-y-1 text-slate-300">
+          <p className="text-geeko-400 font-bold">Package 'event-rewards-and-swag':</p>
+          <p>• Winners    : Mechanical Keyboard, Wireless Mouse, Developer Gifts (Pool Under ₹5,000)</p>
+          <p>• Attendees  : Free Official openSUSE T-Shirt (Sizes S/M/L/XL/XXL)</p>
+          <p>• Check-in   : Holographic Geeko Sticker Packs & Conference Badges</p>
+          <p className="text-geeko-300">Run 'zypper in opensuse-blr' to claim pass and select your T-shirt size.</p>
+        </div>
+      );
     } else {
       res = (
         <p className="text-rose-400">

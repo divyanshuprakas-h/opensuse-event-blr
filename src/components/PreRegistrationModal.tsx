@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Ticket, Sparkles, Copy, Check, ArrowRight, Share2, Terminal } from 'lucide-react';
+import { X, CheckCircle2, Ticket, Sparkles, Copy, Check, ArrowRight, Share2, Terminal, Shirt } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
 
 interface PreRegistrationModalProps {
@@ -15,6 +15,7 @@ interface RegistrationRecord {
   collegeOrCompany: string;
   role: string;
   interest: string;
+  tshirtSize: string;
   github: string;
   notifyOnDates: boolean;
   registeredAt: string;
@@ -31,6 +32,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
     collegeOrCompany: '',
     role: 'Student',
     interest: 'Both Workshops & Hackathon',
+    tshirtSize: 'M',
     github: '',
     notifyOnDates: true,
   });
@@ -208,6 +210,39 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                   </div>
                 </div>
 
+                {/* T-Shirt Size (Free for all attendees) */}
+                <div className="bg-pine-950/40 border border-geeko-500/50 p-3.5 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-mono font-bold uppercase tracking-wider text-geeko-300 flex items-center gap-1.5">
+                      <Shirt className="w-3.5 h-3.5 text-geeko-400" />
+                      <span>T-Shirt Size (Free for Everyone)</span>
+                      <span className="text-geeko-400">*</span>
+                    </label>
+                    <span className="text-[10px] text-geeko-400 font-bold bg-obsidian-900 border border-slate-700 px-2 py-0.5">
+                      100% FREE
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 font-sans">
+                    Every confirmed attendee gets an official openSUSE India T-shirt. Choose your size so we reserve yours:
+                  </p>
+                  <div className="grid grid-cols-5 gap-2 pt-1">
+                    {(['S', 'M', 'L', 'XL', 'XXL'] as const).map((size) => (
+                      <button
+                        key={size}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, tshirtSize: size })}
+                        className={`py-2 text-center font-mono font-black text-xs uppercase border-2 transition-all cursor-pointer ${
+                          formData.tshirtSize === size
+                            ? 'bg-geeko-500 text-black border-black shadow-[2px_2px_0px_0px_#ffffff]'
+                            : 'bg-obsidian-900 text-slate-300 border-slate-700 hover:border-geeko-400 hover:text-white'
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* GitHub (Optional) */}
                 <div>
                   <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1.5">
@@ -291,7 +326,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-xs mb-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs mb-4">
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase block">ATTENDEE</span>
                     <span className="font-bold text-white text-sm truncate block">{submittedPass.name}</span>
@@ -301,12 +336,20 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                     <span className="font-bold text-geeko-400 text-sm block">{submittedPass.id}</span>
                   </div>
                   <div>
+                    <span className="text-[10px] text-slate-500 uppercase block">T-SHIRT SIZE</span>
+                    <span className="font-bold text-geeko-300 text-sm block">Size {submittedPass.tshirtSize} (Reserved)</span>
+                  </div>
+                  <div>
                     <span className="text-[10px] text-slate-500 uppercase block">VENUE</span>
                     <span className="text-slate-200 block text-[11px]">Newton School of Tech, BLR</span>
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase block">PROPOSED DATE</span>
-                    <span className="text-amber-400 block text-[11px]">January 2027 (Updating Soon)</span>
+                    <span className="text-amber-400 block text-[11px]">January 2027</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-slate-500 uppercase block">SWAG PACK</span>
+                    <span className="text-geeko-400 block text-[11px]">Badge + T-Shirt + Stickers</span>
                   </div>
                 </div>
 

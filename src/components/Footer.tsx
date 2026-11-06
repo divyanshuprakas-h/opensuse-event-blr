@@ -21,8 +21,9 @@ export const Footer: React.FC = () => {
               </div>
               <div>
                 <div className="text-white font-black text-base tracking-tight flex items-baseline">
-                  <span className="font-normal text-slate-300 lowercase text-sm">open</span>
-                  <span className="font-black text-white uppercase text-lg ml-0.5">SUSE</span>
+                  <span className="font-black text-white text-base tracking-tight">
+                    <span className="lowercase">open</span><span className="uppercase">SUSE</span>
+                  </span>
                   <span className="text-geeko-400 font-bold uppercase text-xs ml-1.5 font-mono">India</span>
                 </div>
                 <div className="text-slate-300 text-xs">
@@ -54,13 +55,13 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#phases" className="hover:text-geeko-400 transition-colors uppercase">
-                  // 3-Phase Schedule
+                <a href="#schedule" className="hover:text-geeko-400 transition-colors uppercase">
+                  // 2-Day Schedule
                 </a>
               </li>
               <li>
-                <a href="#hackathon" className="hover:text-geeko-400 transition-colors uppercase">
-                  // 10H Hackathon Tracks
+                <a href="#prizes" className="hover:text-geeko-400 transition-colors uppercase">
+                  // Prizes & Swag
                 </a>
               </li>
               <li>

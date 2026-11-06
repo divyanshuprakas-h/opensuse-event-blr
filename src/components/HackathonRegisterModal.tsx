@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Code2, CheckCircle2, Sparkles, Terminal, Copy, Check, Users, ShieldAlert } from 'lucide-react';
+import { X, Code2, CheckCircle2, Sparkles, Terminal, Copy, Check, Users, ShieldAlert, Shirt } from 'lucide-react';
 import { HACKATHON_TRACKS, EVENT_CONFIG } from '../data/eventData';
 
 interface HackathonRegisterModalProps {
@@ -14,6 +14,7 @@ interface HackathonRegistration {
   leaderEmail: string;
   teamSize: number;
   trackId: string;
+  leaderTshirtSize: string;
   members: string[];
   github: string;
   projectIdea: string;
@@ -27,6 +28,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
     leaderEmail: '',
     teamSize: 2,
     trackId: HACKATHON_TRACKS[0].id,
+    leaderTshirtSize: 'M',
     memberNames: '',
     github: '',
     projectIdea: '',
@@ -50,6 +52,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
       leaderEmail: formData.leaderEmail,
       teamSize: Number(formData.teamSize),
       trackId: formData.trackId,
+      leaderTshirtSize: formData.leaderTshirtSize,
       members: formData.memberNames.split(',').map((s) => s.trim()).filter(Boolean),
       github: formData.github,
       projectIdea: formData.projectIdea,
@@ -195,6 +198,39 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                   </div>
                 </div>
 
+                {/* T-Shirt Size for Leader & Team */}
+                <div className="bg-pine-950/40 border border-geeko-500/50 p-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-mono font-bold uppercase tracking-wider text-geeko-300 flex items-center gap-1.5">
+                      <Shirt className="w-3.5 h-3.5 text-geeko-400" />
+                      <span>Leader T-Shirt Size (Free for all members)</span>
+                      <span className="text-geeko-400">*</span>
+                    </label>
+                    <span className="text-[10px] text-geeko-400 font-bold bg-obsidian-900 border border-slate-700 px-2 py-0.5">
+                      FREE T-SHIRTS
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 font-sans">
+                    All hackathon participants receive free official openSUSE T-shirts. Select leader size below (teammate sizes recorded at check-in):
+                  </p>
+                  <div className="grid grid-cols-5 gap-2 pt-1">
+                    {(['S', 'M', 'L', 'XL', 'XXL'] as const).map((size) => (
+                      <button
+                        key={size}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, leaderTshirtSize: size })}
+                        className={`py-1.5 text-center font-mono font-black text-xs uppercase border-2 transition-all cursor-pointer ${
+                          formData.leaderTshirtSize === size
+                            ? 'bg-geeko-500 text-black border-black shadow-[2px_2px_0px_0px_#ffffff]'
+                            : 'bg-obsidian-900 text-slate-300 border-slate-700 hover:border-geeko-400 hover:text-white'
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Other Member Names */}
                 {formData.teamSize > 1 && (
                   <div>
@@ -280,6 +316,10 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 <div className="flex justify-between border-b border-slate-800 pb-1">
                   <span className="text-slate-500">TEAM SIZE:</span>
                   <span className="text-slate-200">{submittedHackPass.teamSize} Member(s)</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-800 pb-1">
+                  <span className="text-slate-500">LEADER T-SHIRT:</span>
+                  <span className="text-geeko-300 font-bold">Size {submittedHackPass.leaderTshirtSize} (All members get shirts)</span>
                 </div>
                 <div className="flex justify-between border-b border-slate-800 pb-1">
                   <span className="text-slate-500">VENUE:</span>

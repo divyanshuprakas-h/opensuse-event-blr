@@ -270,6 +270,10 @@ export const FAQS: FAQItem[] = [
     a: "Mandatory Core sessions (keynotes, distribution architecture, contribution panel) are held in the main auditorium for all attendees. Optional Elective sessions are parallel hands-on breakout workshops (OBS vs openQA vs sysadmin) where you choose which skill to learn."
   },
   {
+    q: "What prizes do hackathon winners get, and do attendees get swag?",
+    a: "Yes! Hackathon winners receive practical developer hardware including mechanical keyboards, precision wireless mice, and curated openSUSE collector items (total prize pool capped under ₹5,000 to keep the event authentic and grassroots). Additionally, every single registered attendee receives an official limited-edition openSUSE India T-shirt (just select your size during registration) plus sticker packs and physical badges at check-in."
+  },
+  {
     q: "Is the event free to attend?",
     a: "Yes, 100% free. Admission, workshops, food, and hackathon participation are non-profit and community-supported."
   },

@@ -18,7 +18,7 @@ export const SponsorsSection: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
             <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-1">
-              // 04. ORGANIZER & SPONSORS
+              // 05. ORGANIZER & SPONSORS
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
               Organized & Supported By

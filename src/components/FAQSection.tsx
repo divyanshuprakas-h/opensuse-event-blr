@@ -16,7 +16,7 @@ export const FAQSection: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-10">
           <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-1">
-            // 06. FREQUENTLY ASKED QUESTIONS
+            // 07. FREQUENTLY ASKED QUESTIONS
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
             Common Questions

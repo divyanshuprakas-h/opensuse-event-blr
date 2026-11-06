@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, MapPin, Users, Sparkles, Terminal, ArrowRight, Code, Image as ImageIcon } from 'lucide-react';
+import { Calendar, MapPin, Users, Sparkles, Terminal, ArrowRight, Code, Image as ImageIcon, Gift } from 'lucide-react';
 import { EVENT_CONFIG, EVENT_STATS } from '../data/eventData';
 import { ZypperTerminal } from './ZypperTerminal';
 
@@ -101,13 +101,13 @@ export const Hero: React.FC<HeroProps> = ({
               </form>
 
               <div className="mt-2.5 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px]">
-                <span className="text-slate-400">Taking part in Day 2 Hackathon?</span>
+                <span className="text-slate-400">✦ Free T-shirt for all attendees (pick size on pass)</span>
                 <button
                   type="button"
                   onClick={onOpenHackathonRegister}
                   className="text-geeko-400 hover:text-white underline font-bold cursor-pointer"
                 >
-                  Register team separately →
+                  Hackathon pass →
                 </button>
               </div>
             </div>
@@ -120,6 +120,14 @@ export const Hero: React.FC<HeroProps> = ({
               >
                 <span>View Schedule</span>
                 <ArrowRight className="w-3.5 h-3.5 text-geeko-400" />
+              </a>
+
+              <a
+                href="#prizes"
+                className="px-3.5 py-2 bg-obsidian-900 hover:bg-pine-950 border border-geeko-500/60 text-xs text-geeko-300 hover:text-white uppercase tracking-wider flex items-center gap-1.5 transition-colors"
+              >
+                <Gift className="w-3.5 h-3.5 text-geeko-400" />
+                <span>Prizes & Swag</span>
               </a>
 
               <button
