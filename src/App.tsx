@@ -56,7 +56,7 @@ export function App() {
           onOpenDay1Register={handleOpenDay1Register}
         />
 
-        {/* 4. Hackathon Prizes & Community Swag (Total Pool Under ₹5,000 + Free T-Shirts) */}
+        {/* 4. Hackathon Prizes & Community Swag (Exciting Awards & Free T-Shirts) */}
         <PrizesSection
           onOpenDay1Register={handleOpenDay1Register}
           onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}

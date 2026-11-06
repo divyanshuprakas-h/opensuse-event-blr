@@ -1,5 +1,5 @@
 import React from 'react';
-import { Keyboard, Mouse, Gift, Shirt, Sparkles, Award, CheckCircle2, ArrowRight, Trophy } from 'lucide-react';
+import { Gift, Shirt, Sparkles, Award, CheckCircle2, ArrowRight, Trophy } from 'lucide-react';
 
 interface PrizesSectionProps {
   onOpenDay1Register: () => void;
@@ -40,14 +40,14 @@ export const PrizesSection: React.FC<PrizesSectionProps> = ({
             <span>Merit-Driven Hacker Rewards & Community Appreciation</span>
           </div>
           <p>
-            We celebrate true open-source craftsmanship. Rather than excessive commercial giveaways, our hackathon rewards top builders with essential developer hardware under a <strong className="text-geeko-300 font-mono">total prize pool under ₹5,000</strong>. Plus, <strong className="text-white">every registered attendee</strong> receives an official event T-shirt — simply pick your size during registration!
+            We celebrate true open-source craftsmanship. Our hackathon rewards top builders with exciting tech prizes and exclusive openSUSE developer swag hampers. Plus, <strong className="text-white">every registered attendee</strong> receives an official event T-shirt — simply pick your size during registration!
           </p>
         </div>
 
         {/* Main 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           
-          {/* Card 1: Hackathon Winner Prizes (Under ₹5,000 Pool) */}
+          {/* Card 1: Hackathon Winner Prizes */}
           <div className="bg-obsidian-900 border-2 border-geeko-500/80 p-6 sm:p-8 flex flex-col justify-between shadow-[6px_6px_0px_0px_#173f35] relative">
             <div className="absolute top-0 right-0 bg-geeko-500 text-black px-3 py-1 text-[11px] font-black uppercase tracking-wider border-b-2 border-l-2 border-black">
               TOP HACKATHON TEAMS
@@ -63,7 +63,7 @@ export const PrizesSection: React.FC<PrizesSectionProps> = ({
                     Day 2 • 10-Hour Hackathon
                   </span>
                   <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-                    Winner & Runner-Up Prizes
+                    Winner & Runner-Up Awards
                   </h3>
                 </div>
               </div>
@@ -71,57 +71,57 @@ export const PrizesSection: React.FC<PrizesSectionProps> = ({
               {/* Pool Badge */}
               <div className="inline-block bg-pine-950 border border-geeko-500/60 px-3 py-1 mb-6">
                 <span className="text-xs font-bold text-geeko-300 uppercase">
-                  Total Prize Pool: <span className="text-white font-black">Under ₹5,000</span>
+                  Exciting Tech Prizes & <span className="text-white font-black">Swag Hampers</span>
                 </span>
               </div>
 
               {/* Prize list items */}
               <div className="space-y-4 mb-8">
                 
-                {/* 1. Mechanical Keyboard */}
+                {/* 1. Track Champions */}
                 <div className="bg-obsidian-950 border border-slate-800 p-4 flex items-start gap-3.5 hover:border-geeko-500/60 transition-colors">
                   <div className="w-9 h-9 bg-obsidian-900 border border-slate-700 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
-                    <Keyboard className="w-5 h-5" />
+                    <Trophy className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-white uppercase tracking-tight flex items-center gap-2">
-                      <span>Mechanical Keyboard</span>
+                      <span>Track Champions & 1st Place</span>
                       <span className="text-[10px] text-geeko-400 font-bold bg-pine-950 border border-geeko-500/40 px-1.5 py-0.2">TOP PRIZE</span>
                     </h4>
                     <p className="text-xs text-slate-300 font-sans mt-1">
-                      Tactile developer keyboard engineered for fast typing, coding sprints, and Linux system terminals.
+                      Exciting tech prizes, winner recognition trophy, and exclusive openSUSE contributor kit.
                     </p>
                   </div>
                 </div>
 
-                {/* 2. Precision Wireless Mouse */}
+                {/* 2. Runners-Up */}
                 <div className="bg-obsidian-950 border border-slate-800 p-4 flex items-start gap-3.5 hover:border-geeko-500/60 transition-colors">
                   <div className="w-9 h-9 bg-obsidian-900 border border-slate-700 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
-                    <Mouse className="w-5 h-5" />
+                    <Award className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-white uppercase tracking-tight flex items-center gap-2">
-                      <span>Precision Wireless Mouse</span>
-                      <span className="text-[10px] text-cyan-300 font-bold bg-cyan-950 border border-cyan-800 px-1.5 py-0.2">HARDWARE</span>
+                      <span>Runners-Up & Top Finalists</span>
+                      <span className="text-[10px] text-cyan-300 font-bold bg-cyan-950 border border-cyan-800 px-1.5 py-0.2">AWARDS</span>
                     </h4>
                     <p className="text-xs text-slate-300 font-sans mt-1">
-                      High-accuracy wireless optical mouse for daily development workflow and productivity.
+                      Curated developer prizes, runner-up awards, and special openSUSE merchandise hampers.
                     </p>
                   </div>
                 </div>
 
-                {/* 3. Small Developer Gifts & Collector Swag */}
+                {/* 3. Special Jury & Innovation Mentions */}
                 <div className="bg-obsidian-950 border border-slate-800 p-4 flex items-start gap-3.5 hover:border-geeko-500/60 transition-colors">
                   <div className="w-9 h-9 bg-obsidian-900 border border-slate-700 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
                     <Gift className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-white uppercase tracking-tight flex items-center gap-2">
-                      <span>Small Gifts & openSUSE Goodies</span>
-                      <span className="text-[10px] text-amber-300 font-bold bg-amber-950 border border-amber-800 px-1.5 py-0.2">CURATED</span>
+                      <span>Special Innovation Mentions</span>
+                      <span className="text-[10px] text-amber-300 font-bold bg-amber-950 border border-amber-800 px-1.5 py-0.2">COMMUNITY</span>
                     </h4>
                     <p className="text-xs text-slate-300 font-sans mt-1">
-                      Official Geeko collector pins, custom desk accessories, cheat sheets, and special contributor merchandise.
+                      Special recognition awards for standout open-source contributions, packaging hacks, and student innovators.
                     </p>
                   </div>
                 </div>
@@ -257,10 +257,10 @@ export const PrizesSection: React.FC<PrizesSectionProps> = ({
           <div className="bg-obsidian-900 border border-slate-800 p-4 text-left shadow-[2px_2px_0px_0px_#173f35]">
             <div className="text-geeko-400 text-xs font-bold uppercase mb-1 flex items-center gap-1.5">
               <Trophy className="w-3.5 h-3.5" />
-              <span>Developer Prize Pool</span>
+              <span>Hackathon Awards</span>
             </div>
             <p className="text-xs text-slate-300 font-sans">
-              Mechanical keyboard, wireless mouse, and developer accessories under ₹5,000 total pool for top hacks.
+              Exciting tech prizes, winner trophies, and openSUSE merchandise hampers awarded to standout hackathon teams.
             </p>
           </div>
         </div>

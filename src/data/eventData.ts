@@ -271,7 +271,7 @@ export const FAQS: FAQItem[] = [
   },
   {
     q: "What prizes do hackathon winners get, and do attendees get swag?",
-    a: "Yes! Hackathon winners receive practical developer hardware including mechanical keyboards, precision wireless mice, and curated openSUSE collector items (total prize pool capped under ₹5,000 to keep the event authentic and grassroots). Additionally, every single registered attendee receives an official limited-edition openSUSE India T-shirt (just select your size during registration) plus sticker packs and physical badges at check-in."
+    a: "Yes! Hackathon winners receive exciting tech prizes, winner trophies, and exclusive openSUSE developer swag hampers. Additionally, every single registered attendee receives an official limited-edition openSUSE India T-shirt (just select your size during registration) plus sticker packs and physical badges at check-in."
   },
   {
     q: "Is the event free to attend?",

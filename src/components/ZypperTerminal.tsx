@@ -113,7 +113,7 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
           <p>✔ [Hardware]  : Newton School of Technology, Bengaluru</p>
           <p>✔ [Software]  : Open Build Service, Zypper, YaST, openQA, Git</p>
           <p>✔ [Security]  : Inclusive Open Source Code of Conduct</p>
-          <p>✔ [Support]   : ₹90,000 community allocation for food & hackathon prizes</p>
+          <p>✔ [Support]   : Community-sponsored food, refreshments & hackathon awards</p>
         </div>
       );
     } else if (trimmed === 'obs') {
@@ -130,7 +130,7 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
       res = (
         <div className="space-y-1 text-slate-300">
           <p className="text-geeko-400 font-bold">Package 'event-rewards-and-swag':</p>
-          <p>• Winners    : Mechanical Keyboard, Wireless Mouse, Developer Gifts (Pool Under ₹5,000)</p>
+          <p>• Winners    : Exciting Tech Prizes, Trophies & Swag Hampers</p>
           <p>• Attendees  : Free Official openSUSE T-Shirt (Sizes S/M/L/XL/XXL)</p>
           <p>• Check-in   : Holographic Geeko Sticker Packs & Conference Badges</p>
           <p className="text-geeko-300">Run 'zypper in opensuse-blr' to claim pass and select your T-shirt size.</p>
