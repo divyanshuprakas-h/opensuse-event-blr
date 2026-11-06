@@ -12,7 +12,6 @@ import { Footer } from './components/Footer';
 import { PreRegistrationModal } from './components/PreRegistrationModal';
 import { HackathonRegisterModal } from './components/HackathonRegisterModal';
 import { MockupViewerModal } from './components/MockupViewerModal';
-import { Sparkles, Code2 } from 'lucide-react';
 
 export function App() {
   const [isDay1ModalOpen, setIsDay1ModalOpen] = useState(false);
@@ -78,26 +77,6 @@ export function App() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Floating Bottom Quick Action Bar */}
-      <div className="fixed bottom-4 right-4 z-40 flex items-center gap-2">
-        <button
-          onClick={() => setIsHackathonModalOpen(true)}
-          className="bg-obsidian-900 border-2 border-geeko-500 hover:bg-pine-950 text-white px-3 py-2 font-mono text-xs uppercase font-bold shadow-[3px_3px_0px_0px_#173f35] flex items-center gap-1.5 cursor-pointer transition-all"
-          title="Register for Day 2 Hackathon separately"
-        >
-          <Code2 className="w-3.5 h-3.5 text-geeko-400" />
-          <span className="hidden sm:inline">Hackathon Pass</span>
-        </button>
-
-        <button
-          onClick={handleOpenDay1Register}
-          className="bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black px-3.5 py-2 font-mono text-xs uppercase font-black shadow-[3px_3px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[1px] hover:translate-y-[1px] flex items-center gap-1.5 cursor-pointer transition-all"
-        >
-          <Sparkles className="w-3.5 h-3.5 fill-black" />
-          <span>Day 1 Pass</span>
-        </button>
-      </div>
 
       {/* Modals */}
       <PreRegistrationModal
