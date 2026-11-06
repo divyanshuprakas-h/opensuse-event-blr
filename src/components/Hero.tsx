@@ -37,33 +37,22 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Top Chips */}
-        <div className="flex flex-wrap items-center gap-2 mb-6 text-xs">
-          <div className="inline-flex items-center gap-2 bg-pine-900/60 border border-geeko-500/50 text-geeko-300 px-3 py-1 font-bold">
+        {/* Top Meta Bar */}
+        <div className="flex flex-wrap items-center gap-2.5 mb-6 text-xs font-mono">
+          <div className="inline-flex items-center gap-2 bg-pine-950/80 border border-geeko-500/40 text-geeko-300 px-3 py-1.5 rounded-full backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-geeko-400 animate-pulse" />
-            <span>JANUARY 2027 // DATES ANNOUNCING SHORTLY</span>
+            <span className="font-bold tracking-wide">JANUARY 2027 // DATES ANNOUNCING SHORTLY</span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 bg-obsidian-900 border border-slate-800 text-slate-300 px-3 py-1">
+          <div className="inline-flex items-center gap-1.5 bg-obsidian-900/80 border border-slate-800 text-slate-300 px-3 py-1.5 rounded-full">
             <MapPin className="w-3.5 h-3.5 text-geeko-400" />
             <span>Newton School of Technology, Bengaluru</span>
           </div>
 
-          <button
-            onClick={onOpenCFP}
-            className="inline-flex items-center gap-1.5 bg-emerald-950/80 hover:bg-emerald-900 border border-geeko-500/60 text-geeko-300 px-3 py-1 font-bold transition-all cursor-pointer"
-          >
-            <Mic className="w-3.5 h-3.5 text-geeko-400" />
-            <span>CFP Open: Submit Talk</span>
-          </button>
-
-          <button
-            onClick={onOpenMockupViewer}
-            className="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-400 hover:text-white px-2.5 py-1 transition-all cursor-pointer text-[11px]"
-          >
-            <ImageIcon className="w-3.5 h-3.5" />
-            <span>Concepts</span>
-          </button>
+          <div className="hidden sm:inline-flex items-center gap-1.5 bg-obsidian-900/80 border border-slate-800 text-slate-400 px-3 py-1.5 rounded-full">
+            <Users className="w-3.5 h-3.5 text-geeko-400" />
+            <span>300–400 Community Attendees</span>
+          </div>
         </div>
 
         {/* Main Grid: Left copy, Right interactive CLI */}
