@@ -44,7 +44,7 @@ export const SponsorsSection: React.FC = () => {
             </div>
 
             <div className="my-auto space-y-3 py-4 flex flex-col items-center">
-              <div className="w-20 h-20 bg-pine-950 border border-geeko-500/50 p-2 flex items-center justify-center">
+              <div className="w-24 h-24 flex items-center justify-center">
                 <img 
                   src={`${import.meta.env.BASE_URL}geeko.svg`}
                   alt="openSUSE" 
@@ -52,13 +52,14 @@ export const SponsorsSection: React.FC = () => {
                 />
               </div>
               <div>
-                <h3 className="text-lg font-black text-white uppercase tracking-tight">
-                  openSUSE
+                <h3 className="text-xl font-black text-white tracking-tight flex items-baseline justify-center">
+                  <span className="font-normal lowercase text-sm text-slate-300">open</span>
+                  <span className="font-black uppercase text-2xl text-white ml-0.5">SUSE</span>
                 </h3>
-                <p className="text-xs text-geeko-400 font-bold uppercase mt-0.5">
-                  openSUSE India & Project
+                <p className="text-xs text-geeko-400 font-bold uppercase mt-1">
+                  <span className="font-normal lowercase text-[11px]">open</span><span className="font-black uppercase text-xs">SUSE</span> India & Project
                 </p>
-                <p className="text-[11px] text-slate-400 font-sans mt-1">
+                <p className="text-[11px] text-slate-400 font-sans mt-0.5">
                   Primary Community Sponsor
                 </p>
               </div>

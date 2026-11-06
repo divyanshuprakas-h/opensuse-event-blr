@@ -16,14 +16,16 @@ export const Footer: React.FC = () => {
           {/* Col 1: Identity & Motto */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-pine-900 border-2 border-geeko-500 p-1 flex items-center justify-center">
-                <img src={`${import.meta.env.BASE_URL}geeko.svg`} alt="openSUSE Geeko" className="w-full h-full object-contain" />
+              <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                <img src={`${import.meta.env.BASE_URL}geeko.svg`} alt="openSUSE" className="w-full h-full object-contain" />
               </div>
               <div>
-                <div className="text-white font-black text-base uppercase tracking-tight">
-                  openSUSE India
+                <div className="text-white font-black text-base tracking-tight flex items-baseline">
+                  <span className="font-normal text-slate-300 lowercase text-sm">open</span>
+                  <span className="font-black text-white uppercase text-lg ml-0.5">SUSE</span>
+                  <span className="text-geeko-400 font-bold uppercase text-xs ml-1.5 font-mono">India</span>
                 </div>
-                <div className="text-geeko-400 text-xs">
+                <div className="text-slate-300 text-xs">
                   Bengaluru Connect 2027
                 </div>
               </div>

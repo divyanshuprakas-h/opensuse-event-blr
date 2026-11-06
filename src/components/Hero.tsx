@@ -63,12 +63,14 @@ export const Hero: React.FC<HeroProps> = ({
                 [ openSUSE India Community Gathering ]
               </span>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08] uppercase">
-                openSUSE India <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-geeko-400 via-geeko-500 to-emerald-300">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08]">
+                <span className="font-normal text-slate-200 lowercase">open</span>
+                <span className="font-black text-white uppercase">SUSE</span>{' '}
+                <span className="font-black text-white uppercase">India</span> <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-geeko-400 via-geeko-500 to-emerald-300 font-black uppercase">
                   Bengaluru Connect
                 </span> <br />
-                <span className="text-slate-300">2027</span>
+                <span className="text-slate-300 font-mono font-black">2027</span>
               </h1>
             </div>
 

@@ -42,8 +42,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 h-16 sm:h-[70px] flex items-center justify-between">
         
         {/* Brand Logo & Event Title on the far left */}
-        <a href="#" className="flex items-center gap-3 group shrink-0">
-          <div className="w-10 h-10 rounded-lg bg-pine-950/90 border border-geeko-500/50 p-1 flex items-center justify-center transition-all group-hover:border-geeko-400 group-hover:shadow-[0_0_15px_rgba(115,186,37,0.35)]">
+        <a href="#" className="flex items-center gap-3.5 group shrink-0">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
             <img 
               src={`${import.meta.env.BASE_URL}geeko.svg`}
               alt="openSUSE" 
@@ -51,11 +51,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             />
           </div>
           <div className="text-left font-mono">
-            <div className="flex items-center gap-1.5 text-[10px] text-geeko-400 font-bold uppercase tracking-widest leading-none">
-              <span>openSUSE India</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-geeko-400 animate-pulse" />
+            <div className="flex items-baseline tracking-wider leading-none">
+              <span className="font-normal text-slate-300 lowercase text-xs">open</span>
+              <span className="font-black text-white uppercase text-base tracking-wide ml-0.5">SUSE</span>
+              <span className="text-geeko-400 font-bold uppercase text-[10px] tracking-widest ml-1.5 font-mono">India</span>
             </div>
-            <div className="text-base sm:text-lg font-black tracking-tight text-white leading-tight">
+            <div className="text-base sm:text-lg font-black tracking-tight text-white leading-tight mt-1">
               Bengaluru Connect <span className="text-geeko-400 font-mono text-sm font-bold">'27</span>
             </div>
           </div>
