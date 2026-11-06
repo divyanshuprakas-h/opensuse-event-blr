@@ -63,13 +63,23 @@ export const VenueSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-4 bg-obsidian-950 border border-slate-800 p-5 text-center space-y-2">
-              <div className="w-10 h-10 mx-auto bg-pine-900 border border-geeko-500 flex items-center justify-center text-geeko-400">
-                <Building className="w-5 h-5" />
+            <div className="lg:col-span-4 bg-obsidian-950 border border-slate-800 overflow-hidden text-center group">
+              <div className="relative h-44 overflow-hidden border-b border-slate-800">
+                <img 
+                  src={`${import.meta.env.BASE_URL}college.png`} 
+                  alt="Newton School of Technology Campus" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-80" />
+                <span className="absolute bottom-2 left-2 text-[10px] font-mono font-bold bg-obsidian-950/80 border border-geeko-500/50 text-geeko-400 px-2 py-0.5">
+                  Proposed Campus
+                </span>
               </div>
-              <div className="text-sm font-black text-white uppercase">Newton School of Tech</div>
-              <div className="text-[11px] text-slate-400">Bengaluru, Karnataka, India</div>
-              <div className="text-[10px] text-geeko-400 pt-1 font-bold">JANUARY 2027</div>
+              <div className="p-3.5 space-y-1">
+                <div className="text-sm font-black text-white uppercase">Newton School of Tech</div>
+                <div className="text-[11px] text-slate-400">Bengaluru, Karnataka, India</div>
+                <div className="text-[10px] text-geeko-400 pt-0.5 font-bold">JANUARY 2027 // DATES TBA</div>
+              </div>
             </div>
 
           </div>

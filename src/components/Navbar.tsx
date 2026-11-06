@@ -38,14 +38,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           : 'bg-obsidian-950/90 backdrop-blur-sm border-b border-slate-800/80'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[68px] flex items-center justify-between">
+      {/* Full width navbar: Brand shifted far left, CTAs shifted far right */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 h-16 sm:h-[70px] flex items-center justify-between">
         
-        {/* Brand Logo & Event Title */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-lg bg-pine-950 border border-geeko-500/40 p-1.5 flex items-center justify-center transition-all group-hover:border-geeko-400 group-hover:shadow-[0_0_12px_rgba(115,186,37,0.3)]">
+        {/* Brand Logo & Event Title on the far left */}
+        <a href="#" className="flex items-center gap-3 group shrink-0">
+          <div className="w-10 h-10 rounded-lg bg-pine-950/90 border border-geeko-500/50 p-1 flex items-center justify-center transition-all group-hover:border-geeko-400 group-hover:shadow-[0_0_15px_rgba(115,186,37,0.35)]">
             <img 
               src={`${import.meta.env.BASE_URL}geeko.svg`}
-              alt="openSUSE Geeko" 
+              alt="openSUSE" 
               className="w-full h-full object-contain"
             />
           </div>
@@ -54,14 +55,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>openSUSE India</span>
               <span className="w-1.5 h-1.5 rounded-full bg-geeko-400 animate-pulse" />
             </div>
-            <div className="text-base font-black tracking-tight text-white leading-tight">
+            <div className="text-base sm:text-lg font-black tracking-tight text-white leading-tight">
               Bengaluru Connect <span className="text-geeko-400 font-mono text-sm font-bold">'27</span>
             </div>
           </div>
         </a>
 
-        {/* Clean, Well-Spaced Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-7 font-mono text-xs text-slate-300">
+        {/* Clean, Well-Spaced Desktop Nav Links in Center */}
+        <nav className="hidden lg:flex items-center gap-7 xl:gap-8 font-mono text-xs text-slate-300">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -73,22 +74,24 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Focused 2 Action CTAs */}
-        <div className="hidden sm:flex items-center gap-3 font-mono">
+        {/* Brutalist Action CTAs on the far right (matching screenshot) */}
+        <div className="hidden sm:flex items-center gap-3 font-mono shrink-0">
           <button
             onClick={onOpenHackathonRegister}
-            className="px-3.5 py-1.5 text-xs border border-pine-700/80 hover:border-geeko-400 text-geeko-300 hover:text-white bg-pine-950/80 rounded-md transition-all flex items-center gap-1.5 cursor-pointer font-bold"
+            className="px-4 py-2 bg-obsidian-900 hover:bg-pine-950 border-2 border-geeko-500 text-white font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#173f35] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5 cursor-pointer"
+            title="Register for Day 2 Hackathon separately"
           >
             <Code2 className="w-3.5 h-3.5 text-geeko-400" />
-            <span>Hackathon (Day 2)</span>
+            <span>HACKATHON</span>
           </button>
 
           <button
             onClick={onOpenDay1Register}
-            className="px-4 py-1.5 bg-geeko-500 hover:bg-geeko-400 text-black font-black text-xs uppercase tracking-wider rounded-md shadow-[0_0_15px_rgba(115,186,37,0.3)] hover:shadow-[0_0_20px_rgba(115,186,37,0.5)] transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-4 py-2 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-mono font-black text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5 cursor-pointer"
+            title="Register for Day 1 Conference Pass (Free)"
           >
             <Sparkles className="w-3.5 h-3.5 fill-black" />
-            <span>Register (Free)</span>
+            <span>DAY 1 PASS</span>
           </button>
         </div>
 
@@ -119,16 +122,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          <div className="pt-2 flex flex-col gap-2.5">
+          <div className="pt-2 flex flex-col gap-3">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenHackathonRegister();
               }}
-              className="w-full py-2.5 bg-pine-950 border border-geeko-500 text-geeko-300 font-bold text-xs uppercase tracking-wider rounded-md text-center flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-2.5 bg-obsidian-900 border-2 border-geeko-500 text-white font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] flex items-center justify-center gap-2 cursor-pointer"
             >
               <Code2 className="w-3.5 h-3.5 text-geeko-400" />
-              <span>Apply for Day 2 Hackathon</span>
+              <span>HACKATHON (DAY 2)</span>
             </button>
 
             <button
@@ -136,10 +139,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenDay1Register();
               }}
-              className="w-full py-3 bg-geeko-500 text-black font-black text-xs uppercase tracking-wider rounded-md text-center shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 bg-geeko-500 text-black border-2 border-black font-black text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#ffffff] flex items-center justify-center gap-2 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 fill-black" />
-              <span>Register for Day 1 (Free)</span>
+              <span>DAY 1 PASS (FREE)</span>
             </button>
           </div>
         </div>
