@@ -1,54 +1,75 @@
-import React, { useState } from 'react';
-import { Code2, Award, Users, Terminal, CheckCircle2, Flame, Sparkles, Layers } from 'lucide-react';
+import React from 'react';
+import { Code2, Award, Users, Terminal, CheckCircle2, Flame, Sparkles, Layers, ShieldAlert } from 'lucide-react';
 import { HACKATHON_TRACKS, TrackItem } from '../data/eventData';
 
 interface HackathonSectionProps {
-  onOpenPreRegister: () => void;
+  onOpenHackathonRegister: () => void;
+  onOpenDay1Register: () => void;
 }
 
-export const HackathonSection: React.FC<HackathonSectionProps> = ({ onOpenPreRegister }) => {
-  const [activeTrack, setActiveTrack] = useState<string>(HACKATHON_TRACKS[0].id);
-
+export const HackathonSection: React.FC<HackathonSectionProps> = ({
+  onOpenHackathonRegister,
+  onOpenDay1Register,
+}) => {
   return (
-    <section id="hackathon" className="py-20 border-b-2 border-slate-800 bg-obsidian-950">
+    <section id="hackathon" className="py-20 border-b-2 border-slate-800 bg-obsidian-950 font-mono">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
-            <span className="font-mono text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-2 flex items-center gap-2">
+            <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-2 flex items-center gap-2">
               <Flame className="w-4 h-4 text-orange-500" />
-              <span>// 03. 10-HOUR INTENSIVE HACKATHON</span>
+              <span>// 03. DAY 2: 10-HOUR INTENSIVE HACKATHON</span>
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
               Build Real Open-Source Solutions
             </h2>
           </div>
-          <div className="font-mono text-xs text-slate-400">
+          <div className="text-xs text-slate-400">
             <span className="bg-slate-900 border border-slate-800 px-3 py-1.5 text-geeko-400 font-bold">
               10-HOUR SPRINT • 5 DIVERSE TRACKS
             </span>
           </div>
         </div>
 
-        {/* Hackathon Info Card */}
-        <div className="mb-12 bg-pine-900/30 border-2 border-slate-800 p-6 sm:p-8 font-mono">
+        {/* Separate Registration Notice */}
+        <div className="mb-10 bg-pine-900/30 border-2 border-geeko-500/80 p-5 text-xs text-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[4px_4px_0px_0px_#173f35]">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-geeko-400 font-bold uppercase">
+              <ShieldAlert className="w-4 h-4 text-geeko-400" />
+              <span>SEPARATE REGISTRATION REQUIRED FOR HACKATHON</span>
+            </div>
+            <p className="text-slate-300 font-sans">
+              Day 1 registration is for talks and workshops. If you want to hack on Day 2, please register your team (1–4 members) or enter solo below.
+            </p>
+          </div>
+          <button
+            onClick={onOpenHackathonRegister}
+            className="px-5 py-2.5 bg-geeko-500 hover:bg-geeko-400 text-black font-mono font-bold text-xs uppercase tracking-wider border-2 border-black whitespace-nowrap cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
+          >
+            Apply for Hackathon (Day 2) →
+          </button>
+        </div>
+
+        {/* Hackathon Specs Card */}
+        <div className="mb-12 bg-obsidian-900 border-2 border-slate-800 p-6 sm:p-8 font-mono">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
             <div>
               <span className="text-geeko-400 font-bold uppercase block mb-1">FORMAT</span>
-              <p className="text-slate-200 font-sans">
+              <p className="text-slate-300 font-sans">
                 10-Hour in-person coding sprint. Participants identify problems, build working prototypes, and demonstrate them to a panel of mentors and judges.
               </p>
             </div>
             <div>
               <span className="text-geeko-400 font-bold uppercase block mb-1">TEAM COMPOSITION</span>
-              <p className="text-slate-200 font-sans">
-                Form teams of 2–4 or hack solo. Solo hackers can join team-matching sessions at the start of Phase 3.
+              <p className="text-slate-300 font-sans">
+                Form teams of 1–4 members or hack solo. Solo hackers can join team-matching sessions at the start of Phase 3.
               </p>
             </div>
             <div>
               <span className="text-geeko-400 font-bold uppercase block mb-1">EVALUATION CRITERIA</span>
-              <p className="text-slate-200 font-sans">
+              <p className="text-slate-300 font-sans">
                 Originality, functional completeness, adherence to open-source licensing, and ecosystem utility.
               </p>
             </div>
@@ -110,11 +131,11 @@ export const HackathonSection: React.FC<HackathonSectionProps> = ({ onOpenPreReg
             </div>
 
             <button
-              onClick={onOpenPreRegister}
+              onClick={onOpenHackathonRegister}
               className="w-full py-3 bg-black hover:bg-slate-900 text-white font-mono font-bold text-xs uppercase tracking-wider border border-black flex items-center justify-center gap-2 cursor-pointer transition-colors"
             >
               <Sparkles className="w-4 h-4 text-geeko-400" />
-              <span>Register for Hackathon</span>
+              <span>Apply for Hackathon (Day 2)</span>
             </button>
           </div>
         </div>

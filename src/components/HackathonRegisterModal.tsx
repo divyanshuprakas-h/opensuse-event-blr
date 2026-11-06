@@ -1,0 +1,316 @@
+import React, { useState } from 'react';
+import { X, Code2, CheckCircle2, Sparkles, Terminal, Copy, Check, Users, ShieldAlert } from 'lucide-react';
+import { HACKATHON_TRACKS, EVENT_CONFIG } from '../data/eventData';
+
+interface HackathonRegisterModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+interface HackathonRegistration {
+  id: string;
+  teamName: string;
+  leaderName: string;
+  leaderEmail: string;
+  teamSize: number;
+  trackId: string;
+  members: string[];
+  github: string;
+  projectIdea: string;
+  registeredAt: string;
+}
+
+export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    teamName: '',
+    leaderName: '',
+    leaderEmail: '',
+    teamSize: 2,
+    trackId: HACKATHON_TRACKS[0].id,
+    memberNames: '',
+    github: '',
+    projectIdea: '',
+  });
+
+  const [submittedHackPass, setSubmittedHackPass] = useState<HackathonRegistration | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.teamName || !formData.leaderName || !formData.leaderEmail) return;
+
+    setIsSubmitting(true);
+    const passRecord: HackathonRegistration = {
+      id: `HACK-BLR-${Math.floor(1000 + Math.random() * 9000)}`,
+      teamName: formData.teamName,
+      leaderName: formData.leaderName,
+      leaderEmail: formData.leaderEmail,
+      teamSize: Number(formData.teamSize),
+      trackId: formData.trackId,
+      members: formData.memberNames.split(',').map((s) => s.trim()).filter(Boolean),
+      github: formData.github,
+      projectIdea: formData.projectIdea,
+      registeredAt: new Date().toISOString(),
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('opensuse_blr_hackathon_registrations') || '[]');
+      existing.push(passRecord);
+      localStorage.setItem('opensuse_blr_hackathon_registrations', JSON.stringify(existing));
+    } catch {
+      // Fallback
+    }
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmittedHackPass(passRecord);
+    }, 400);
+  };
+
+  const copyId = () => {
+    if (!submittedHackPass) return;
+    navigator.clipboard.writeText(submittedHackPass.id);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl bg-obsidian-950 border-2 border-geeko-500 shadow-[8px_8px_0px_0px_#173f35] text-slate-100 overflow-hidden my-8">
+        
+        {/* Header */}
+        <div className="bg-geeko-500 text-black px-4 py-2.5 font-mono text-xs font-black uppercase tracking-wider flex items-center justify-between border-b-2 border-black">
+          <div className="flex items-center gap-2">
+            <Code2 className="w-4 h-4" />
+            <span>DAY 2 // 10-HOUR HACKATHON REGISTRATION</span>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-black hover:bg-black hover:text-white p-1 transition-colors cursor-pointer"
+            aria-label="Close modal"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 max-h-[80vh] overflow-y-auto">
+          {!submittedHackPass ? (
+            <div className="space-y-5">
+              
+              <div className="bg-pine-900/40 border border-geeko-500/30 p-3.5 text-xs font-mono">
+                <div className="text-geeko-400 font-bold mb-1 flex items-center gap-1.5">
+                  <Terminal className="w-3.5 h-3.5" />
+                  <span>SEPARATE DAY 2 HACKATHON ENTRY</span>
+                </div>
+                <p className="text-slate-300">
+                  Register your team (1 to 4 members) or enter solo for the 10-hour open-source sprint. Day 2 registration is independent from Day 1 talks.
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                
+                {/* Team Name */}
+                <div>
+                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                    Team Name (or Solo Handle) <span className="text-geeko-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.teamName}
+                    onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
+                    placeholder="e.g. Geeko Kernels / ByteCraft"
+                    className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                  />
+                </div>
+
+                {/* Team Lead Name & Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                      Team Leader Name <span className="text-geeko-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.leaderName}
+                      onChange={(e) => setFormData({ ...formData, leaderName: e.target.value })}
+                      placeholder="e.g. Divyanshu"
+                      className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                      Leader Email <span className="text-geeko-400">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.leaderEmail}
+                      onChange={(e) => setFormData({ ...formData, leaderEmail: e.target.value })}
+                      placeholder="leader@domain.com"
+                      className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Team Size & Track */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                      Team Size
+                    </label>
+                    <select
+                      value={formData.teamSize}
+                      onChange={(e) => setFormData({ ...formData, teamSize: Number(e.target.value) })}
+                      className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                    >
+                      <option value={1}>1 (Solo Hacker)</option>
+                      <option value={2}>2 Members</option>
+                      <option value={3}>3 Members</option>
+                      <option value={4}>4 Members (Max)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                      Preferred Track
+                    </label>
+                    <select
+                      value={formData.trackId}
+                      onChange={(e) => setFormData({ ...formData, trackId: e.target.value })}
+                      className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                    >
+                      {HACKATHON_TRACKS.map((t) => (
+                        <option key={t.id} value={t.id}>
+                          {t.code}: {t.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Other Member Names */}
+                {formData.teamSize > 1 && (
+                  <div>
+                    <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                      Other Teammates' Names & Emails <span className="text-slate-500 lowercase">(comma separated)</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.memberNames}
+                      onChange={(e) => setFormData({ ...formData, memberNames: e.target.value })}
+                      placeholder="e.g. Rahul Sharma (rahul@...), Ananya (ananya@...)"
+                      className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                    />
+                  </div>
+                )}
+
+                {/* GitHub & Project Idea */}
+                <div>
+                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                    GitHub Handle / Repo Link <span className="text-slate-500 lowercase">(optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.github}
+                    onChange={(e) => setFormData({ ...formData, github: e.target.value })}
+                    placeholder="https://github.com/..."
+                    className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-300 mb-1">
+                    Rough Project Idea / Problem Statement <span className="text-slate-500 lowercase">(optional)</span>
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={formData.projectIdea}
+                    onChange={(e) => setFormData({ ...formData, projectIdea: e.target.value })}
+                    placeholder="What open-source tool, CLI utility or openSUSE automation do you plan to build?"
+                    className="w-full bg-obsidian-900 border-2 border-slate-700 focus:border-geeko-500 px-3 py-2 font-mono text-xs text-white outline-none"
+                  />
+                </div>
+
+                {/* Submit */}
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3 bg-geeko-500 text-black font-mono font-black text-xs uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  >
+                    {isSubmitting ? <span>Reserving Hackathon Table...</span> : <span>Claim Day 2 Hackathon Pass</span>}
+                  </button>
+                </div>
+
+              </form>
+
+            </div>
+          ) : (
+            /* Confirmation Pass View */
+            <div className="space-y-5 text-center">
+              <div className="w-12 h-12 mx-auto bg-geeko-500 text-black border-2 border-black flex items-center justify-center font-bold">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+
+              <div>
+                <h3 className="text-xl font-black text-white uppercase tracking-tight">
+                  Hackathon Registration Confirmed!
+                </h3>
+                <p className="text-xs font-mono text-geeko-400 mt-1">
+                  Team table reservation locked for Day 2 (10-Hour Sprint).
+                </p>
+              </div>
+
+              <div className="bg-obsidian-900 border-2 border-geeko-500 p-4 font-mono text-left shadow-[4px_4px_0px_0px_#173f35] text-xs space-y-2">
+                <div className="flex justify-between border-b border-slate-800 pb-1">
+                  <span className="text-slate-500">HACK PASS ID:</span>
+                  <span className="text-geeko-400 font-bold">{submittedHackPass.id}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-800 pb-1">
+                  <span className="text-slate-500">TEAM:</span>
+                  <span className="text-white font-bold">{submittedHackPass.teamName}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-800 pb-1">
+                  <span className="text-slate-500">TEAM SIZE:</span>
+                  <span className="text-slate-200">{submittedHackPass.teamSize} Member(s)</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-800 pb-1">
+                  <span className="text-slate-500">VENUE:</span>
+                  <span className="text-slate-300">Newton School of Technology, BLR</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">STATUS:</span>
+                  <span className="text-geeko-400 font-bold">PRE-REGISTERED // SEPARATE DAY 2</span>
+                </div>
+              </div>
+
+              <div className="flex gap-3 justify-center pt-2">
+                <button
+                  onClick={copyId}
+                  className="px-4 py-2 bg-obsidian-900 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-geeko-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copied ? 'Pass Copied' : 'Copy Pass ID'}</span>
+                </button>
+                <button
+                  onClick={onClose}
+                  className="px-5 py-2 bg-geeko-500 text-black border-2 border-black font-mono font-bold text-xs uppercase cursor-pointer"
+                >
+                  Close Desk
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+      </div>
+    </div>
+  );
+};

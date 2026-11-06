@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
-import { Menu, X, Terminal, Calendar, MapPin, Sparkles } from 'lucide-react';
+import { Menu, X, Terminal, Calendar, MapPin, Sparkles, Mic, Code2 } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
 
 interface NavbarProps {
-  onOpenPreRegister: () => void;
+  onOpenDay1Register: () => void;
+  onOpenHackathonRegister: () => void;
+  onOpenCFP: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenPreRegister }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenDay1Register,
+  onOpenHackathonRegister,
+  onOpenCFP,
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { name: 'About', href: '#about' },
-    { name: '3-Phase Structure', href: '#phases' },
+    { name: 'Schedule (Day 1 & 2)', href: '#schedule' },
     { name: 'Hackathon Tracks', href: '#hackathon' },
     { name: 'Dates & Venue', href: '#venue' },
     { name: 'Budget & Sponsors', href: '#budget' },
@@ -25,19 +31,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPreRegister }) => {
       <div className="bg-geeko-500 text-black text-xs font-mono font-bold tracking-wider py-1.5 px-4 border-b-2 border-black flex items-center justify-between overflow-x-auto whitespace-nowrap">
         <div className="flex items-center gap-3">
           <span className="inline-block w-2 h-2 rounded-full bg-black animate-ping" />
-          <span>[STATUS: PRE-REGISTRATION LIVE]</span>
+          <span>[PLAN: DAY 1 TALKS & WORKSHOPS // DAY 2 10H HACKATHON]</span>
           <span className="hidden sm:inline">•</span>
-          <span className="hidden sm:inline">DATES ANNOUNCING SOON // JAN 2027 // VENUE: NEWTON SCHOOL OF TECHNOLOGY, BENGALURU</span>
+          <span className="hidden sm:inline">CFP NOW OPEN: SUBMIT YOUR TALK OR WORKSHOP</span>
         </div>
         <div className="flex items-center gap-3 font-semibold text-[11px]">
-          <span className="bg-black text-geeko-400 px-2 py-0.5 uppercase tracking-widest text-[10px]">
-            openSUSE India
-          </span>
+          <button
+            onClick={onOpenCFP}
+            className="bg-black text-geeko-400 hover:text-white px-2.5 py-0.5 uppercase tracking-wider text-[10px] cursor-pointer flex items-center gap-1"
+          >
+            <Mic className="w-3 h-3" />
+            <span>Submit CFP</span>
+          </button>
           <button 
-            onClick={onOpenPreRegister}
+            onClick={onOpenDay1Register}
             className="underline hover:text-white transition-colors cursor-pointer"
           >
-            Claim Early Priority Pass →
+            Pre-Register (Day 1) →
           </button>
         </div>
       </div>
@@ -50,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPreRegister }) => {
           <a href="#" className="flex items-center gap-3.5 group">
             <div className="w-12 h-12 bg-pine-900 border-2 border-geeko-500 flex items-center justify-center p-1.5 shadow-[3px_3px_0px_0px_#73ba25] group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-[1px_1px_0px_0px_#73ba25] transition-all">
               <img 
-                src={`${import.meta.env.BASE_URL}geeko.svg`} 
+                src={`${import.meta.env.BASE_URL}geeko.svg`}
                 alt="openSUSE Geeko Logo" 
                 className="w-full h-full object-contain"
               />
@@ -71,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPreRegister }) => {
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-6 font-mono text-xs text-slate-300">
+          <nav className="hidden lg:flex items-center gap-5 font-mono text-xs text-slate-300">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -83,21 +93,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPreRegister }) => {
             ))}
           </nav>
 
-          {/* Action CTA */}
-          <div className="hidden sm:flex items-center gap-3">
-            <a
-              href="#terminal"
-              className="px-3 py-2 text-xs font-mono border border-slate-700 hover:border-geeko-500 text-slate-300 hover:text-geeko-400 bg-obsidian-900 transition-colors flex items-center gap-1.5"
-            >
-              <Terminal className="w-3.5 h-3.5 text-geeko-400" />
-              <span>zypper cli</span>
-            </a>
+          {/* Action CTAs */}
+          <div className="hidden sm:flex items-center gap-2.5">
             <button
-              onClick={onOpenPreRegister}
-              className="px-5 py-2.5 bg-geeko-500 text-black font-mono font-black text-xs uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center gap-2 cursor-pointer"
+              onClick={onOpenCFP}
+              className="px-3 py-2 text-xs font-mono border border-slate-700 hover:border-geeko-500 text-slate-300 hover:text-geeko-400 bg-obsidian-900 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 fill-black" />
-              <span>Pre-Register Now</span>
+              <Mic className="w-3.5 h-3.5 text-geeko-400" />
+              <span>CFP Desk</span>
+            </button>
+
+            <button
+              onClick={onOpenHackathonRegister}
+              className="px-3.5 py-2 text-xs font-mono border border-slate-700 hover:border-geeko-500 text-geeko-400 bg-pine-950 transition-colors flex items-center gap-1.5 cursor-pointer font-bold"
+            >
+              <Code2 className="w-3.5 h-3.5" />
+              <span>Day 2 Hackathon</span>
+            </button>
+
+            <button
+              onClick={onOpenDay1Register}
+              className="px-4 py-2 bg-geeko-500 text-black font-mono font-black text-xs uppercase tracking-wider border-2 border-black shadow-[3px_3px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5 fill-black" />
+              <span>Register Day 1</span>
             </button>
           </div>
 
@@ -128,11 +147,29 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPreRegister }) => {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenPreRegister();
+                  onOpenCFP();
                 }}
-                className="w-full py-3 bg-geeko-500 text-black font-mono font-bold uppercase tracking-wider border-2 border-black shadow-[3px_3px_0px_0px_#ffffff] text-center"
+                className="w-full py-2.5 bg-obsidian-900 border border-slate-700 text-geeko-400 font-mono text-xs uppercase font-bold text-center"
               >
-                Pre-Register for Updates
+                Submit Talk (CFP)
+              </button>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenHackathonRegister();
+                }}
+                className="w-full py-2.5 bg-pine-950 border border-geeko-500 text-geeko-300 font-mono text-xs uppercase font-bold text-center"
+              >
+                Register for Day 2 Hackathon
+              </button>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenDay1Register();
+                }}
+                className="w-full py-3 bg-geeko-500 text-black font-mono font-bold uppercase tracking-wider border-2 border-black text-center"
+              >
+                Pre-Register for Day 1
               </button>
             </div>
           </div>
