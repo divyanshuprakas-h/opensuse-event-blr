@@ -35,8 +35,9 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
             <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-2">
               // 02. TWO-DAY PROGRAM ARCHITECTURE
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight">
-              Day 1 Talks & Workshops // Day 2 Hackathon
+            <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight leading-tight">
+              Day 1 Talks & Workshops <br />
+              <span className="text-geeko-400">//</span> Day 2 Hackathon
             </h2>
           </div>
           
