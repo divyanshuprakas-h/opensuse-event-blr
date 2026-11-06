@@ -6,6 +6,18 @@ Official repository and website for **openSUSE India – Bengaluru Connect 2027*
 
 ---
 
+## 🎨 Design Mockups (Minimalism + Neo-Brutalism)
+
+The website design combines **minimalism** and **neo-brutalism** with canonical openSUSE branding: high-contrast obsidian dark backgrounds (`#090e0d`), openSUSE deep pine green (`#173f35`), sharp borders, monospaced terminal telemetry, and high-voltage openSUSE Geeko green accents (`#73ba25`).
+
+### 1. Hero Section & Pre-Registration View
+![Hero Section Design Mockup](./public/images/hero-design-mockup.jpg)
+
+### 2. 3-Phase Structure & Hackathon Tracks View
+![Event Structure & Tracks Mockup](./public/images/tracks-design-mockup.jpg)
+
+---
+
 ## 📌 Event Details
 
 - **Event Type:** Open-Source Community Meetup, Technical Workshops & Hackathon
@@ -15,85 +27,90 @@ Official repository and website for **openSUSE India – Bengaluru Connect 2027*
 - **Proposed Venue:** Newton School of Technology, Bengaluru
 - **Expected Participation:** 300–400 Participants
 - **Organized by:** openSUSE India Community
+- **Admission:** 100% Free & Open-Source Community Event
 
 ---
 
-## 🎯 Event Overview
+## ⚡ Key Website Features
 
-**openSUSE India – Bengaluru Connect 2027** brings together students, developers, Linux enthusiasts, system administrators, and open-source contributors from across Bengaluru and neighboring regions.
+1. **Pre-Registration & Dynamic Digital Pass Generator:**
+   - Dedicated pre-registration system for participants to reserve priority entry before exact January 2027 dates are locked.
+   - Generates a personalized **Neo-Brutalist Digital Ticket / Pass** with unique ID (`OSBLR-2027-XXXX`), attendee info, barcode telemetry, and instant sharing to X/Twitter or clipboard.
+   - Built to easily switch to `datesConfirmed: true` once final dates are finalized without layout shifts.
 
-The initiative focuses on increasing awareness, adoption, and practical understanding of openSUSE technologies while strengthening the open-source community in India.
+2. **Interactive Zypper Terminal CLI:**
+   - In-browser interactive openSUSE terminal simulator.
+   - Try commands like `zypper in opensuse-blr`, `zypper info event`, `zypper lr`, `geeko`, `yast`, `obs`, and `help`.
 
-Through technical talks, interactive workshops, and a 10-hour hackathon, participants will gain exposure to the openSUSE ecosystem, explore its development tools, and discover opportunities to contribute to real-world open-source projects.
+3. **3-Phase Detailed Syllabus:**
+   - **Phase 01:** Technical Talks & Community Engagement (Leap vs Tumbleweed, Linux careers, OBS introduction, openSUSE governance).
+   - **Phase 02:** Hands-on Technical Workshops (YaST system control, Zypper package management, OBS binary packaging, openQA automated operating system tests, Git workflows).
+   - **Phase 03:** 10-Hour Open-Source Hackathon (5 targeted tracks, on-site openSUSE maintainer mentorship, prototype evaluations, awards).
 
-The event is designed to welcome both beginners exploring Linux for the first time and experienced developers interested in contributing to open-source technologies.
+4. **10-Hour Hackathon Tracks:**
+   - Track 01: Linux & Developer Productivity Tools
+   - Track 02: Open-Source Automation & System Utilities
+   - Track 03: Cloud-Native & Infrastructure Technologies
+   - Track 04: Open-Source Applications & Community Solutions
+   - Track 05: openSUSE Ecosystem Integrations
 
----
+5. **Financial Transparency & Sponsorship Deck:**
+   - Complete breakdown of the **₹90,000 INR** community budget pool.
+   - Call for community sponsors, partners, and student travel benefactors.
 
-## 🗓️ Event Structure
-
-The event is organized into three distinct phases across two days:
-
-### Phase 1 — Technical Talks & Community Engagement
-Introducing participants to openSUSE, its community, and its role in the global open-source ecosystem:
-- Introduction to openSUSE and the global open-source ecosystem.
-- Exploring openSUSE Leap and Tumbleweed.
-- Linux development, system administration, and open-source career opportunities.
-- Understanding community-driven software development.
-- How to get started contributing to openSUSE.
-- Opportunities to participate in openSUSE community initiatives.
-
-### Phase 2 — Hands-on Technical Workshops
-Practical learning through guided workshops and demonstrations of openSUSE technologies:
-- Installing and configuring openSUSE.
-- Package management using Zypper.
-- System administration with YaST.
-- Exploring openSUSE Leap and Tumbleweed.
-- Introduction to Open Build Service (OBS).
-- Understanding automated testing through openQA.
-- Using Git and collaborative development workflows.
-- Getting started with open-source contributions.
-
-### Phase 3 — 10-Hour Open-Source Hackathon
-Collaborative prototyping and hacking on open-source solutions:
-- **Tracks:**
-  - Linux & Developer Productivity Tools
-  - Open-Source Automation & System Utilities
-  - Cloud-Native & Infrastructure Technologies
-  - Open-Source Applications & Community Solutions
-  - Projects utilizing or integrating openSUSE technologies
-- Mentorship, technical evaluation, project presentations, and awards.
+6. **Road to openSUSE Conf India:**
+   - Clear community roadmap explaining how Bengaluru Connect 2027 acts as the nationwide launchpad.
 
 ---
 
-## 👥 Organizing Team
+## 👥 Organizing Committee
 
-- **Divyanshu Prakash**
-- **Dushyant Acharya**
-- **Rithull Raj Kallat**
-
----
-
-## 💼 Sponsorship & Support
-
-- **Estimated Budget:** ₹90,000 INR
-- Budget allocations include venue arrangements, participant refreshments, technical infrastructure, openSUSE-branded merchandise, speaker hospitality, and hackathon prizes.
-- Open for community partnerships and sponsorships.
+- **Divyanshu Prakash** — Lead Organizer
+- **Dushyant Acharya** — Co-Organizer & Technical Coordinator
+- **Rithull Raj Kallat** — Co-Organizer & Operations Lead
 
 ---
 
-## 🚀 Building Momentum Toward openSUSE Conf India
+## 🚀 Getting Started Locally
 
-Bengaluru Connect 2027 serves as a key milestone and momentum generator toward a future **openSUSE Conf India** national conference, nurturing a sustainable and passionate network of users, contributors, and maintainers.
+### Prerequisites
+- Node.js (v18+ or v20+)
+- npm or yarn
+
+### Installation & Run
+
+```bash
+# Clone the repository
+git clone https://github.com/divyanshuprakas-h/opensuse-event-blr.git
+cd opensuse-event-blr
+
+# Install dependencies
+npm install
+
+# Start local development server
+npm run dev
+```
+
+Visit `http://localhost:5173` to explore the website.
+
+### Production Build
+
+```bash
+npm run build
+```
+
+The production output is bundled into `dist/`.
 
 ---
 
-## 🛠️ Tech Stack (Website)
+## 🌐 Automatic GitHub Pages Deployment
 
-- **Framework:** React + Vite
-- **Styling:** Tailwind CSS + openSUSE Design Palette (`#73ba25`)
-- **Icons:** Lucide Icons
-- **Deployment:** GitHub Pages / Static Web Hosting
+This repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically builds and publishes the website to GitHub Pages upon pushing to `main`.
+
+To enable GitHub Pages in your GitHub repository:
+1. Go to repository **Settings** → **Pages**
+2. Under **Build and deployment** → **Source**, select **GitHub Actions**
+3. Any push to `main` will automatically build and publish the live site!
 
 ---
 
