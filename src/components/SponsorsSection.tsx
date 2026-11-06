@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Github, MessageSquare, Handshake, Mail, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
+import { Globe, Github, Handshake } from 'lucide-react';
 
 export const SponsorsSection: React.FC = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -15,65 +15,71 @@ export const SponsorsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
             <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-1">
-              // 04. ORGANIZER & SPONSORSHIP
+              // 04. ORGANIZER & SPONSORS
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-              Powered by openSUSE
+              Organized & Supported By
             </h2>
           </div>
           <div className="text-xs text-slate-400">
-            <span className="bg-pine-950/80 border border-geeko-500/40 px-3 py-1 text-geeko-400 font-bold inline-flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              100% NON-PROFIT • FREE COMMUNITY EVENT
+            <span className="bg-obsidian-900 border border-slate-800 px-3 py-1 text-geeko-400 font-bold">
+              COMMUNITY-FIRST • 100% FREE ADMISSION
             </span>
           </div>
         </div>
 
-        {/* Primary Organizer & Sponsor: openSUSE Only */}
-        <div className="bg-obsidian-900/90 border-2 border-geeko-500/60 p-6 sm:p-8 rounded-lg shadow-[4px_4px_0px_0px_#173f35] mb-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-pine-950 border border-geeko-500/50 p-2.5 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(115,186,37,0.25)]">
+        {/* Compact Square Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl">
+          
+          {/* Square Card 1: openSUSE */}
+          <div className="bg-obsidian-900 border-2 border-geeko-500 p-6 flex flex-col justify-between items-center text-center shadow-[4px_4px_0px_0px_#173f35] min-h-[300px]">
+            <div className="w-full flex justify-between items-center text-[10px]">
+              <span className="bg-pine-950 border border-geeko-500/50 text-geeko-400 font-bold uppercase px-2 py-0.5">
+                Lead Organizer
+              </span>
+              <span className="text-slate-500 font-mono">01</span>
+            </div>
+
+            <div className="my-auto space-y-3 py-4 flex flex-col items-center">
+              <div className="w-20 h-20 bg-pine-950 border border-geeko-500/50 p-2 flex items-center justify-center">
                 <img 
                   src={`${import.meta.env.BASE_URL}geeko.svg`}
-                  alt="openSUSE Geeko" 
+                  alt="openSUSE" 
                   className="w-full h-full object-contain"
                 />
               </div>
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-bold text-geeko-400 uppercase tracking-wider bg-pine-950 border border-geeko-500/40 px-2 py-0.5 rounded">
-                    Lead Organizer & Primary Sponsor
-                  </span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-                  The openSUSE Project & openSUSE India
+                <h3 className="text-lg font-black text-white uppercase tracking-tight">
+                  openSUSE
                 </h3>
-                <p className="text-xs text-slate-400 font-sans mt-0.5">
-                  Global Free & Open Source Linux Distribution & Tooling Ecosystem
+                <p className="text-xs text-geeko-400 font-bold uppercase mt-0.5">
+                  openSUSE India & Project
+                </p>
+                <p className="text-[11px] text-slate-400 font-sans mt-1">
+                  Primary Community Sponsor
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5 w-full md:w-auto">
+            <div className="w-full pt-3 border-t border-slate-800 flex items-center justify-center gap-3 text-xs">
               <a
                 href="https://www.opensuse.org"
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 md:flex-initial px-3.5 py-2 bg-obsidian-950 hover:bg-slate-900 border border-slate-700 hover:border-geeko-400 text-xs text-slate-300 hover:text-white rounded transition-colors flex items-center justify-center gap-1.5"
+                className="hover:text-geeko-400 text-slate-300 transition-colors flex items-center gap-1"
               >
                 <Globe className="w-3.5 h-3.5 text-geeko-400" />
                 <span>opensuse.org</span>
               </a>
-
+              <span className="text-slate-700">•</span>
               <a
                 href="https://github.com/openSUSE"
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 md:flex-initial px-3.5 py-2 bg-obsidian-950 hover:bg-slate-900 border border-slate-700 hover:border-geeko-400 text-xs text-slate-300 hover:text-white rounded transition-colors flex items-center justify-center gap-1.5"
+                className="hover:text-geeko-400 text-slate-300 transition-colors flex items-center gap-1"
               >
                 <Github className="w-3.5 h-3.5 text-geeko-400" />
                 <span>GitHub</span>
@@ -81,64 +87,43 @@ export const SponsorsSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-6 grid grid-cols-1 md:grid-cols-3 gap-6 font-sans text-xs">
-            <div className="bg-obsidian-950/70 p-4 border border-slate-800 rounded">
-              <div className="font-mono font-bold text-geeko-400 uppercase tracking-wide mb-1 flex items-center gap-1.5">
-                <span>// Leap & Tumbleweed</span>
+          {/* Square Card 2: Upcoming Collaborations */}
+          <div className="bg-obsidian-900/60 border-2 border-dashed border-slate-700 p-6 flex flex-col justify-between items-center text-center min-h-[300px]">
+            <div className="w-full flex justify-between items-center text-[10px]">
+              <span className="bg-slate-900 border border-slate-700 text-slate-400 font-bold uppercase px-2 py-0.5">
+                In Progress
+              </span>
+              <span className="text-slate-600 font-mono">02</span>
+            </div>
+
+            <div className="my-auto space-y-2.5 py-4 flex flex-col items-center">
+              <div className="w-14 h-14 bg-obsidian-950 border border-slate-800 flex items-center justify-center text-slate-500">
+                <Handshake className="w-7 h-7 text-geeko-400" />
               </div>
-              <p className="text-slate-300 leading-relaxed">
-                Rock-solid stability with openSUSE Leap enterprise codebase and bleeding-edge innovation with rolling-release openSUSE Tumbleweed.
+              <h3 className="text-base font-black text-white uppercase tracking-tight">
+                Further Collaborations
+              </h3>
+              <p className="text-xs text-slate-300 font-sans max-w-xs leading-relaxed">
+                Further community partners and sponsors will be updated as collaborations are confirmed.
               </p>
             </div>
 
-            <div className="bg-obsidian-950/70 p-4 border border-slate-800 rounded">
-              <div className="font-mono font-bold text-geeko-400 uppercase tracking-wide mb-1 flex items-center gap-1.5">
-                <span>// Open Build Service (OBS)</span>
-              </div>
-              <p className="text-slate-300 leading-relaxed">
-                The industry-standard open build system compiling source packages for openSUSE, Fedora, Debian, Ubuntu, and Arch across multiple architectures.
-              </p>
-            </div>
-
-            <div className="bg-obsidian-950/70 p-4 border border-slate-800 rounded">
-              <div className="font-mono font-bold text-geeko-400 uppercase tracking-wide mb-1 flex items-center gap-1.5">
-                <span>// openQA Automated Testing</span>
-              </div>
-              <p className="text-slate-300 leading-relaxed">
-                Automated end-to-end full operating system testing using optical character recognition and video capture to guarantee distribution quality.
-              </p>
+            <div className="w-full pt-3 border-t border-slate-800 flex items-center justify-center gap-2">
+              <a
+                href="mailto:divyanshuprakash914@gmail.com?subject=Collaboration%20Inquiry%20-%20openSUSE%20Bengaluru%20Connect%202027"
+                className="px-3 py-1.5 bg-geeko-500 hover:bg-geeko-400 text-black font-black text-xs uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                Collaborate
+              </a>
+              <button
+                onClick={copyContact}
+                className="px-2.5 py-1.5 bg-obsidian-950 border border-slate-700 hover:border-geeko-400 text-slate-300 text-xs cursor-pointer transition-colors"
+              >
+                {copiedEmail ? 'Copied' : 'Contact'}
+              </button>
             </div>
           </div>
-        </div>
 
-        {/* Collaboration Notice Card */}
-        <div className="bg-pine-950/60 border border-geeko-500/40 rounded-lg p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1.5 text-left">
-            <div className="flex items-center gap-2">
-              <Handshake className="w-4 h-4 text-geeko-400" />
-              <h4 className="text-sm sm:text-base font-black text-white uppercase tracking-tight">
-                Community Collaborations & Further Partners
-              </h4>
-            </div>
-            <p className="text-xs text-slate-300 font-sans max-w-2xl leading-relaxed">
-              We are actively collaborating with student developer clubs, open-source user groups, and tech communities across Bengaluru. <strong className="text-geeko-300">Further community partners and sponsors will be updated as collaborations are confirmed.</strong>
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2.5 shrink-0 w-full md:w-auto">
-            <a
-              href="mailto:divyanshuprakash914@gmail.com?subject=Collaboration%20Inquiry%20-%20openSUSE%20Bengaluru%20Connect%202027"
-              className="flex-1 md:flex-initial px-4 py-2 bg-geeko-500 hover:bg-geeko-400 text-black text-xs font-black uppercase tracking-wider rounded transition-all text-center cursor-pointer shadow-[0_0_12px_rgba(115,186,37,0.3)]"
-            >
-              Collaborate With Us
-            </a>
-            <button
-              onClick={copyContact}
-              className="px-3 py-2 bg-obsidian-900 border border-slate-700 hover:border-geeko-400 text-slate-300 text-xs rounded cursor-pointer transition-colors"
-            >
-              {copiedEmail ? 'Copied' : 'Copy Contact'}
-            </button>
-          </div>
         </div>
 
       </div>
