@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DAY1_SESSIONS, DAY2_SESSIONS, SessionItem, HACKATHON_TRACKS } from '../data/eventData';
-import { Calendar, Clock, MapPin, Tag, CheckCircle2, Flame, Sparkles, Code2, ArrowRight, Filter } from 'lucide-react';
+import { Calendar, Clock, MapPin, Tag, CheckCircle2, Flame, Sparkles, Code2, ArrowRight, Filter, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface DayScheduleSectionProps {
   onOpenHackathonRegister: () => void;
@@ -13,12 +13,17 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
 }) => {
   const [activeDay, setActiveDay] = useState<'day1' | 'day2'>('day1');
   const [day1Filter, setDay1Filter] = useState<'all' | 'mandatory' | 'optional'>('all');
+  const [showAllDay1, setShowAllDay1] = useState(false);
+  const [showAllDay2, setShowAllDay2] = useState(false);
 
   const filteredDay1 = DAY1_SESSIONS.filter((s) => {
     if (day1Filter === 'mandatory') return s.isMandatory;
     if (day1Filter === 'optional') return !s.isMandatory;
     return true;
   });
+
+  const visibleDay1 = showAllDay1 ? filteredDay1 : filteredDay1.slice(0, 3);
+  const visibleDay2 = showAllDay2 ? DAY2_SESSIONS : DAY2_SESSIONS.slice(0, 3);
 
   return (
     <section id="schedule" className="py-20 border-b-2 border-slate-800 bg-obsidian-950 font-mono">
@@ -110,7 +115,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
 
             {/* Session Cards */}
             <div className="space-y-3">
-              {filteredDay1.map((session) => (
+              {visibleDay1.map((session) => (
                 <div
                   key={session.id}
                   className={`p-5 border-2 text-left transition-all ${
@@ -166,6 +171,28 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
                 </div>
               ))}
             </div>
+
+            {/* View More / Show Less Toggle Button */}
+            {filteredDay1.length > 3 && (
+              <div className="pt-2 text-center">
+                <button
+                  onClick={() => setShowAllDay1(!showAllDay1)}
+                  className="w-full sm:w-auto px-6 py-2.5 bg-obsidian-900 hover:bg-pine-950 border-2 border-geeko-500 text-geeko-300 hover:text-white font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#173f35] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                >
+                  {showAllDay1 ? (
+                    <>
+                      <ChevronUp className="w-4 h-4 text-geeko-400" />
+                      <span>Show Less (Collapse Schedule)</span>
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-4 h-4 text-geeko-400" />
+                      <span>View More Sessions ({filteredDay1.length - 3} More)</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-obsidian-900 border-2 border-geeko-500 p-5">
               <div>
@@ -246,7 +273,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
                 DAY 2 SPRINT CHRONOLOGY (10-HOUR TIMELINE):
               </h4>
 
-              {DAY2_SESSIONS.map((session) => (
+              {visibleDay2.map((session) => (
                 <div
                   key={session.id}
                   className="p-4 bg-obsidian-900 border-2 border-slate-800 text-left font-mono"
@@ -268,6 +295,27 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
                   </p>
                 </div>
               ))}
+
+              {DAY2_SESSIONS.length > 3 && (
+                <div className="pt-2 text-center">
+                  <button
+                    onClick={() => setShowAllDay2(!showAllDay2)}
+                    className="w-full sm:w-auto px-6 py-2.5 bg-obsidian-900 hover:bg-pine-950 border-2 border-geeko-500 text-geeko-300 hover:text-white font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#173f35] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                  >
+                    {showAllDay2 ? (
+                      <>
+                        <ChevronUp className="w-4 h-4 text-geeko-400" />
+                        <span>Show Less</span>
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="w-4 h-4 text-geeko-400" />
+                        <span>View Full Timeline ({DAY2_SESSIONS.length - 3} More Slots)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
 
           </div>

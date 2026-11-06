@@ -24,7 +24,7 @@ export interface FAQItem {
 }
 
 export const EVENT_CONFIG = {
-  name: "openSUSE India – Bengaluru Connect 2027",
+  name: "openSUSE India - Bengaluru Connect 2027",
   shortName: "Bengaluru Connect '27",
   edition: "2027",
   tagline: "Explore Open Source. Learn openSUSE. Build Together.",
