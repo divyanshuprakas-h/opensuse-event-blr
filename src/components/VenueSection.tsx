@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { MapPin, Wifi, Zap, Monitor, Coffee, Building, ExternalLink, Navigation, Map as MapIcon, Image as ImageIcon } from 'lucide-react';
+import React from 'react';
+import { MapPin, Wifi, Zap, Monitor, Coffee, Building, ExternalLink, Navigation } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
 
 export const VenueSection: React.FC = () => {
-  const [activeMediaTab, setActiveMediaTab] = useState<'photo' | 'map'>('photo');
-
   const facilities = [
     { icon: Wifi, title: "Gigabit Wi-Fi", desc: "Optimized for fast distro downloads & OBS building." },
     { icon: Zap, title: "Power Stations", desc: "Power hubs at every table for 10-hour hacking." },
@@ -41,11 +39,11 @@ export const VenueSection: React.FC = () => {
         <div className="bg-obsidian-900 border-2 border-slate-800 p-6 sm:p-8 shadow-[4px_4px_0px_0px_#173f35] mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left Column: Campus Specs & Route Actions */}
+            {/* Left Column: Campus Specs */}
             <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center gap-2 text-geeko-400 font-bold text-xs">
                 <MapPin className="w-4 h-4" />
-                <span>CAMPUS SPECIFICATIONS & LOCATION</span>
+                <span>CAMPUS SPECIFICATIONS</span>
               </div>
               <p className="text-sm font-sans text-slate-200 leading-relaxed">
                 Newton School of Technology serves as the proposed host venue for openSUSE India – Bengaluru Connect 2027. The modern campus is equipped for 300–400 attendees with dual-projection auditoriums, computer labs for workshops, and open hacking zones with high-speed connectivity.
@@ -70,95 +68,23 @@ export const VenueSection: React.FC = () => {
                   <span className="text-slate-300">Available</span>
                 </div>
               </div>
-
-              {/* Direct Maps Action Buttons */}
-              <div className="pt-3 border-t border-slate-800 flex flex-wrap items-center gap-3">
-                <a
-                  href={googleMapsSearchUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3.5 py-2 bg-geeko-500 hover:bg-geeko-400 text-black text-xs font-bold uppercase tracking-wider border border-black flex items-center gap-1.5 shadow-[2px_2px_0px_0px_#ffffff] transition-all cursor-pointer"
-                >
-                  <MapPin className="w-3.5 h-3.5" />
-                  <span>Open in Google Maps</span>
-                  <ExternalLink className="w-3 h-3 ml-0.5" />
-                </a>
-
-                <a
-                  href={googleMapsDirectionsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-3.5 py-2 bg-obsidian-950 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-geeko-400 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer"
-                >
-                  <Navigation className="w-3.5 h-3.5 text-geeko-400" />
-                  <span>Get Directions</span>
-                  <ExternalLink className="w-3 h-3 ml-0.5" />
-                </a>
-
-                <span className="text-[11px] text-slate-500">
-                  GPS: 12.7570° N, 77.6265° E
-                </span>
-              </div>
             </div>
 
-            {/* Right Column: Media Card with Photo & Interactive Map Switcher */}
-            <div className="lg:col-span-5 bg-obsidian-950 border-2 border-slate-700/80 hover:border-geeko-500/80 transition-all rounded-lg overflow-hidden shadow-[4px_4px_0px_0px_#173f35]">
-              
-              {/* Media Switcher Tab Header */}
-              <div className="bg-slate-900 border-b border-slate-800 px-3 py-2 flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <button
-                    onClick={() => setActiveMediaTab('photo')}
-                    className={`px-2.5 py-1 text-[11px] font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
-                      activeMediaTab === 'photo'
-                        ? 'bg-geeko-500 text-black border border-black'
-                        : 'text-slate-400 hover:text-white bg-obsidian-950 border border-slate-800'
-                    }`}
-                  >
-                    <ImageIcon className="w-3 h-3" />
-                    <span>Campus Photo</span>
-                  </button>
-
-                  <button
-                    onClick={() => setActiveMediaTab('map')}
-                    className={`px-2.5 py-1 text-[11px] font-bold uppercase transition-colors flex items-center gap-1.5 cursor-pointer ${
-                      activeMediaTab === 'map'
-                        ? 'bg-geeko-500 text-black border border-black'
-                        : 'text-slate-400 hover:text-white bg-obsidian-950 border border-slate-800'
-                    }`}
-                  >
-                    <MapIcon className="w-3 h-3" />
-                    <span>Interactive Map</span>
-                  </button>
-                </div>
-
-                <span className="text-[10px] text-geeko-400 font-bold bg-pine-950 border border-geeko-500/40 px-2 py-0.5 rounded">
-                  PROPOSED VENUE
-                </span>
-              </div>
-
-              {/* Media Body: Photo View or Live Map View */}
+            {/* Right Column: College Campus Photo Card (college.png) */}
+            <div className="lg:col-span-5 bg-obsidian-950 border-2 border-slate-700/80 hover:border-geeko-500/80 transition-all rounded-lg overflow-hidden shadow-[4px_4px_0px_0px_#173f35] group">
               <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-black/40 border-b border-slate-800">
-                {activeMediaTab === 'photo' ? (
-                  <div className="relative w-full h-full group">
-                    <img 
-                      src={`${import.meta.env.BASE_URL}college.png`} 
-                      alt="Newton School of Technology, Bengaluru Campus" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-70 pointer-events-none" />
-                    <div className="absolute bottom-2.5 right-3 bg-obsidian-950/90 text-slate-300 text-[10px] font-mono px-2 py-0.5 rounded border border-slate-800">
-                      Bengaluru Campus
-                    </div>
-                  </div>
-                ) : (
-                  <iframe
-                    title="Campus Map Preview"
-                    src={mapEmbedUrl}
-                    className="w-full h-full border-0 filter invert-[90%] hue-rotate-180 contrast-[110%] brightness-[95%]"
-                    loading="lazy"
-                  />
-                )}
+                <img 
+                  src={`${import.meta.env.BASE_URL}college.png`} 
+                  alt="Newton School of Technology, Bengaluru Campus" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent opacity-70 pointer-events-none" />
+                <div className="absolute top-3 left-3 bg-obsidian-950/90 backdrop-blur-sm border border-geeko-500/60 text-geeko-400 text-[10px] font-mono font-bold px-2 py-0.5 rounded">
+                  PROPOSED VENUE
+                </div>
+                <div className="absolute bottom-2.5 right-3 bg-obsidian-950/90 text-slate-300 text-[10px] font-mono px-2 py-0.5 rounded border border-slate-800">
+                  Bengaluru Campus
+                </div>
               </div>
 
               {/* Media Card Footer */}
@@ -178,7 +104,6 @@ export const VenueSection: React.FC = () => {
                   </span>
                 </div>
               </div>
-
             </div>
 
           </div>
