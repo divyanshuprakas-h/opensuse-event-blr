@@ -74,7 +74,7 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
           <p>Proposed Dates  : January 2027 (exact dates to be confirmed)</p>
           <p>Venue           : Newton School of Technology, Bengaluru</p>
           <p>Capacity        : 300–400 Attendees</p>
-          <p>Budget Pool     : ₹90,000 INR (Free admission)</p>
+          <p>Admission       : 100% Free (Community Open Access)</p>
           <p>Summary         : 2 Days, 3 Phases, 10-Hour Hackathon & Technical Workshops</p>
         </div>
       );

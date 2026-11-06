@@ -74,7 +74,7 @@ export const MockupViewerModal: React.FC<MockupViewerModalProps> = ({ isOpen, on
                   <br />
                   • <strong>Dynamic Pre-Registration:</strong> Clear status badge for dates announced soon, one-click priority pass reservation, and instant local pass code generation.
                   <br />
-                  • <strong>Metric Grid:</strong> Brutalist monospace key performance indicator metrics for attendance, hackathon duration, and community budget.
+                  • <strong>Metric Grid:</strong> Brutalist monospace key performance indicator metrics for attendance, hackathon duration, and free community access.
                 </p>
               </div>
             </div>

@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles, Mic, Code2 } from 'lucide-react';
+import { Menu, X, Sparkles, Code2 } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDay1Register: () => void;
   onOpenHackathonRegister: () => void;
-  onOpenCFP: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenDay1Register,
   onOpenHackathonRegister,
-  onOpenCFP,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -27,8 +25,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'About', href: '#about' },
     { name: 'Schedule', href: '#schedule' },
     { name: 'Hackathon', href: '#hackathon' },
+    { name: 'Sponsors', href: '#sponsors' },
     { name: 'Venue', href: '#venue' },
-    { name: 'Budget', href: '#budget' },
     { name: 'FAQ', href: '#faq' },
   ];
 
@@ -63,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </a>
 
         {/* Clean, Well-Spaced Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-7 font-mono text-xs text-slate-300">
+        <nav className="hidden lg:flex items-center gap-7 font-mono text-xs text-slate-300">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -75,22 +73,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Balanced Action CTAs */}
-        <div className="hidden sm:flex items-center gap-2.5 font-mono">
-          <button
-            onClick={onOpenCFP}
-            className="px-3 py-1.5 text-xs border border-slate-700/80 hover:border-geeko-500/80 text-slate-300 hover:text-white bg-obsidian-900/80 rounded-md transition-all flex items-center gap-1.5 cursor-pointer font-medium"
-          >
-            <Mic className="w-3.5 h-3.5 text-geeko-400" />
-            <span>Submit CFP</span>
-          </button>
-
+        {/* Focused 2 Action CTAs */}
+        <div className="hidden sm:flex items-center gap-3 font-mono">
           <button
             onClick={onOpenHackathonRegister}
             className="px-3.5 py-1.5 text-xs border border-pine-700/80 hover:border-geeko-400 text-geeko-300 hover:text-white bg-pine-950/80 rounded-md transition-all flex items-center gap-1.5 cursor-pointer font-bold"
           >
             <Code2 className="w-3.5 h-3.5 text-geeko-400" />
-            <span>Hackathon</span>
+            <span>Hackathon (Day 2)</span>
           </button>
 
           <button
@@ -130,17 +120,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="pt-2 flex flex-col gap-2.5">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenCFP();
-              }}
-              className="w-full py-2.5 bg-obsidian-900 border border-slate-700 text-geeko-400 font-bold text-xs uppercase tracking-wider rounded-md text-center flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Mic className="w-3.5 h-3.5" />
-              <span>Submit Talk Proposal (CFP)</span>
-            </button>
-
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

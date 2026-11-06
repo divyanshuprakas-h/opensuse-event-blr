@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, MapPin, Users, Sparkles, Terminal, ArrowRight, Code, Mic, Image as ImageIcon } from 'lucide-react';
+import { Calendar, MapPin, Users, Sparkles, Terminal, ArrowRight, Code, Image as ImageIcon } from 'lucide-react';
 import { EVENT_CONFIG, EVENT_STATS } from '../data/eventData';
 import { ZypperTerminal } from './ZypperTerminal';
 
@@ -7,15 +7,13 @@ interface HeroProps {
   onOpenDay1Register: () => void;
   onOpenDay1RegisterWithEmail: (email: string) => void;
   onOpenHackathonRegister: () => void;
-  onOpenCFP: () => void;
-  onOpenMockupViewer: () => void;
+  onOpenMockupViewer?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   onOpenDay1Register,
   onOpenDay1RegisterWithEmail,
   onOpenHackathonRegister,
-  onOpenCFP,
   onOpenMockupViewer,
 }) => {
   const [quickEmail, setQuickEmail] = useState('');
@@ -134,15 +132,7 @@ export const Hero: React.FC<HeroProps> = ({
                 className="px-3.5 py-2 bg-pine-950 hover:bg-pine-900 border border-geeko-500/60 text-xs text-geeko-300 uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Code className="w-3.5 h-3.5 text-geeko-400" />
-                <span>Hackathon Pass</span>
-              </button>
-
-              <button
-                onClick={onOpenCFP}
-                className="px-3.5 py-2 bg-obsidian-900 hover:bg-slate-800 border border-slate-700 text-xs text-slate-200 uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <Mic className="w-3.5 h-3.5 text-geeko-400" />
-                <span>Submit CFP</span>
+                <span>Hackathon Pass (Day 2)</span>
               </button>
             </div>
           </div>

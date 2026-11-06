@@ -67,8 +67,8 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#budget" className="hover:text-geeko-400 transition-colors uppercase">
-                  // ₹90,000 Budget Pool
+                <a href="#sponsors" className="hover:text-geeko-400 transition-colors uppercase">
+                  // Organizer & Sponsors
                 </a>
               </li>
               <li>

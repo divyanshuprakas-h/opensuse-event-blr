@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { DAY1_SESSIONS, DAY2_SESSIONS, SessionItem, HACKATHON_TRACKS } from '../data/eventData';
-import { Calendar, Clock, MapPin, Tag, CheckCircle2, Flame, Mic, Sparkles, Code2, ArrowRight, Filter } from 'lucide-react';
+import { Calendar, Clock, MapPin, Tag, CheckCircle2, Flame, Sparkles, Code2, ArrowRight, Filter } from 'lucide-react';
 
 interface DayScheduleSectionProps {
-  onOpenCFP: () => void;
   onOpenHackathonRegister: () => void;
   onOpenDay1Register: () => void;
 }
 
 export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
-  onOpenCFP,
   onOpenHackathonRegister,
   onOpenDay1Register,
 }) => {
@@ -63,31 +61,6 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
               <span>Day 2: 10H Hackathon</span>
             </button>
           </div>
-        </div>
-
-        {/* CFP Live Banner */}
-        <div className="mb-10 bg-pine-900/40 border-2 border-geeko-500/60 p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[4px_4px_0px_0px_#173f35]">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-geeko-500 text-black flex items-center justify-center shrink-0 border border-black">
-              <Mic className="w-5 h-5 fill-black" />
-            </div>
-            <div>
-              <div className="text-xs text-geeko-400 font-bold uppercase tracking-wider flex items-center gap-2">
-                <span>CALL FOR PROPOSALS (CFP) IS LIVE</span>
-                <span className="w-2 h-2 rounded-full bg-geeko-400 animate-ping" />
-              </div>
-              <p className="text-xs text-slate-300 font-sans mt-0.5">
-                Want to speak or run a workshop? We welcome proposals on Linux, YaST, Zypper, OBS, openQA, and open-source tooling.
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={onOpenCFP}
-            className="px-4 py-2 bg-geeko-500 hover:bg-geeko-400 text-black text-xs font-bold uppercase tracking-wider border border-black whitespace-nowrap cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
-          >
-            Submit Talk Proposal (CFP) →
-          </button>
         </div>
 
         {/* DAY 1 VIEW */}

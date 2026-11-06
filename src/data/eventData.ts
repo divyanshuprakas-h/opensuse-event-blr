@@ -10,15 +10,6 @@ export interface SessionItem {
   speakerOrLead?: string;
 }
 
-export const BUDGET_BREAKDOWN = [
-  { category: "Venue & Operations", amount: "₹25,000", percentage: 28 },
-  { category: "Catering & Lunch", amount: "₹25,000", percentage: 28 },
-  { category: "Geeko Swag & T-Shirts", amount: "₹18,000", percentage: 20 },
-  { category: "Technical & AV", amount: "₹10,000", percentage: 11 },
-  { category: "Hackathon Prizes", amount: "₹8,000", percentage: 9 },
-  { category: "Speaker Hospitality", amount: "₹4,000", percentage: 4 },
-];
-
 export interface TrackItem {
   id: string;
   code: string;
@@ -45,7 +36,6 @@ export const EVENT_CONFIG = {
   venue: "Newton School of Technology",
   venueAddress: "Bengaluru Campus, Karnataka, India",
   expectedAttendees: "300–400 Hackers & Devs",
-  totalBudgetINR: "₹90,000",
   organizer: "openSUSE India Community",
 };
 
@@ -288,8 +278,8 @@ export const FAQS: FAQItem[] = [
     a: "We are currently locking exact days with Newton School of Technology. Pre-registering now reserves your priority pass and sends you an email notification the moment dates are finalized."
   },
   {
-    q: "How can I submit a talk or workshop for the CFP?",
-    a: "Click 'Submit CFP' in the navigation bar or schedule section. We accept 30-min technical talks, 60-min workshops, and 10-min lightning talks."
+    q: "Who is organizing and sponsoring Bengaluru Connect 2027?",
+    a: "The event is organized and powered by the openSUSE India Community and the openSUSE Project. Further community partners and sponsors will be updated as collaborations are confirmed."
   }
 ];
 
