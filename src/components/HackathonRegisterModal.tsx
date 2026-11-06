@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, Code2, CheckCircle2, Sparkles, Terminal, Copy, Check, Users, ShieldAlert, Shirt } from 'lucide-react';
+import { X, Code2, CheckCircle2, Sparkles, Terminal, Copy, Check, Users, ShieldAlert, Shirt, Mail } from 'lucide-react';
 import { HACKATHON_TRACKS, EVENT_CONFIG } from '../data/eventData';
+import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL } from '../services/emailService';
 
 interface HackathonRegisterModalProps {
   isOpen: boolean;
@@ -58,6 +59,17 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
       projectIdea: formData.projectIdea,
       registeredAt: new Date().toISOString(),
     };
+
+    // Trigger immediate email confirmation from Divyanshuprakash@opensuse.org
+    sendInstantConfirmationEmail({
+      recipientEmail: passRecord.leaderEmail,
+      recipientName: passRecord.leaderName,
+      passId: passRecord.id,
+      tshirtSize: passRecord.leaderTshirtSize,
+      eventTrack: passRecord.trackId,
+      eventType: 'Day 2 Hackathon Team Pass',
+      teamName: passRecord.teamName,
+    });
 
     try {
       const existing = JSON.parse(localStorage.getItem('opensuse_blr_hackathon_registrations') || '[]');
@@ -274,6 +286,14 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                   />
                 </div>
 
+                {/* Immediate Email Notice */}
+                <div className="bg-obsidian-900 border border-slate-800 p-2.5 text-xs text-slate-300 flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-geeko-400 shrink-0" />
+                  <span>
+                    Team table pass & T-shirt confirmation will be emailed immediately from <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
+                  </span>
+                </div>
+
                 {/* Submit */}
                 <div className="pt-2">
                   <button
@@ -304,6 +324,31 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 </p>
               </div>
 
+              {/* Immediate Email Confirmation Dispatched Banner */}
+              <div className="bg-pine-950/80 border-2 border-geeko-500/80 p-3.5 text-left font-mono text-xs shadow-[3px_3px_0px_0px_#173f35] flex items-start gap-3">
+                <div className="w-8 h-8 bg-obsidian-950 border border-geeko-500 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div className="space-y-1 flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-white text-xs uppercase flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-geeko-400" />
+                      <span>Hackathon Pass Emailed</span>
+                    </span>
+                    <span className="text-[10px] bg-geeko-500 text-black font-black px-1.5 py-0.2 uppercase">
+                      SENT
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                    A confirmation email with team pass ID (<strong className="text-geeko-300 font-mono">{submittedHackPass.id}</strong>) and table reservation has been sent to <strong className="text-white">{submittedHackPass.leaderEmail}</strong>.
+                  </p>
+                  <div className="text-[10px] text-slate-400 pt-1 border-t border-slate-800 flex flex-wrap items-center justify-between gap-1">
+                    <span>From: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
+                    <span>Check inbox & spam folder</span>
+                  </div>
+                </div>
+              </div>
+
               <div className="bg-obsidian-900 border-2 border-geeko-500 p-4 font-mono text-left shadow-[4px_4px_0px_0px_#173f35] text-xs space-y-2">
                 <div className="flex justify-between border-b border-slate-800 pb-1">
                   <span className="text-slate-500">HACK PASS ID:</span>
@@ -331,14 +376,31 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 </div>
               </div>
 
-              <div className="flex gap-3 justify-center pt-2">
+              <div className="flex flex-col sm:flex-row gap-2.5 justify-center pt-2">
                 <button
                   onClick={copyId}
-                  className="px-4 py-2 bg-obsidian-900 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 bg-obsidian-900 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-geeko-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copied ? 'Pass Copied' : 'Copy Pass ID'}</span>
                 </button>
+
+                <a
+                  href={`mailto:${submittedHackPass.leaderEmail}?subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Hackathon Pass [${submittedHackPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
+                    recipientEmail: submittedHackPass.leaderEmail,
+                    recipientName: submittedHackPass.leaderName,
+                    passId: submittedHackPass.id,
+                    tshirtSize: submittedHackPass.leaderTshirtSize,
+                    eventTrack: submittedHackPass.trackId,
+                    eventType: 'Day 2 Hackathon Team Pass',
+                    teamName: submittedHackPass.teamName
+                  }).body)}`}
+                  className="px-4 py-2 bg-obsidian-900 border border-geeko-500/60 hover:border-geeko-400 text-xs font-mono text-geeko-300 flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <Mail className="w-3.5 h-3.5 text-geeko-400" />
+                  <span>Open in Mail Client</span>
+                </a>
+
                 <button
                   onClick={onClose}
                   className="px-5 py-2 bg-geeko-500 text-black border-2 border-black font-mono font-bold text-xs uppercase cursor-pointer"

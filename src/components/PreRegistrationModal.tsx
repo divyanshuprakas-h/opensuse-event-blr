@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Ticket, Sparkles, Copy, Check, ArrowRight, Share2, Terminal, Shirt } from 'lucide-react';
+import { X, CheckCircle2, Ticket, Sparkles, Copy, Check, ArrowRight, Share2, Terminal, Shirt, Mail } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
+import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL } from '../services/emailService';
 
 interface PreRegistrationModalProps {
   isOpen: boolean;
@@ -59,6 +60,16 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
       ...formData,
       registeredAt: new Date().toISOString(),
     };
+
+    // Trigger immediate email confirmation from Divyanshuprakash@opensuse.org
+    sendInstantConfirmationEmail({
+      recipientEmail: passRecord.email,
+      recipientName: passRecord.name,
+      passId: passRecord.id,
+      tshirtSize: passRecord.tshirtSize,
+      eventTrack: passRecord.interest,
+      eventType: 'Day 1 Conference Pass',
+    });
 
     // Save to localStorage
     try {
@@ -272,6 +283,14 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                   </label>
                 </div>
 
+                {/* Immediate Email Notice */}
+                <div className="bg-obsidian-900 border border-slate-800 p-2.5 text-xs text-slate-300 flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-geeko-400 shrink-0" />
+                  <span>
+                    Your pass and reserved T-shirt confirmation will be emailed immediately from <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
+                  </span>
+                </div>
+
                 {/* Submit button */}
                 <div className="pt-4">
                   <button
@@ -304,6 +323,31 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                 <p className="text-xs font-mono text-geeko-400">
                   Priority pass generated. You are locked in for date announcements and workshop seat reservations.
                 </p>
+              </div>
+
+              {/* Immediate Email Confirmation Dispatched Banner */}
+              <div className="bg-pine-950/80 border-2 border-geeko-500/80 p-3.5 text-left font-mono text-xs shadow-[3px_3px_0px_0px_#173f35] flex items-start gap-3">
+                <div className="w-8 h-8 bg-obsidian-950 border border-geeko-500 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div className="space-y-1 flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-white text-xs uppercase flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-geeko-400" />
+                      <span>Pass Confirmation Emailed</span>
+                    </span>
+                    <span className="text-[10px] bg-geeko-500 text-black font-black px-1.5 py-0.2 uppercase">
+                      SENT
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                    A confirmation email with your digital pass ID (<strong className="text-geeko-300 font-mono">{submittedPass.id}</strong>) and reserved <strong className="text-white">T-Shirt Size {submittedPass.tshirtSize}</strong> has been sent to <strong className="text-white">{submittedPass.email}</strong>.
+                  </p>
+                  <div className="text-[10px] text-slate-400 pt-1 border-t border-slate-800 flex flex-wrap items-center justify-between gap-1">
+                    <span>From: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
+                    <span>Check inbox & spam folder</span>
+                  </div>
+                </div>
               </div>
 
               {/* Brutalist Digital Ticket / Pass Card */}
@@ -388,6 +432,21 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                   <Share2 className="w-4 h-4" />
                   <span>Share on X / Twitter</span>
                 </button>
+
+                <a
+                  href={`mailto:${submittedPass.email}?subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Pass [${submittedPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
+                    recipientEmail: submittedPass.email,
+                    recipientName: submittedPass.name,
+                    passId: submittedPass.id,
+                    tshirtSize: submittedPass.tshirtSize,
+                    eventTrack: submittedPass.interest,
+                    eventType: 'Day 1 Conference Pass'
+                  }).body)}`}
+                  className="py-2.5 px-4 bg-obsidian-900 border-2 border-geeko-500/60 hover:border-geeko-400 text-xs font-mono font-bold text-geeko-300 flex items-center justify-center gap-2 cursor-pointer col-span-1 sm:col-span-2 shadow-[2px_2px_0px_0px_#173f35]"
+                >
+                  <Mail className="w-4 h-4 text-geeko-400" />
+                  <span>Open Confirmation in My Mail Client</span>
+                </a>
               </div>
 
               <div className="text-center pt-2">
