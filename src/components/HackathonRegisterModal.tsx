@@ -41,7 +41,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.teamName || !formData.leaderName || !formData.leaderEmail) return;
 
@@ -60,8 +60,16 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
       registeredAt: new Date().toISOString(),
     };
 
-    // Trigger immediate email confirmation from divyanshuprakash914@gmail.com
-    sendInstantConfirmationEmail({
+    try {
+      const existing = JSON.parse(localStorage.getItem('opensuse_blr_hackathon_registrations') || '[]');
+      existing.push(passRecord);
+      localStorage.setItem('opensuse_blr_hackathon_registrations', JSON.stringify(existing));
+    } catch {
+      // Fallback
+    }
+
+    // Trigger immediate background email confirmation from divyanshuprakash914@gmail.com
+    await sendInstantConfirmationEmail({
       recipientEmail: passRecord.leaderEmail,
       recipientName: passRecord.leaderName,
       passId: passRecord.id,
@@ -71,18 +79,8 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
       teamName: passRecord.teamName,
     });
 
-    try {
-      const existing = JSON.parse(localStorage.getItem('opensuse_blr_hackathon_registrations') || '[]');
-      existing.push(passRecord);
-      localStorage.setItem('opensuse_blr_hackathon_registrations', JSON.stringify(existing));
-    } catch {
-      // Fallback
-    }
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmittedHackPass(passRecord);
-    }, 400);
+    setIsSubmitting(false);
+    setSubmittedHackPass(passRecord);
   };
 
   const copyId = () => {

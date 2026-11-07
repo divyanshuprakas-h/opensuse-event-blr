@@ -50,7 +50,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -61,16 +61,6 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
       registeredAt: new Date().toISOString(),
     };
 
-    // Trigger immediate email confirmation from divyanshuprakash914@gmail.com
-    sendInstantConfirmationEmail({
-      recipientEmail: passRecord.email,
-      recipientName: passRecord.name,
-      passId: passRecord.id,
-      tshirtSize: passRecord.tshirtSize,
-      eventTrack: passRecord.interest,
-      eventType: 'Day 1 Conference Pass',
-    });
-
     // Save to localStorage
     try {
       const existing = JSON.parse(localStorage.getItem('opensuse_blr_preregistrations') || '[]');
@@ -80,10 +70,18 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
       // Fallback
     }
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmittedPass(passRecord);
-    }, 400);
+    // Trigger immediate background email confirmation from divyanshuprakash914@gmail.com
+    await sendInstantConfirmationEmail({
+      recipientEmail: passRecord.email,
+      recipientName: passRecord.name,
+      passId: passRecord.id,
+      tshirtSize: passRecord.tshirtSize,
+      eventTrack: passRecord.interest,
+      eventType: 'Day 1 Conference Pass',
+    });
+
+    setIsSubmitting(false);
+    setSubmittedPass(passRecord);
   };
 
   const copyTicketId = () => {
