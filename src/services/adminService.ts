@@ -237,7 +237,24 @@ export function exportToCsv(filename: string, rows: (string | number)[][], heade
 
 /* ----------------- ADMIN AUTH ----------------- */
 
-export const DEFAULT_ADMIN_PIN = (import.meta as any).env?.VITE_ADMIN_PIN || 'opensuse-blr-2027';
+// Cryptographic SHA-256 hash of organizer access passphrase
+// Evaluated in-memory via Web Crypto API. Raw secret is never committed or exposed in bundles.
+const ADMIN_PASS_HASH =
+  (import.meta as any).env?.VITE_ADMIN_HASH ||
+  'a2944fd8244f790d193f80746d69b6b217b8ee06af230cf035736401b8eb8a49';
+
+export async function verifyAdminPassphrase(input: string): Promise<boolean> {
+  try {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input.trim());
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+    return hashHex === ADMIN_PASS_HASH;
+  } catch {
+    return false;
+  }
+}
 
 export function isAdminAuthenticated(): boolean {
   try {
