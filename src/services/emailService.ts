@@ -17,6 +17,30 @@ export interface EmailDispatchPayload {
 export const SENDER_EMAIL = 'divyanshuprakash914@gmail.com';
 export const SENDER_NAME = 'Divyanshu Prakash (openSUSE India)';
 
+// Configure this URL once Google Apps Script Web App is deployed.
+// It can also be overridden via the VITE_EMAIL_WEBHOOK_URL environment variable.
+export const GOOGLE_APPS_SCRIPT_URL =
+  (import.meta as any).env?.VITE_EMAIL_WEBHOOK_URL || '';
+
+/**
+ * Check if automated background email dispatching is actively configured
+ */
+export function isAutomatedEmailConfigured(): boolean {
+  return Boolean(GOOGLE_APPS_SCRIPT_URL && GOOGLE_APPS_SCRIPT_URL.trim().length > 0);
+}
+
+/**
+ * Generate direct Gmail Web compose URL
+ */
+export function getGmailWebComposeUrl(to: string, subject: string, body: string, cc?: string): string {
+  const base = 'https://mail.google.com/mail/?view=cm&fs=1';
+  let url = `${base}&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if (cc) {
+    url += `&cc=${encodeURIComponent(cc)}`;
+  }
+  return url;
+}
+
 /**
  * Generate formatted plain-text confirmation email
  */
@@ -64,10 +88,11 @@ Website: https://divyanshuprakas-h.github.io/opensuse-event-blr/
 
 /**
  * Trigger immediate confirmation email dispatch.
- * Records dispatch log locally and opens mail client or sends via webhook if configured.
+ * Records dispatch log locally and sends via Google Apps Script Web App if configured.
  */
 export async function sendInstantConfirmationEmail(payload: EmailDispatchPayload): Promise<boolean> {
   const { subject, body } = generateEmailContent(payload);
+  const isAuto = isAutomatedEmailConfigured();
 
   // Store in sent dispatch logs for audit
   try {
@@ -77,30 +102,32 @@ export async function sendInstantConfirmationEmail(payload: EmailDispatchPayload
       sender: SENDER_EMAIL,
       subject,
       dispatchedAt: new Date().toISOString(),
-      status: 'SENT'
+      status: isAuto ? 'SENT_VIA_WEBHOOK' : 'SAVED_LOCAL'
     });
     localStorage.setItem('opensuse_dispatched_emails', JSON.stringify(logs));
   } catch {
     // fallback
   }
 
-  // If a custom webhook/EmailJS endpoint is defined in env, trigger it
-  const webhookUrl = (import.meta as any).env?.VITE_EMAIL_WEBHOOK_URL;
-  if (webhookUrl) {
+  // If a custom webhook / Google Apps Script endpoint is defined, dispatch real email
+  if (GOOGLE_APPS_SCRIPT_URL) {
     try {
-      await fetch(webhookUrl, {
+      await fetch(GOOGLE_APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({
           from: SENDER_EMAIL,
           to: payload.recipientEmail,
           subject,
           text: body,
           payload
-        })
+        }),
+        mode: 'no-cors'
       });
+      return true;
     } catch (err) {
       console.warn('Webhook dispatch error (handled gracefully):', err);
+      return false;
     }
   }
 

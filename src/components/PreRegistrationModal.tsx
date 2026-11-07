@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Ticket, Sparkles, Copy, Check, ArrowRight, Share2, Terminal, Shirt, Mail } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
-import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL } from '../services/emailService';
+import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL, isAutomatedEmailConfigured, getGmailWebComposeUrl } from '../services/emailService';
 
 interface PreRegistrationModalProps {
   isOpen: boolean;
@@ -287,7 +287,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                 <div className="bg-obsidian-900 border border-slate-800 p-2.5 text-xs text-slate-300 flex items-center gap-2">
                   <Mail className="w-4 h-4 text-geeko-400 shrink-0" />
                   <span>
-                    Your pass and reserved T-shirt confirmation will be emailed immediately from <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
+                    Your pass and reserved T-shirt confirmation can be emailed directly to your inbox with sender <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
                   </span>
                 </div>
 
@@ -325,27 +325,32 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                 </p>
               </div>
 
-              {/* Immediate Email Confirmation Dispatched Banner */}
+              {/* Email Confirmation Status Banner */}
               <div className="bg-pine-950/80 border-2 border-geeko-500/80 p-3.5 text-left font-mono text-xs shadow-[3px_3px_0px_0px_#173f35] flex items-start gap-3">
                 <div className="w-8 h-8 bg-obsidian-950 border border-geeko-500 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
                   <Mail className="w-4 h-4" />
                 </div>
-                <div className="space-y-1 flex-1">
+                <div className="space-y-1.5 flex-1">
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-white text-xs uppercase flex items-center gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-geeko-400" />
-                      <span>Pass Confirmation Emailed</span>
+                      <span>{isAutomatedEmailConfigured() ? 'Pass Confirmation Dispatched' : 'Pass Confirmed & Ready'}</span>
                     </span>
                     <span className="text-[10px] bg-geeko-500 text-black font-black px-1.5 py-0.2 uppercase">
-                      SENT
+                      {isAutomatedEmailConfigured() ? 'AUTO-SENT' : 'READY TO EMAIL'}
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
-                    A confirmation email with your digital pass ID (<strong className="text-geeko-300 font-mono">{submittedPass.id}</strong>) and reserved <strong className="text-white">T-Shirt Size {submittedPass.tshirtSize}</strong> has been sent to <strong className="text-white">{submittedPass.email}</strong>.
+                    Digital Pass ID <strong className="text-geeko-300 font-mono">[{submittedPass.id}]</strong> and reserved <strong className="text-white">T-Shirt Size {submittedPass.tshirtSize}</strong> are locked for <strong className="text-white">{submittedPass.email}</strong>.
+                  </p>
+                  <p className="text-[11px] text-geeko-300 font-sans">
+                    {isAutomatedEmailConfigured()
+                      ? `Automated copy dispatched from ${SENDER_EMAIL}. Check inbox and spam folder.`
+                      : `Click "Send / Open Pass in Gmail Web" below to send a copy to your inbox.`}
                   </p>
                   <div className="text-[10px] text-slate-400 pt-1 border-t border-slate-800 flex flex-wrap items-center justify-between gap-1">
-                    <span>From: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
-                    <span>Check inbox & spam folder</span>
+                    <span>Organizer: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
+                    <span>100% Free Pass</span>
                   </div>
                 </div>
               </div>
@@ -415,39 +420,69 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                <button
-                  onClick={copyTicketId}
-                  className="py-2.5 px-4 bg-obsidian-900 border-2 border-slate-700 hover:border-geeko-400 text-xs font-mono font-bold text-slate-200 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  {copied ? <Check className="w-4 h-4 text-geeko-400" /> : <Copy className="w-4 h-4" />}
-                  <span>{copied ? 'Pass ID Copied!' : 'Copy Pass ID'}</span>
-                </button>
+                {/* Action Buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  <button
+                    onClick={copyTicketId}
+                    className="py-2.5 px-4 bg-obsidian-900 border-2 border-slate-700 hover:border-geeko-400 text-xs font-mono font-bold text-slate-200 flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-geeko-400" /> : <Copy className="w-4 h-4" />}
+                    <span>{copied ? 'Pass ID Copied!' : 'Copy Pass ID'}</span>
+                  </button>
 
-                <button
-                  onClick={shareOnTwitter}
-                  className="py-2.5 px-4 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
-                >
-                  <Share2 className="w-4 h-4" />
-                  <span>Share on X / Twitter</span>
-                </button>
+                  <button
+                    onClick={shareOnTwitter}
+                    className="py-2.5 px-4 bg-obsidian-900 border-2 border-slate-700 hover:border-geeko-400 text-slate-200 text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Share2 className="w-4 h-4" />
+                    <span>Share on X / Twitter</span>
+                  </button>
 
-                <a
-                  href={`mailto:${submittedPass.email}?cc=${SENDER_EMAIL}&subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Pass [${submittedPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
-                    recipientEmail: submittedPass.email,
-                    recipientName: submittedPass.name,
-                    passId: submittedPass.id,
-                    tshirtSize: submittedPass.tshirtSize,
-                    eventTrack: submittedPass.interest,
-                    eventType: 'Day 1 Conference Pass'
-                  }).body)}`}
-                  className="py-2.5 px-4 bg-obsidian-900 border-2 border-geeko-500/60 hover:border-geeko-400 text-xs font-mono font-bold text-geeko-300 flex items-center justify-center gap-2 cursor-pointer col-span-1 sm:col-span-2 shadow-[2px_2px_0px_0px_#173f35]"
-                >
-                  <Mail className="w-4 h-4 text-geeko-400" />
-                  <span>Open Confirmation in My Mail Client</span>
-                </a>
-              </div>
+                  {/* Primary: Send in Gmail Web */}
+                  <a
+                    href={getGmailWebComposeUrl(
+                      submittedPass.email,
+                      generateEmailContent({
+                        recipientEmail: submittedPass.email,
+                        recipientName: submittedPass.name,
+                        passId: submittedPass.id,
+                        tshirtSize: submittedPass.tshirtSize,
+                        eventTrack: submittedPass.interest,
+                        eventType: 'Day 1 Conference Pass'
+                      }).subject,
+                      generateEmailContent({
+                        recipientEmail: submittedPass.email,
+                        recipientName: submittedPass.name,
+                        passId: submittedPass.id,
+                        tshirtSize: submittedPass.tshirtSize,
+                        eventTrack: submittedPass.interest,
+                        eventType: 'Day 1 Conference Pass'
+                      }).body,
+                      SENDER_EMAIL
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="py-3 px-4 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-black text-xs font-mono flex items-center justify-center gap-2 cursor-pointer col-span-1 sm:col-span-2 shadow-[3px_3px_0px_0px_#ffffff] transition-all hover:translate-x-[1px] hover:translate-y-[1px]"
+                  >
+                    <Mail className="w-4 h-4 text-black" />
+                    <span>✉ Send / Open Pass in Gmail Web</span>
+                  </a>
+
+                  {/* Secondary: Default System Mail Client */}
+                  <a
+                    href={`mailto:${submittedPass.email}?cc=${SENDER_EMAIL}&subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Pass [${submittedPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
+                      recipientEmail: submittedPass.email,
+                      recipientName: submittedPass.name,
+                      passId: submittedPass.id,
+                      tshirtSize: submittedPass.tshirtSize,
+                      eventTrack: submittedPass.interest,
+                      eventType: 'Day 1 Conference Pass'
+                    }).body)}`}
+                    className="py-2 px-3 bg-obsidian-900 border border-slate-800 hover:border-slate-600 text-[11px] font-mono text-slate-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer col-span-1 sm:col-span-2"
+                  >
+                    <span>Open in Default System Mail App (Apple Mail / Outlook)</span>
+                  </a>
+                </div>
 
               <div className="text-center pt-2">
                 <button

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Code2, CheckCircle2, Sparkles, Terminal, Copy, Check, Users, ShieldAlert, Shirt, Mail } from 'lucide-react';
 import { HACKATHON_TRACKS, EVENT_CONFIG } from '../data/eventData';
-import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL } from '../services/emailService';
+import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL, isAutomatedEmailConfigured, getGmailWebComposeUrl } from '../services/emailService';
 
 interface HackathonRegisterModalProps {
   isOpen: boolean;
@@ -290,7 +290,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 <div className="bg-obsidian-900 border border-slate-800 p-2.5 text-xs text-slate-300 flex items-center gap-2">
                   <Mail className="w-4 h-4 text-geeko-400 shrink-0" />
                   <span>
-                    Team table pass & T-shirt confirmation will be emailed immediately from <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
+                    Team table pass & T-shirt confirmation can be emailed directly to your inbox with sender <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
                   </span>
                 </div>
 
@@ -324,27 +324,32 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 </p>
               </div>
 
-              {/* Immediate Email Confirmation Dispatched Banner */}
+              {/* Email Confirmation Status Banner */}
               <div className="bg-pine-950/80 border-2 border-geeko-500/80 p-3.5 text-left font-mono text-xs shadow-[3px_3px_0px_0px_#173f35] flex items-start gap-3">
                 <div className="w-8 h-8 bg-obsidian-950 border border-geeko-500 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
                   <Mail className="w-4 h-4" />
                 </div>
-                <div className="space-y-1 flex-1">
+                <div className="space-y-1.5 flex-1">
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-white text-xs uppercase flex items-center gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-geeko-400" />
-                      <span>Hackathon Pass Emailed</span>
+                      <span>{isAutomatedEmailConfigured() ? 'Hackathon Pass Emailed' : 'Hackathon Table Locked & Ready'}</span>
                     </span>
                     <span className="text-[10px] bg-geeko-500 text-black font-black px-1.5 py-0.2 uppercase">
-                      SENT
+                      {isAutomatedEmailConfigured() ? 'AUTO-SENT' : 'READY TO EMAIL'}
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
-                    A confirmation email with team pass ID (<strong className="text-geeko-300 font-mono">{submittedHackPass.id}</strong>) and table reservation has been sent to <strong className="text-white">{submittedHackPass.leaderEmail}</strong>.
+                    Team Pass ID <strong className="text-geeko-300 font-mono">[{submittedHackPass.id}]</strong> and table reservation are locked for <strong className="text-white">{submittedHackPass.leaderEmail}</strong>.
+                  </p>
+                  <p className="text-[11px] text-geeko-300 font-sans">
+                    {isAutomatedEmailConfigured()
+                      ? `Automated copy dispatched from ${SENDER_EMAIL}. Check inbox and spam folder.`
+                      : `Click "Send / Open Pass in Gmail Web" below to send a copy to your inbox.`}
                   </p>
                   <div className="text-[10px] text-slate-400 pt-1 border-t border-slate-800 flex flex-wrap items-center justify-between gap-1">
-                    <span>From: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
-                    <span>Check inbox & spam folder</span>
+                    <span>Organizer: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
+                    <span>Day 2 Hackathon</span>
                   </div>
                 </div>
               </div>
@@ -376,7 +381,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2.5 justify-center pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
                 <button
                   onClick={copyId}
                   className="px-4 py-2 bg-obsidian-900 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer"
@@ -385,6 +390,46 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                   <span>{copied ? 'Pass Copied' : 'Copy Pass ID'}</span>
                 </button>
 
+                <button
+                  onClick={onClose}
+                  className="px-4 py-2 bg-obsidian-900 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  Close Desk
+                </button>
+
+                {/* Primary: Send in Gmail Web */}
+                <a
+                  href={getGmailWebComposeUrl(
+                    submittedHackPass.leaderEmail,
+                    generateEmailContent({
+                      recipientEmail: submittedHackPass.leaderEmail,
+                      recipientName: submittedHackPass.leaderName,
+                      passId: submittedHackPass.id,
+                      tshirtSize: submittedHackPass.leaderTshirtSize,
+                      eventTrack: submittedHackPass.trackId,
+                      eventType: 'Day 2 Hackathon Team Pass',
+                      teamName: submittedHackPass.teamName
+                    }).subject,
+                    generateEmailContent({
+                      recipientEmail: submittedHackPass.leaderEmail,
+                      recipientName: submittedHackPass.leaderName,
+                      passId: submittedHackPass.id,
+                      tshirtSize: submittedHackPass.leaderTshirtSize,
+                      eventTrack: submittedHackPass.trackId,
+                      eventType: 'Day 2 Hackathon Team Pass',
+                      teamName: submittedHackPass.teamName
+                    }).body,
+                    SENDER_EMAIL
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-2.5 px-4 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-black text-xs font-mono flex items-center justify-center gap-2 cursor-pointer col-span-1 sm:col-span-2 shadow-[3px_3px_0px_0px_#ffffff] transition-all hover:translate-x-[1px] hover:translate-y-[1px]"
+                >
+                  <Mail className="w-4 h-4 text-black" />
+                  <span>✉ Send / Open Pass in Gmail Web</span>
+                </a>
+
+                {/* Secondary: Default System Mail Client */}
                 <a
                   href={`mailto:${submittedHackPass.leaderEmail}?cc=${SENDER_EMAIL}&subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Hackathon Pass [${submittedHackPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
                     recipientEmail: submittedHackPass.leaderEmail,
@@ -395,18 +440,10 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                     eventType: 'Day 2 Hackathon Team Pass',
                     teamName: submittedHackPass.teamName
                   }).body)}`}
-                  className="px-4 py-2 bg-obsidian-900 border border-geeko-500/60 hover:border-geeko-400 text-xs font-mono text-geeko-300 flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="py-1.5 px-3 bg-obsidian-900 border border-slate-800 hover:border-slate-600 text-[11px] font-mono text-slate-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer col-span-1 sm:col-span-2"
                 >
-                  <Mail className="w-3.5 h-3.5 text-geeko-400" />
-                  <span>Open in Mail Client</span>
+                  <span>Open in Default System Mail App (Apple Mail / Outlook)</span>
                 </a>
-
-                <button
-                  onClick={onClose}
-                  className="px-5 py-2 bg-geeko-500 text-black border-2 border-black font-mono font-bold text-xs uppercase cursor-pointer"
-                >
-                  Close Desk
-                </button>
               </div>
             </div>
           )}
