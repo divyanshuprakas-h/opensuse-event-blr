@@ -23,24 +23,26 @@ export function App() {
 
   useEffect(() => {
     const checkHash = () => {
-      if (window.location.hash === '#admin') {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#admin' || hash === '#/admin') {
         setIsAdminView(true);
+      } else {
+        setIsAdminView(false);
       }
     };
     checkHash();
     window.addEventListener('hashchange', checkHash);
-    return () => window.removeEventListener('hashchange', checkHash);
+    window.addEventListener('popstate', checkHash);
+    return () => {
+      window.removeEventListener('hashchange', checkHash);
+      window.removeEventListener('popstate', checkHash);
+    };
   }, []);
-
-  const handleOpenAdmin = () => {
-    setIsAdminView(true);
-    window.location.hash = '#admin';
-  };
 
   const handleBackToSite = () => {
     setIsAdminView(false);
-    if (window.location.hash === '#admin') {
-      window.history.pushState(null, '', window.location.pathname);
+    if (window.location.hash.toLowerCase() === '#admin' || window.location.hash.toLowerCase() === '#/admin') {
+      window.history.pushState(null, '', window.location.pathname + window.location.search);
     }
   };
 
@@ -65,7 +67,6 @@ export function App() {
       <Navbar
         onOpenDay1Register={handleOpenDay1Register}
         onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
-        onOpenAdmin={handleOpenAdmin}
       />
 
       {/* Main Content */}
@@ -76,7 +77,6 @@ export function App() {
           onOpenDay1RegisterWithEmail={handleOpenDay1RegisterWithEmail}
           onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
           onOpenMockupViewer={() => setIsMockupViewerOpen(true)}
-          onOpenAdmin={handleOpenAdmin}
         />
 
         {/* 2. Core Mission & What to Expect */}
@@ -108,7 +108,7 @@ export function App() {
       </main>
 
       {/* Footer */}
-      <Footer onOpenAdmin={handleOpenAdmin} />
+      <Footer />
 
       {/* Modals */}
       <PreRegistrationModal

@@ -124,6 +124,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
   const handleLogout = () => {
     setAdminAuthenticated(false);
     setIsAuthenticated(false);
+    onBackToSite();
+  };
+
+  const handleExitToSite = () => {
+    setAdminAuthenticated(false);
+    setIsAuthenticated(false);
+    onBackToSite();
   };
 
   /* ----------------- FILTERED DATA ----------------- */
@@ -323,7 +330,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
         <div className="w-full max-w-md bg-obsidian-900 border-2 border-geeko-500 p-8 shadow-[8px_8px_0px_0px_#173f35] relative">
           
           <button
-            onClick={onBackToSite}
+            onClick={handleExitToSite}
             className="absolute top-4 right-4 text-slate-400 hover:text-white flex items-center gap-1 text-xs cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
@@ -391,7 +398,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
 
             <div className="pt-2 text-center">
               <button
-                onClick={onBackToSite}
+                onClick={handleExitToSite}
                 className="text-xs text-slate-400 hover:text-white underline cursor-pointer"
               >
                 ← Return to Public Event Website

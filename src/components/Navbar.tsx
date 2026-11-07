@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles, Code2, Shield } from 'lucide-react';
+import { Menu, X, Sparkles, Code2 } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDay1Register: () => void;
   onOpenHackathonRegister: () => void;
-  onOpenAdmin?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenDay1Register,
   onOpenHackathonRegister,
-  onOpenAdmin,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -147,17 +145,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Sparkles className="w-4 h-4 fill-black" />
               <span>DAY 1 PASS (FREE)</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (onOpenAdmin) onOpenAdmin();
-              }}
-              className="w-full py-2 bg-obsidian-950 border border-slate-700 text-slate-300 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Shield className="w-3.5 h-3.5 text-geeko-400" />
-              <span>ORGANIZER ADMIN DESK</span>
             </button>
           </div>
         </div>
