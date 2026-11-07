@@ -1,6 +1,6 @@
 {
   "$schema": "https://fundingjson.org/schema/v1.1.0.json",
-  "version": "1.0.2",
+  "version": "v1.0.0",
   "entity": {
     "type": "group",
     "role": "owner",
