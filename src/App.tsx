@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
@@ -12,12 +12,37 @@ import { Footer } from './components/Footer';
 import { PreRegistrationModal } from './components/PreRegistrationModal';
 import { HackathonRegisterModal } from './components/HackathonRegisterModal';
 import { MockupViewerModal } from './components/MockupViewerModal';
+import { AdminDashboard } from './components/AdminDashboard';
 
 export function App() {
+  const [isAdminView, setIsAdminView] = useState(false);
   const [isDay1ModalOpen, setIsDay1ModalOpen] = useState(false);
   const [prefilledEmail, setPrefilledEmail] = useState('');
   const [isHackathonModalOpen, setIsHackathonModalOpen] = useState(false);
   const [isMockupViewerOpen, setIsMockupViewerOpen] = useState(false);
+
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === '#admin') {
+        setIsAdminView(true);
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, []);
+
+  const handleOpenAdmin = () => {
+    setIsAdminView(true);
+    window.location.hash = '#admin';
+  };
+
+  const handleBackToSite = () => {
+    setIsAdminView(false);
+    if (window.location.hash === '#admin') {
+      window.history.pushState(null, '', window.location.pathname);
+    }
+  };
 
   const handleOpenDay1Register = () => {
     setPrefilledEmail('');
@@ -29,12 +54,18 @@ export function App() {
     setIsDay1ModalOpen(true);
   };
 
+  // If in Admin Portal Mode, render full-screen Admin Dashboard
+  if (isAdminView) {
+    return <AdminDashboard onBackToSite={handleBackToSite} />;
+  }
+
   return (
     <div className="min-h-screen bg-obsidian-950 text-slate-100 flex flex-col selection:bg-geeko-500 selection:text-black">
       {/* Navigation */}
       <Navbar
         onOpenDay1Register={handleOpenDay1Register}
         onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
       />
 
       {/* Main Content */}
@@ -76,7 +107,7 @@ export function App() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onOpenAdmin={handleOpenAdmin} />
 
       {/* Modals */}
       <PreRegistrationModal

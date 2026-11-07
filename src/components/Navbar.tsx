@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles, Code2 } from 'lucide-react';
+import { Menu, X, Sparkles, Code2, Shield } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDay1Register: () => void;
   onOpenHackathonRegister: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenDay1Register,
   onOpenHackathonRegister,
+  onOpenAdmin,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -74,6 +76,22 @@ export const Navbar: React.FC<NavbarProps> = ({
               {link.name}
             </a>
           ))}
+
+          {/* Admin Portal Shortcut */}
+          <a
+            href="#admin"
+            onClick={(e) => {
+              if (onOpenAdmin) {
+                e.preventDefault();
+                onOpenAdmin();
+              }
+            }}
+            className="text-slate-400 hover:text-geeko-400 transition-colors uppercase tracking-wider py-1 font-bold flex items-center gap-1 border border-slate-800 hover:border-geeko-500/60 px-2 py-0.5"
+            title="Organizer Admin Portal"
+          >
+            <Shield className="w-3 h-3 text-geeko-400" />
+            <span>Admin</span>
+          </a>
         </nav>
 
         {/* Brutalist Action CTAs on the far right (matching screenshot) */}
@@ -145,6 +163,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Sparkles className="w-4 h-4 fill-black" />
               <span>DAY 1 PASS (FREE)</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenAdmin) onOpenAdmin();
+              }}
+              className="w-full py-2 bg-obsidian-950 border border-slate-700 text-slate-300 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <Shield className="w-3.5 h-3.5 text-geeko-400" />
+              <span>ORGANIZER ADMIN DESK</span>
             </button>
           </div>
         </div>

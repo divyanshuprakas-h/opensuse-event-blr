@@ -2,7 +2,11 @@ import React from 'react';
 import { Terminal, Github, Globe, MessageSquare, Heart, ArrowUp } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenAdmin?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -77,6 +81,21 @@ export const Footer: React.FC = () => {
               <li>
                 <a href="#team" className="hover:text-geeko-400 transition-colors uppercase">
                   // Organizing Committee
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#admin"
+                  onClick={(e) => {
+                    if (onOpenAdmin) {
+                      e.preventDefault();
+                      onOpenAdmin();
+                    }
+                  }}
+                  className="text-geeko-400 hover:text-white transition-colors uppercase font-bold flex items-center gap-1.5 pt-1"
+                >
+                  <Terminal className="w-3.5 h-3.5" />
+                  <span>// Organizer Admin Desk</span>
                 </a>
               </li>
             </ul>
