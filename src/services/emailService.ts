@@ -17,10 +17,10 @@ export interface EmailDispatchPayload {
 export const SENDER_EMAIL = 'divyanshuprakash914@gmail.com';
 export const SENDER_NAME = 'Divyanshu Prakash (openSUSE India)';
 
-// Configure this URL once Google Apps Script Web App is deployed.
-// It can also be overridden via the VITE_EMAIL_WEBHOOK_URL environment variable.
+// Active Google Apps Script Web App deployed under divyanshuprakash914@gmail.com
 export const GOOGLE_APPS_SCRIPT_URL =
-  (import.meta as any).env?.VITE_EMAIL_WEBHOOK_URL || '';
+  (import.meta as any).env?.VITE_EMAIL_WEBHOOK_URL ||
+  'https://script.google.com/macros/s/AKfycbyjPv0wI8EUDmXy6wgHhAqN4D7gwTLBh1eh97tgpEHQS4oDE2pocGJThUl5MipwybVH/exec';
 
 /**
  * Check if automated background email dispatching is actively configured

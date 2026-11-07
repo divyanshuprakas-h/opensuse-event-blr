@@ -285,7 +285,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                 <div className="bg-obsidian-900 border border-slate-800 p-2.5 text-xs text-slate-300 flex items-center gap-2">
                   <Mail className="w-4 h-4 text-geeko-400 shrink-0" />
                   <span>
-                    Your pass and reserved T-shirt confirmation can be emailed directly to your inbox with sender <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
+                    Your pass and reserved T-shirt confirmation will be emailed automatically to your inbox from <strong className="text-geeko-300 font-bold">{SENDER_EMAIL}</strong>
                   </span>
                 </div>
 
@@ -297,7 +297,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                     className="w-full py-3.5 bg-geeko-500 text-black font-mono font-black text-sm uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span>Generating Pass...</span>
+                      <span>Confirming & Sending Pass to Email...</span>
                     ) : (
                       <>
                         <Sparkles className="w-4 h-4 fill-black" />
@@ -323,7 +323,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                 </p>
               </div>
 
-              {/* Email Confirmation Status Banner */}
+              {/* Email Confirmation Dispatched Banner */}
               <div className="bg-pine-950/80 border-2 border-geeko-500/80 p-3.5 text-left font-mono text-xs shadow-[3px_3px_0px_0px_#173f35] flex items-start gap-3">
                 <div className="w-8 h-8 bg-obsidian-950 border border-geeko-500 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
                   <Mail className="w-4 h-4" />
@@ -332,23 +332,18 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-white text-xs uppercase flex items-center gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-geeko-400" />
-                      <span>{isAutomatedEmailConfigured() ? 'Pass Confirmation Dispatched' : 'Pass Confirmed & Ready'}</span>
+                      <span>Pass Confirmation Emailed</span>
                     </span>
                     <span className="text-[10px] bg-geeko-500 text-black font-black px-1.5 py-0.2 uppercase">
-                      {isAutomatedEmailConfigured() ? 'AUTO-SENT' : 'READY TO EMAIL'}
+                      SENT
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
-                    Digital Pass ID <strong className="text-geeko-300 font-mono">[{submittedPass.id}]</strong> and reserved <strong className="text-white">T-Shirt Size {submittedPass.tshirtSize}</strong> are locked for <strong className="text-white">{submittedPass.email}</strong>.
-                  </p>
-                  <p className="text-[11px] text-geeko-300 font-sans">
-                    {isAutomatedEmailConfigured()
-                      ? `Automated copy dispatched from ${SENDER_EMAIL}. Check inbox and spam folder.`
-                      : `Click "Send / Open Pass in Gmail Web" below to send a copy to your inbox.`}
+                    A confirmation email with your digital pass ID (<strong className="text-geeko-300 font-mono">{submittedPass.id}</strong>) and reserved <strong className="text-white">T-Shirt Size {submittedPass.tshirtSize}</strong> has been automatically dispatched to <strong className="text-white">{submittedPass.email}</strong>.
                   </p>
                   <div className="text-[10px] text-slate-400 pt-1 border-t border-slate-800 flex flex-wrap items-center justify-between gap-1">
-                    <span>Organizer: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
-                    <span>100% Free Pass</span>
+                    <span>From: <strong className="text-geeko-400">{SENDER_EMAIL}</strong></span>
+                    <span>Check inbox & spam folder</span>
                   </div>
                 </div>
               </div>
@@ -430,56 +425,11 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
 
                   <button
                     onClick={shareOnTwitter}
-                    className="py-2.5 px-4 bg-obsidian-900 border-2 border-slate-700 hover:border-geeko-400 text-slate-200 text-xs font-mono font-bold flex items-center justify-center gap-2 cursor-pointer"
+                    className="py-2.5 px-4 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-black text-xs font-mono uppercase flex items-center justify-center gap-2 cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
                   >
                     <Share2 className="w-4 h-4" />
                     <span>Share on X / Twitter</span>
                   </button>
-
-                  {/* Primary: Send in Gmail Web */}
-                  <a
-                    href={getGmailWebComposeUrl(
-                      submittedPass.email,
-                      generateEmailContent({
-                        recipientEmail: submittedPass.email,
-                        recipientName: submittedPass.name,
-                        passId: submittedPass.id,
-                        tshirtSize: submittedPass.tshirtSize,
-                        eventTrack: submittedPass.interest,
-                        eventType: 'Day 1 Conference Pass'
-                      }).subject,
-                      generateEmailContent({
-                        recipientEmail: submittedPass.email,
-                        recipientName: submittedPass.name,
-                        passId: submittedPass.id,
-                        tshirtSize: submittedPass.tshirtSize,
-                        eventTrack: submittedPass.interest,
-                        eventType: 'Day 1 Conference Pass'
-                      }).body,
-                      SENDER_EMAIL
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="py-3 px-4 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-black text-xs font-mono flex items-center justify-center gap-2 cursor-pointer col-span-1 sm:col-span-2 shadow-[3px_3px_0px_0px_#ffffff] transition-all hover:translate-x-[1px] hover:translate-y-[1px]"
-                  >
-                    <Mail className="w-4 h-4 text-black" />
-                    <span>✉ Send / Open Pass in Gmail Web</span>
-                  </a>
-
-                  {/* Secondary: Default System Mail Client */}
-                  <a
-                    href={`mailto:${submittedPass.email}?cc=${SENDER_EMAIL}&subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Pass [${submittedPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
-                      recipientEmail: submittedPass.email,
-                      recipientName: submittedPass.name,
-                      passId: submittedPass.id,
-                      tshirtSize: submittedPass.tshirtSize,
-                      eventTrack: submittedPass.interest,
-                      eventType: 'Day 1 Conference Pass'
-                    }).body)}`}
-                    className="py-2 px-3 bg-obsidian-900 border border-slate-800 hover:border-slate-600 text-[11px] font-mono text-slate-400 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer col-span-1 sm:col-span-2"
-                  >
-                    <span>Open in Default System Mail App (Apple Mail / Outlook)</span>
-                  </a>
                 </div>
 
               <div className="text-center pt-2">
