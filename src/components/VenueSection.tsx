@@ -50,7 +50,7 @@ export const VenueSection: React.FC = () => {
                 <span>CAMPUS SPECIFICATIONS</span>
               </div>
               <p className="text-sm font-sans text-slate-200 leading-relaxed">
-                Newton School of Technology (P3 Building, S-VYASA, Sattva Global City) serves as the proposed host venue for openSUSE India – Bengaluru Connect 2027. Embedded inside the prestigious Sattva Global City tech park off Mysore Road, the modern campus is equipped for 300–400 attendees with dual-projection auditoriums, specialized computer labs for packaging workshops, and open hacking zones with high-speed connectivity.
+                Newton School of Technology (P3 Building, S-VYASA, Sattva Global City) serves as the host venue for openSUSE India – Bengaluru Connect 2027. Embedded inside the prestigious Sattva Global City tech park off Mysore Road, the campus is equipped for 250 builders with dual-projection auditoriums, breakout labs for packaging workshops, and load-tested hacking zones with high-speed connectivity.
               </p>
 
               {/* Specs Grid */}
@@ -61,7 +61,7 @@ export const VenueSection: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-slate-500 uppercase text-[10px] block">CAPACITY</span>
-                  <span className="text-geeko-400 font-bold">300–400 Devs</span>
+                  <span className="text-geeko-400 font-bold">250 Builders (280 Cap)</span>
                 </div>
                 <div>
                   <span className="text-slate-500 uppercase text-[10px] block">TRANSIT</span>

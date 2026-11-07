@@ -90,6 +90,15 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs">
               <li>
                 <a
+                  href={`${import.meta.env.BASE_URL}proposal/`}
+                  className="hover:text-geeko-400 transition-colors flex items-center gap-1.5 font-bold text-geeko-300"
+                >
+                  <Terminal className="w-3.5 h-3.5 text-geeko-400" />
+                  <span>⚡ Proposal OS &amp; Bootloader</span>
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://www.opensuse.org"
                   target="_blank"
                   rel="noreferrer"

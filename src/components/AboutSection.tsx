@@ -20,9 +20,9 @@ export const AboutSection: React.FC = () => {
     {
       step: "03",
       icon: Layers,
-      title: "10-Hour Open Hackathon",
-      desc: "Collaborate in teams of 1 to 4 with experienced mentors to engineer real open-source utilities and CLI tools.",
-      tag: "HACKATHON_SPRINT"
+      title: "20-Hour Geeko Buildathon",
+      desc: "Collaborate in teams of 3 to 4 with experienced mentors to engineer real open-source utilities, CLI tools, and upstream patches.",
+      tag: "BUILDATHON_SPRINT"
     }
   ];
 

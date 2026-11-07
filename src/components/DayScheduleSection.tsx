@@ -37,7 +37,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight leading-tight">
               Day 1 Talks & Workshops <br />
-              <span className="text-geeko-400">//</span> Day 2 Hackathon
+              <span className="text-geeko-400">//</span> Day 2 20H Buildathon
             </h2>
           </div>
           
@@ -64,7 +64,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
               }`}
             >
               <Code2 className="w-3.5 h-3.5" />
-              <span>Day 2: 10H Hackathon</span>
+              <span>Day 2: 20H Buildathon</span>
             </button>
           </div>
         </div>
@@ -248,7 +248,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
                   <div>
                     <div className="flex items-center justify-between text-[10px] text-geeko-400 font-bold mb-1.5">
                       <span>{track.code}</span>
-                      <span className="text-slate-500">10H SPRINT</span>
+                      <span className="text-slate-500">20H BUILDATHON</span>
                     </div>
                     <h4 className="text-sm font-black text-white uppercase mb-2">
                       {track.title}
@@ -271,7 +271,7 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
             {/* Day 2 Timeline Slots */}
             <div className="space-y-3 pt-4">
               <h4 className="text-xs font-bold uppercase text-geeko-400 tracking-wider">
-                DAY 2 SPRINT CHRONOLOGY (10-HOUR TIMELINE):
+                DAY 2 SPRINT CHRONOLOGY (20-HOUR BUILDATHON TIMELINE):
               </h4>
 
               {visibleDay2.map((session) => (

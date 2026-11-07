@@ -85,11 +85,11 @@ export const PrizesSection: React.FC<PrizesSectionProps> = ({
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-white uppercase tracking-tight flex items-center gap-2">
-                      <span>Track Champions & 1st Place</span>
-                      <span className="text-[10px] text-geeko-400 font-bold bg-pine-950 border border-geeko-500/40 px-1.5 py-0.2">TOP PRIZE</span>
+                      <span>1st Place Champion Team</span>
+                      <span className="text-[10px] text-geeko-400 font-bold bg-pine-950 border border-geeko-500/40 px-1.5 py-0.2">₹25,000</span>
                     </h4>
                     <p className="text-xs text-slate-300 font-sans mt-1">
-                      Exciting tech prizes, winner recognition trophy, and exclusive openSUSE contributor kit.
+                      ₹25,000 cash award, custom team trophy, winner certificates, and 4 reward shirts.
                     </p>
                   </div>
                 </div>
@@ -101,27 +101,27 @@ export const PrizesSection: React.FC<PrizesSectionProps> = ({
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-white uppercase tracking-tight flex items-center gap-2">
-                      <span>Runners-Up & Top Finalists</span>
-                      <span className="text-[10px] text-cyan-300 font-bold bg-cyan-950 border border-cyan-800 px-1.5 py-0.2">AWARDS</span>
+                      <span>2nd Place Runner-Up</span>
+                      <span className="text-[10px] text-cyan-300 font-bold bg-cyan-950 border border-cyan-800 px-1.5 py-0.2">₹15,000</span>
                     </h4>
                     <p className="text-xs text-slate-300 font-sans mt-1">
-                      Curated developer prizes, runner-up awards, and special openSUSE merchandise hampers.
+                      ₹15,000 cash award, custom team trophy, winner certificates, and 4 reward shirts.
                     </p>
                   </div>
                 </div>
 
-                {/* 3. Special Jury & Innovation Mentions */}
+                {/* 3. Third Place */}
                 <div className="bg-obsidian-950 border border-slate-800 p-4 flex items-start gap-3.5 hover:border-geeko-500/60 transition-colors">
                   <div className="w-9 h-9 bg-obsidian-900 border border-slate-700 flex items-center justify-center text-geeko-400 shrink-0 mt-0.5">
                     <Gift className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-sm font-black text-white uppercase tracking-tight flex items-center gap-2">
-                      <span>Special Innovation Mentions</span>
-                      <span className="text-[10px] text-amber-300 font-bold bg-amber-950 border border-amber-800 px-1.5 py-0.2">COMMUNITY</span>
+                      <span>3rd Place Team & Side Bounties</span>
+                      <span className="text-[10px] text-amber-300 font-bold bg-amber-950 border border-amber-800 px-1.5 py-0.2">₹10,000 + ₹6,000</span>
                     </h4>
                     <p className="text-xs text-slate-300 font-sans mt-1">
-                      Special recognition awards for standout open-source contributions, packaging hacks, and student innovators.
+                      ₹10,000 for 3rd place, plus ₹6,000 side bounty pool for Midnight Bug Hunt, Arcade, and Quest Passport.
                     </p>
                   </div>
                 </div>

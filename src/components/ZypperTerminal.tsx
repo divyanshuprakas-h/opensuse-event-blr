@@ -33,12 +33,26 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
         <div className="space-y-1 text-slate-300">
           <p className="text-geeko-400 font-bold">AVAILABLE COMMANDS:</p>
           <p>• <span className="text-geeko-300 font-mono">zypper in opensuse-blr</span> : Launch priority pre-registration</p>
-          <p>• <span className="text-geeko-300 font-mono">zypper info event</span> : View event stats, dates & venue</p>
+          <p>• <span className="text-geeko-300 font-mono">proposal</span> : Launch 18-page proposal OS &amp; bootloader</p>
+          <p>• <span className="text-geeko-300 font-mono">zypper info event</span> : View event stats, dates &amp; venue</p>
           <p>• <span className="text-geeko-300 font-mono">zypper lr</span> : List event repositories (Tracks & workshops)</p>
           <p>• <span className="text-geeko-300 font-mono">geeko</span> : Display openSUSE ASCII Chameleon</p>
           <p>• <span className="text-geeko-300 font-mono">yast</span> : Launch system control overview</p>
           <p>• <span className="text-geeko-300 font-mono">obs</span> : Open Build Service packaging status</p>
           <p>• <span className="text-geeko-300 font-mono">clear</span> : Clear screen</p>
+        </div>
+      );
+    } else if (trimmed === 'proposal' || trimmed === 'boot' || trimmed === 'grub') {
+      res = (
+        <div className="space-y-1 text-slate-200">
+          <p className="text-geeko-400 font-bold">Booting openSUSE Bengaluru Connect 2027 Proposal OS...</p>
+          <p className="text-slate-300">18 sections verified: 20H Buildathon, 6 tracks, itemized ₹2,57,840 budget matrix.</p>
+          <a
+            href={`${import.meta.env.BASE_URL}proposal/`}
+            className="mt-2 inline-flex items-center gap-2 bg-geeko-500 text-black px-3 py-1 text-xs font-bold font-mono border border-black hover:bg-geeko-400 cursor-pointer"
+          >
+            [PRESS ENTER OR CLICK HERE TO LAUNCH PROPOSAL OS &amp; BOOTLOADER →]
+          </a>
         </div>
       );
     } else if (trimmed === 'clear') {
@@ -73,9 +87,9 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
           <p>Arch            : all-developers</p>
           <p>Proposed Dates  : January 2027 (exact dates to be confirmed)</p>
           <p>Venue           : Newton School of Technology (P3 Building, Sattva Global City)</p>
-          <p>Capacity        : 300–400 Attendees</p>
+          <p>Capacity        : 250 Builders (Working Headcount: 280)</p>
           <p>Admission       : 100% Free (Community Open Access)</p>
-          <p>Summary         : 2 Days, 3 Phases, 10-Hour Hackathon & Technical Workshops</p>
+          <p>Summary         : 2 Days, 3 Phases, 20-Hour Geeko Buildathon & Technical Workshops</p>
         </div>
       );
     } else if (trimmed === 'zypper lr') {
@@ -85,7 +99,7 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
           <p>--+---------------------+------------------------------+---------+----------</p>
           <p>1 | phase-01-talks      | Phase 1: Tech Talks & OBS    | Yes     | (r ) Yes </p>
           <p>2 | phase-02-workshops  | Phase 2: YaST, Zypper & openQA| Yes     | (r ) Yes </p>
-          <p>3 | phase-03-hackathon  | Phase 3: 10H Sprint Hackathon| Yes     | (r ) Yes </p>
+          <p>3 | phase-03-buildathon | Phase 3: 20H Geeko Buildathon| Yes     | (r ) Yes </p>
           <p>4 | openSUSE-conf-india | Road to openSUSE Conf India  | Yes     | (r ) Yes </p>
         </div>
       );

@@ -70,7 +70,7 @@ export const Hero: React.FC<HeroProps> = ({
             <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed max-w-xl">
               <strong className="text-white">Explore Open Source. Learn openSUSE. Build Together.</strong>
               <br />
-              Two days of Linux distribution keynotes, hands-on packaging workshops (YaST, Zypper, OBS, openQA), and an intensive 10-hour hackathon.
+              Two days of Linux distribution keynotes, hands-on packaging workshops (YaST, Zypper, OBS, openQA), and an intensive 20-hour Geeko Buildathon at Newton School of Technology.
             </p>
 
             {/* Quick 1-Click Day 1 Pass Form */}

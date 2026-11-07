@@ -28,196 +28,256 @@ export const EVENT_CONFIG = {
   shortName: "Bengaluru Connect '27",
   edition: "2027",
   tagline: "Explore Open Source. Learn openSUSE. Build Together.",
-  motto: "Have a lot of fun…",
+  motto: "Learn. Build. Contribute.",
   dates: "January 2027",
-  datesNotice: "Target: January 2027 (Exact dates announcing soon)",
-  duration: "2 Days (Day 1: Talks & Labs • Day 2: 10H Hackathon)",
+  datesNotice: "January 2027 (Exact consecutive dates announcing shortly)",
+  duration: "2 Days (Day 1: Talks & Labs • Day 2: 20H Geeko Buildathon)",
   location: "Bengaluru, Karnataka, India",
-  venue: "Newton School of Technology, P3 Building, S-VYASA, Sattva Global City",
+  venue: "Newton School of Technology, Bengaluru",
   venueAddress: "P3 Building, S-VYASA Campus, Sattva Global City, Mysore Road, Bengaluru 560059",
-  expectedAttendees: "300–400 Hackers & Devs",
+  expectedAttendees: "250 Builders (Working Site Headcount: 280)",
   organizer: "openSUSE India Community",
 };
 
 export const EVENT_STATS = [
-  { label: "DURATION", value: "2 DAYS", subtext: "Intensive Tech Gathering" },
-  { label: "ATTENDEES", value: "300–400", subtext: "Devs, Students & Sysadmins" },
-  { label: "HACKATHON", value: "10 HOURS", subtext: "Separate Day 2 Registration" },
-  { label: "ADMISSION", value: "100% FREE", subtext: "Open-Source Community Event" },
+  { label: "DURATION", value: "2 DAYS", subtext: "Talks, Labs & 20H Buildathon" },
+  { label: "CAPACITY", value: "250 BUILDERS", subtext: "Strict 1-Pool Admission" },
+  { label: "BUILDATHON", value: "20 HOURS", subtext: "Day 1 14:30 → Day 2 10:30" },
+  { label: "ADMISSION", value: "100% FREE", subtext: "Zero Fees · Pure Open Source" },
 ];
 
 export const DAY1_SESSIONS: SessionItem[] = [
   {
     id: "d1-1",
     time: "09:00 – 09:30",
-    title: "Badge Pickup & Welcome Kit",
+    title: "Check-in, QR Passport Activation & Welcome Refreshments",
     type: "Break",
     isMandatory: true,
     track: "General",
-    description: "Check-in at Newton School of Tech, collect badge lanyards and Geeko sticker packs.",
+    description: "Badge pickup at Newton School of Technology, digital QR quest activation and light breakfast.",
     location: "Main Foyer"
   },
   {
     id: "d1-2",
-    time: "09:30 – 10:15",
-    title: "Keynote: openSUSE in the Global Open-Source Ecosystem",
+    time: "09:30 – 09:45",
+    title: "Welcome & openSUSE Safety Briefing",
     type: "Keynote",
     isMandatory: true,
     track: "General",
-    description: "openSUSE governance, global community reach, and open-source infrastructure.",
+    description: "Event orientation, access boundaries, overnight guidelines, and code of conduct.",
     location: "Auditorium"
   },
   {
     id: "d1-3",
-    time: "10:15 – 11:00",
-    title: "Distribution Architecture: Leap vs. Tumbleweed",
+    time: "09:45 – 10:15",
+    title: "Talk 1: Linux Unlocked: Beyond Windows & macOS",
     type: "Talk",
     isMandatory: true,
     track: "Architecture",
-    description: "Rolling release (Tumbleweed) vs enterprise-aligned regular release (Leap) and Snapper Btrfs rollbacks.",
+    description: "Autonomy, performance, and architecture of Linux distributions in modern engineering.",
     location: "Auditorium"
   },
   {
     id: "d1-4",
-    time: "11:15 – 01:00",
-    title: "Lab A: Zypper Package Management & YaST System Control",
-    type: "Workshop",
-    isMandatory: false,
-    track: "Workshops Lab",
-    description: "Hands-on terminal setup: Zypper SAT solver, repo mirrors, subvolumes & YaST administration.",
-    location: "Lab A (Bring Laptop)"
+    time: "10:15 – 10:45",
+    title: "Talk 2: Inside openSUSE: From Desktop to Developer Tools",
+    type: "Talk",
+    isMandatory: true,
+    track: "Architecture",
+    description: "Deep dive into Tumbleweed, Leap, MicroOS, YaST, Zypper, and Snapper Btrfs rollbacks.",
+    location: "Auditorium"
   },
   {
     id: "d1-5",
-    time: "11:15 – 01:00",
-    title: "Talk B: Linux Systems Administration & Open-Source Careers",
+    time: "10:45 – 11:15",
+    title: "Talk 3: From User to Contributor: Building for Open Source",
     type: "Talk",
-    isMandatory: false,
+    isMandatory: true,
     track: "Ecosystem",
-    description: "Career opportunities in open-source systems engineering, DevOps, and Linux infrastructure.",
-    location: "Seminar Hall B"
+    description: "How to find beginner-friendly issues, navigate Git review etiquette, and submit upstream patches.",
+    location: "Auditorium"
   },
   {
     id: "d1-6",
-    time: "01:00 – 02:00",
-    title: "Lunch & Community Lightning Talks",
+    time: "11:15 – 11:30",
+    title: "Coffee Break & Geeko Arcade Open",
     type: "Break",
     isMandatory: false,
     track: "General",
-    description: "On-campus lunch with rapid 5-minute attendee lightning presentations.",
-    location: "Dining Hall"
+    description: "Light refreshments; Terminal Escape, Trivia Blitz, and Quest stations open for downtime.",
+    location: "Main Foyer"
   },
   {
     id: "d1-7",
-    time: "02:00 – 03:45",
-    title: "Lab A: Universal Packaging with Open Build Service (OBS)",
+    time: "11:30 – 13:00",
+    title: "Parallel Starter Lab (Zypper/YaST) & Idea Lab / Team Formation",
     type: "Workshop",
     isMandatory: false,
-    track: "Packaging",
-    description: "Writing RPM specs, automated multi-arch builds (x86/ARM), and multi-distro targets.",
-    location: "Lab A (Bring Laptop)"
+    track: "Workshops Lab",
+    description: "Lab A: Hands-on Zypper SAT solver & YaST. Lab B: Pitch ideas & form teams of 3–4 for up to 83 teams.",
+    location: "Labs A & B"
   },
   {
     id: "d1-8",
-    time: "02:00 – 03:45",
-    title: "Lab B: Automated Operating System Testing with openQA",
-    type: "Workshop",
+    time: "13:00 – 14:00",
+    title: "Buffet Lunch & Mentor Matchmaking",
+    type: "Break",
     isMandatory: false,
-    track: "QA",
-    description: "Visual regression testing and writing automated OS test needles with openQA.",
-    location: "Lab B"
+    track: "General",
+    description: "Nutritious vegetarian lunch for all 250 registered attendees and 30 working crew.",
+    location: "Dining Hall"
   },
   {
     id: "d1-9",
-    time: "04:00 – 05:00",
-    title: "Contributor Pathways: Submitting Your First openSUSE Patch",
+    time: "14:00 – 14:30",
+    title: "Buildathon Briefing & First Commit Ceremony Preparation",
     type: "Panel",
     isMandatory: true,
     track: "General",
-    description: "Git review etiquette, openSUSE SIGs, and prep for the Day 2 Hackathon.",
+    description: "6 tracks overview, scoring rubric, submission portal, and repository initialization.",
     location: "Auditorium"
+  },
+  {
+    id: "d1-10",
+    time: "14:30",
+    title: "Official Build Start & First Commit Ceremony (20H Clock Starts!)",
+    type: "Sprint",
+    isMandatory: true,
+    track: "Buildathon",
+    description: "The 20-hour non-stop Buildathon begins! Git commit #1 stamped for all teams.",
+    location: "Hackathon Arena"
+  },
+  {
+    id: "d1-11",
+    time: "14:30 – 18:30",
+    title: "Build Sprint 1 & Technical Mentor Desk",
+    type: "Sprint",
+    isMandatory: true,
+    track: "Buildathon",
+    description: "Teams implement core architecture. Evening tea/snacks served at 17:00.",
+    location: "Hackathon Arena"
+  },
+  {
+    id: "d1-12",
+    time: "18:30 – 19:30",
+    title: "Hot Dinner Service (Overnight Builders & Crew)",
+    type: "Break",
+    isMandatory: false,
+    track: "General",
+    description: "Staggered dinner service; quiet rest space opened for rotation.",
+    location: "Dining Hall"
+  },
+  {
+    id: "d1-13",
+    time: "19:30 – 00:00",
+    title: "Night Build Sprint & Late Snacks (23:00)",
+    type: "Sprint",
+    isMandatory: true,
+    track: "Buildathon",
+    description: "Focused coding through the night; late-night warm snacks served at 23:00; shift handover at 23:30.",
+    location: "Hackathon Arena"
   }
 ];
 
 export const DAY2_SESSIONS: SessionItem[] = [
   {
     id: "d2-1",
-    time: "08:30 – 09:15",
-    title: "Hackathon Check-in & Team Matchmaking",
-    type: "Break",
-    isMandatory: true,
-    track: "Hackathon",
-    description: "Team check-in. Solo hackers pitch ideas and form teams of 1 to 4 members.",
-    location: "Hacking Arena"
+    time: "00:00 – 01:00",
+    title: "Quiet Midnight Build & Mentor Rotation",
+    type: "Sprint",
+    isMandatory: false,
+    track: "Buildathon",
+    description: "Quiet focus period with rotating mentor availability.",
+    location: "Hackathon Arena"
   },
   {
     id: "d2-2",
-    time: "09:15 – 09:45",
-    title: "Sprint Kickoff: Track Briefings & Rules",
-    type: "Keynote",
-    isMandatory: true,
+    time: "01:00 – 01:30",
+    title: "Midnight Bug Hunt (Optional Rookie & Expert Showdown)",
+    type: "Sprint",
+    isMandatory: false,
     track: "Hackathon",
-    description: "Briefing on the 5 tracks, mentor availability, code submission requirements, and judging.",
-    location: "Main Stage"
+    description: "30-minute individual debugging sprint in prepared sandboxes. Cash rewards and badges.",
+    location: "Sandbox Zone"
   },
   {
     id: "d2-3",
-    time: "09:45 – 01:00",
-    title: "Hacking Sprint: Phase 1 & Architecture Reviews",
-    type: "Sprint",
-    isMandatory: true,
-    track: "Hackathon",
-    description: "Teams start building. Mentors circulate across tables to assist with tooling and APIs.",
-    location: "Hacking Arena"
+    time: "01:30 – 06:30",
+    title: "Quiet Build & Supervised Rest Space",
+    type: "Break",
+    isMandatory: false,
+    track: "Buildathon",
+    description: "Continuous coding and managed quiet rest zones. Staffed help and security desk on active duty.",
+    location: "Rest Zones & Arena"
   },
   {
     id: "d2-4",
-    time: "01:00 – 02:00",
-    title: "Hackers Lunch & Progress Check-in",
+    time: "06:30 – 07:30",
+    title: "Sunrise Breakfast Service",
     type: "Break",
     isMandatory: false,
-    track: "Hackathon",
-    description: "Nutritious lunch and quick team check-ins.",
+    track: "General",
+    description: "Hot breakfast served to power builders for the final stretch.",
     location: "Dining Hall"
   },
   {
     id: "d2-5",
-    time: "02:00 – 06:00",
-    title: "Hacking Sprint: Phase 2 & Prototype Polish",
+    time: "07:30 – 09:30",
+    title: "Ship at Sunrise: Final Polish, Documentation & Tests",
     type: "Sprint",
     isMandatory: true,
-    track: "Hackathon",
-    description: "Finalizing implementations, writing READMEs, and testing live demos.",
-    location: "Hacking Arena"
+    track: "Buildathon",
+    description: "Final code polish, test passes, README preparation, and demo script validation.",
+    location: "Hackathon Arena"
   },
   {
     id: "d2-6",
-    time: "06:00 – 06:30",
-    title: "Code Freeze & Git Repository Submissions",
+    time: "09:30 – 10:30",
+    title: "Submission Verification & Final Git Tagging",
     type: "Sprint",
     isMandatory: true,
-    track: "Hackathon",
-    description: "All code committed to a public git repo under an open-source license.",
-    location: "Hacking Arena"
+    track: "Buildathon",
+    description: "Submission portal guidance; frozen repository commit verification; no extensions permitted.",
+    location: "Hackathon Arena"
   },
   {
     id: "d2-7",
-    time: "06:30 – 08:00",
-    title: "Live Project Demonstrations Before Jury",
-    type: "Demo",
+    time: "10:30",
+    title: "Hard Submission Deadline (Commit Freeze)",
+    type: "Keynote",
     isMandatory: true,
-    track: "Hackathon",
-    description: "4-minute working demos per team before the panel of technical judges.",
-    location: "Auditorium"
+    track: "Buildathon",
+    description: "20-Hour Hackathon clock permanently ends. Repositories locked for jury evaluation.",
+    location: "Hackathon Arena"
   },
   {
     id: "d2-8",
-    time: "08:00 – 08:30",
-    title: "Awards Ceremony, Swag & Closing",
+    time: "11:00 – 13:00",
+    title: "Every-Team Demo Arena (6 Parallel Judging Lanes)",
+    type: "Demo",
+    isMandatory: true,
+    track: "Hackathon",
+    description: "Up to 83 teams present live to 6 dual-judge panels (7m demo + buffer) plus People's Choice voting.",
+    location: "Demo Arena"
+  },
+  {
+    id: "d2-9",
+    time: "13:15 – 14:15",
+    title: "Grand Finalist Pitches on Main Stage",
+    type: "Demo",
+    isMandatory: true,
+    track: "Hackathon",
+    description: "Top 6 finalist teams pitch live on stage before all attendees, mentors, and jury members.",
+    location: "Auditorium"
+  },
+  {
+    id: "d2-10",
+    time: "14:35 – 15:00",
+    title: "Awards Ceremony, Trophies & Community Farewell",
     type: "Keynote",
     isMandatory: true,
     track: "Hackathon",
-    description: "Winning project recognitions, openSUSE swag hampers, and closing roadmap.",
+    description: "Top 3 team cash awards (₹25k, ₹15k, ₹10k), trophies, 25 reward T-shirts, group photo, and closing.",
     location: "Auditorium"
   }
 ];
@@ -226,83 +286,90 @@ export const HACKATHON_TRACKS: TrackItem[] = [
   {
     id: "track-1",
     code: "TRACK // 01",
-    title: "Linux & Developer Productivity Tools",
-    description: "CLI tools, shell enhancements, terminal utilities, or debugging aids.",
-    tech: ["Bash", "Rust", "Go", "Python", "CLI / TUI"]
+    title: "Terminal Titans",
+    description: "Linux CLI and productivity tools. Build a file organizer, terminal tutor, backup utility or Zypper helper.",
+    tech: ["Bash / Zsh", "Rust / Go / Python", "CLI / TUI", "Linux Syscalls"]
   },
   {
     id: "track-2",
     code: "TRACK // 02",
-    title: "Automation & System Utilities",
-    description: "Automated admin scripts, system monitors, backup solutions, or systemd tools.",
-    tech: ["Systemd", "Ansible", "Zypper Hooks", "Btrfs"]
+    title: "Root Access",
+    description: "Linux security and privacy. Permissions auditors, PAM auth explainers, or AppArmor/SELinux assistants.",
+    tech: ["PAM / Auth Logs", "AppArmor / SELinux", "iptables / nftables", "Sandbox Containment"]
   },
   {
     id: "track-3",
     code: "TRACK // 03",
-    title: "Cloud-Native & Infrastructure",
-    description: "Containerized services, Podman/K8s operators, or immutable MicroOS recipes.",
-    tech: ["Podman", "K8s", "MicroOS", "Terraform"]
+    title: "GeekoOps",
+    description: "Automation, DevOps and infrastructure. OBS build status dashboards, openQA explorers, or container helpers.",
+    tech: ["OBS API", "openQA REST", "Podman / Containerfile", "MicroOS / Transactional Updates"]
   },
   {
     id: "track-4",
     code: "TRACK // 04",
-    title: "Community & Desktop Applications",
-    description: "Desktop apps, educational tools, accessibility aids, or community utilities.",
-    tech: ["GTK", "Qt", "Web / Electron", "Accessibility"]
+    title: "Desktop Reboot",
+    description: "Linux desktop and user experience. Accessible launchers, package discovery or first-boot setup assistants.",
+    tech: ["KDE Plasma / Qt6", "GNOME / GTK4", "Desktop Entry Specs", "Accessibility APIs"]
   },
   {
     id: "track-5",
     code: "TRACK // 05",
-    title: "openSUSE Ecosystem Integrations",
-    description: "OBS packaging automations, openQA test cases, or YaST module plugins.",
-    tech: ["OBS API", "openQA Perl", "Ruby YaST", "RPM Spec"]
+    title: "Upstream Heroes",
+    description: "Real open-source contributions. Fix existing Bugzilla / GitHub issues with code, documentation or tests.",
+    tech: ["Git Workflows", "Bugzilla / GitHub", "Gettext (PO)", "Upstream PRs & RFCs"]
+  },
+  {
+    id: "track-6",
+    code: "TRACK // 06",
+    title: "What Does Linux Need Next?",
+    description: "Open innovation and community impact. Identify an original Linux/openSUSE need and build a measurable solution.",
+    tech: ["Original Design", "Evidence of Need", "Measurable Impact", "Community Architecture"]
   }
 ];
 
 export const FAQS: FAQItem[] = [
   {
-    q: "Is Day 1 registration separate from the Day 2 Hackathon?",
-    a: "Yes. You can register for Day 1 (talks & workshops) independently from Day 2. If you want to participate in the hackathon, please submit a separate hackathon application (teams of 1–4 or solo)."
+    q: "Is there a registration fee or ticket cost?",
+    a: "No, 100% free. Admission, workshops, 6-meal catering, mentor support, and hackathon participation are provided at zero charge under openSUSE India and college collaboration."
   },
   {
-    q: "What is the difference between Mandatory Core and Optional Elective talks on Day 1?",
-    a: "Mandatory Core sessions (keynotes, distribution architecture, contribution panel) are held in the main auditorium for all attendees. Optional Elective sessions are parallel hands-on breakout workshops (OBS vs openQA vs sysadmin) where you choose which skill to learn."
+    q: "How many participants are allowed?",
+    a: "Participation is capped at 250 builders in one single registration pool. All 250 may stay overnight for the 20-hour Buildathon. Combined with 30 working crew/mentors, the total site headcount is 280."
   },
   {
-    q: "What prizes do hackathon winners get, and do attendees get swag?",
-    a: "Yes! Hackathon winners receive exciting tech prizes, winner trophies, and exclusive openSUSE developer swag hampers. Additionally, every single registered attendee receives an official limited-edition openSUSE India T-shirt (just select your size during registration) plus sticker packs and physical badges at check-in."
+    q: "What is the Geeko Buildathon schedule and team size?",
+    a: "Teams consist of 3 to 4 builders (up to 83 teams). The continuous 20-hour hackathon starts at 14:30 on Day 1 (First Commit Ceremony) and locks at 10:30 on Day 2 (Commit Freeze). All submitting teams demo live in the Demo Arena."
   },
   {
-    q: "Is the event free to attend?",
-    a: "Yes, 100% free. Admission, workshops, food, and hackathon participation are non-profit and community-supported."
+    q: "What awards and swag are budgeted?",
+    a: "Top 3 teams receive ₹25,000 / ₹15,000 / ₹10,000 team cash awards, custom trophies, and winner certificates. Side activities (Bug Hunt, Arcade, Quest) have a separate ₹6,000 reward pool. 25 screen-printed reward T-shirts and stickers are provided."
   },
   {
-    q: "When will exact dates in January 2027 be announced?",
-    a: "We are currently locking exact days with Newton School of Technology. Pre-registering now reserves your priority pass and sends you an email notification the moment dates are finalized."
+    q: "Is food provided during the event?",
+    a: "Yes, 6 meal services are catered for all 280 people: Day 1 welcome refreshments, lunch, evening tea/snacks, overnight dinner, late-night snacks, and Day 2 breakfast. Please note that Day 2 lunch is not catered (self-funded/nearby options)."
   },
   {
-    q: "Who is organizing and sponsoring Bengaluru Connect 2027?",
-    a: "The event is organized and powered by the openSUSE India Community and the openSUSE Project. Further community partners and sponsors will be updated as collaborations are confirmed."
+    q: "Where is the venue and how do I reach it?",
+    a: "Hosted at Newton School of Technology, P3 Building, S-VYASA Campus, Sattva Global City, Mysore Road, Bengaluru 560059. Accessible via Purple Line Metro (Kengeri / Mailasandra station) + connecting BMTC buses."
   }
 ];
 
 export const TEAM_MEMBERS = [
   { 
     name: "Divyanshu Prakash", 
-    role: "Organizer", 
+    role: "Event Coordination & Budget Lead", 
     github: "https://github.com/divyanshuprakas-h",
     email: "divyanshuprakash914@gmail.com"
   },
   { 
     name: "Dushyant Acharya", 
-    role: "Organizer", 
+    role: "Program & Buildathon Lead", 
     github: "https://github.com",
     email: "divyanshuprakash914@gmail.com"
   },
   { 
     name: "Rithull Raj Kallat", 
-    role: "Organizer", 
+    role: "Logistics, Venue & Safety Lead", 
     github: "https://github.com",
     email: "divyanshuprakash914@gmail.com"
   },
