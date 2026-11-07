@@ -1,0 +1,10 @@
+# robots.txt for openSUSE India – Bengaluru Connect 2027
+# https://divyanshuprakas-h.github.io/opensuse-event-blr/
+
+User-agent: *
+Allow: /
+Disallow: /#admin
+Disallow: /#/admin
+
+# Crawl-delay: 1
+Sitemap: https://divyanshuprakas-h.github.io/opensuse-event-blr/sitemap.xml

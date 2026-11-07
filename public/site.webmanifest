@@ -1,0 +1,17 @@
+{
+  "name": "openSUSE India – Bengaluru Connect 2027",
+  "short_name": "openSUSE BLR '27",
+  "description": "Two days of Linux distribution keynotes, hands-on workshops, and 10-hour hackathon at Newton School of Technology, Sattva Global City, Bengaluru.",
+  "start_url": "/opensuse-event-blr/",
+  "display": "standalone",
+  "background_color": "#090e0d",
+  "theme_color": "#173f35",
+  "icons": [
+    {
+      "src": "/opensuse-event-blr/geeko.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
