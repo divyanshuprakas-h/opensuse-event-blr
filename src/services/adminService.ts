@@ -50,200 +50,26 @@ const TEAMS_KEY = 'opensuse_blr_hackathon_registrations';
 const VOLUNTEERS_KEY = 'opensuse_blr_volunteers';
 const ADMIN_AUTH_KEY = 'opensuse_admin_auth_session';
 
-// Default initial seed data if storage is completely empty
-const SEED_PARTICIPANTS: Participant[] = [
-  {
-    id: 'OSBLR-2027-6747',
-    name: 'Divyanshu Prakash',
-    email: '2102508744@svyasa-sas.edu.in',
-    collegeOrCompany: 'Newton School of Technology',
-    role: 'Organizer / Student',
-    interest: 'Both Workshops & Hackathon',
-    tshirtSize: 'M',
-    github: 'https://github.com/divyanshuprakas-h',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-06T18:30:00.000Z',
-    notifyOnDates: true,
-  },
-  {
-    id: 'OSBLR-2027-2995',
-    name: 'Rithull Raj Kallat',
-    email: 'rithullkallat@gmail.com',
-    collegeOrCompany: 'Hope Hall Foundation School',
-    role: 'Open-Source Contributor',
-    interest: 'Hands-on Workshops (YaST/OBS)',
-    tshirtSize: 'M',
-    github: 'https://github.com',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-06T19:15:00.000Z',
-    notifyOnDates: true,
-  },
-  {
-    id: 'OSBLR-2027-1042',
-    name: 'Dushyant Acharya',
-    email: 'dushyant@example.com',
-    collegeOrCompany: 'Newton School of Technology',
-    role: 'Organizer / Developer',
-    interest: 'Both Workshops & Hackathon',
-    tshirtSize: 'L',
-    github: 'https://github.com',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-06T19:45:00.000Z',
-    notifyOnDates: true,
-  },
-  {
-    id: 'OSBLR-2027-3180',
-    name: 'Ananya Sharma',
-    email: 'ananya.s@bmsce.ac.in',
-    collegeOrCompany: 'BMS College of Engineering',
-    role: 'Software Developer',
-    interest: 'Technical Talks Only',
-    tshirtSize: 'S',
-    github: 'https://github.com/ananya-dev',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-07T02:10:00.000Z',
-    notifyOnDates: true,
-  },
-  {
-    id: 'OSBLR-2027-4921',
-    name: 'Vikram Rao',
-    email: 'vikram.rao@dell.com',
-    collegeOrCompany: 'Dell Technologies',
-    role: 'DevOps / SysAdmin',
-    interest: 'Hands-on Workshops (YaST/OBS)',
-    tshirtSize: 'XL',
-    github: '',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-07T03:00:00.000Z',
-    notifyOnDates: true,
-  },
-];
-
-const SEED_TEAMS: HackathonTeam[] = [
-  {
-    id: 'HACK-BLR-4821',
-    teamName: 'Geeko Kernels',
-    leaderName: 'Divyanshu Prakash',
-    leaderEmail: 'divyanshuprakash914@gmail.com',
-    teamSize: 3,
-    trackId: 'linux-tooling',
-    leaderTshirtSize: 'M',
-    members: [
-      'Divyanshu Prakash (divyanshuprakash914@gmail.com) [Leader]',
-      'Rahul Sharma (rahul@pes.edu)',
-      'Priya Nair (priya.n@gmail.com)',
-    ],
-    github: 'https://github.com/divyanshuprakas-h/geeko-cli',
-    projectIdea: 'A high-speed Rust-based terminal monitor for openSUSE package repos & Zypper mirrors.',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-06T20:00:00.000Z',
-  },
-  {
-    id: 'HACK-BLR-2094',
-    teamName: 'OBS Automated',
-    leaderName: 'Dushyant Acharya',
-    leaderEmail: 'dushyant@example.com',
-    teamSize: 2,
-    trackId: 'obs-packaging',
-    leaderTshirtSize: 'L',
-    members: [
-      'Dushyant Acharya (dushyant@example.com) [Leader]',
-      'Kiran Patel (kiran.p@gmail.com)',
-    ],
-    github: 'https://github.com/dushyant/obs-bot',
-    projectIdea: 'Automated Open Build Service package build dispatcher for GitHub releases.',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-06T21:10:00.000Z',
-  },
-  {
-    id: 'HACK-BLR-7312',
-    teamName: 'MicroOS Titans',
-    leaderName: 'Rohan Verma',
-    leaderEmail: 'rohan.v@rvce.edu.in',
-    teamSize: 4,
-    trackId: 'microos-iot',
-    leaderTshirtSize: 'XL',
-    members: [
-      'Rohan Verma (rohan.v@rvce.edu.in) [Leader]',
-      'Nikhil Nair (nikhil@rvce.edu.in)',
-      'Tanvi Hegde (tanvi@rvce.edu.in)',
-      'Samarth K (samarth@rvce.edu.in)',
-    ],
-    github: 'https://github.com/rohan-v/microos-edge',
-    projectIdea: 'Immutable edge IoT container deployment system using openSUSE MicroOS.',
-    status: 'ACTIVE',
-    registeredAt: '2026-11-07T01:30:00.000Z',
-  },
-];
-
-const SEED_VOLUNTEERS: Volunteer[] = [
-  {
-    id: 'VOL-BLR-101',
-    name: 'Jaidev Basandrai',
-    email: 'jaidev@nst.edu.in',
-    phone: '+91 98765 43210',
-    collegeOrCompany: 'Newton School of Technology',
-    assignedArea: 'Stage & AV',
-    tshirtSize: 'L',
-    status: 'CONFIRMED',
-    registeredAt: '2026-11-06T15:00:00.000Z',
-  },
-  {
-    id: 'VOL-BLR-102',
-    name: 'Sneha Narayanan',
-    email: 'sneha.n@rvce.edu.in',
-    phone: '+91 98111 22334',
-    collegeOrCompany: 'RV College of Engineering',
-    assignedArea: 'Registration Desk',
-    tshirtSize: 'M',
-    status: 'CONFIRMED',
-    registeredAt: '2026-11-06T16:20:00.000Z',
-  },
-  {
-    id: 'VOL-BLR-103',
-    name: 'Adarsh Kumar',
-    email: 'adarsh.k@pes.edu',
-    phone: '+91 99000 88776',
-    collegeOrCompany: 'PES University',
-    assignedArea: 'Workshop Lab Support',
-    tshirtSize: 'XL',
-    status: 'CONFIRMED',
-    registeredAt: '2026-11-06T17:40:00.000Z',
-  },
-  {
-    id: 'VOL-BLR-104',
-    name: 'Meera Joshi',
-    email: 'meera.j@gmail.com',
-    phone: '+91 98450 11223',
-    collegeOrCompany: 'Freelance Linux Engineer',
-    assignedArea: 'Hackathon Mentor',
-    tshirtSize: 'S',
-    status: 'CONFIRMED',
-    registeredAt: '2026-11-07T00:15:00.000Z',
-  },
-];
+// Initial storage defaults
+const SEED_PARTICIPANTS: Participant[] = [];
+const SEED_TEAMS: HackathonTeam[] = [];
+const SEED_VOLUNTEERS: Volunteer[] = [];
 
 /* ----------------- PARTICIPANTS ----------------- */
 
 export function getParticipants(): Participant[] {
   try {
     const raw = localStorage.getItem(PARTICIPANTS_KEY);
-    if (!raw) {
-      localStorage.setItem(PARTICIPANTS_KEY, JSON.stringify(SEED_PARTICIPANTS));
-      return SEED_PARTICIPANTS;
-    }
+    if (!raw) return [];
     const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed) || parsed.length === 0) {
-      localStorage.setItem(PARTICIPANTS_KEY, JSON.stringify(SEED_PARTICIPANTS));
-      return SEED_PARTICIPANTS;
-    }
+    if (!Array.isArray(parsed)) return [];
     // Normalize status
     return parsed.map((p) => ({
       ...p,
       status: p.status || 'ACTIVE',
     }));
   } catch {
-    return SEED_PARTICIPANTS;
+    return [];
   }
 }
 
@@ -279,22 +105,16 @@ export function deleteParticipant(id: string): void {
 export function getHackathonTeams(): HackathonTeam[] {
   try {
     const raw = localStorage.getItem(TEAMS_KEY);
-    if (!raw) {
-      localStorage.setItem(TEAMS_KEY, JSON.stringify(SEED_TEAMS));
-      return SEED_TEAMS;
-    }
+    if (!raw) return [];
     const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed) || parsed.length === 0) {
-      localStorage.setItem(TEAMS_KEY, JSON.stringify(SEED_TEAMS));
-      return SEED_TEAMS;
-    }
+    if (!Array.isArray(parsed)) return [];
     return parsed.map((t) => ({
       ...t,
       status: t.status || 'ACTIVE',
       members: Array.isArray(t.members) ? t.members : (typeof t.memberNames === 'string' ? t.memberNames.split(',') : []),
     }));
   } catch {
-    return SEED_TEAMS;
+    return [];
   }
 }
 
@@ -330,18 +150,12 @@ export function deleteHackathonTeam(id: string): void {
 export function getVolunteers(): Volunteer[] {
   try {
     const raw = localStorage.getItem(VOLUNTEERS_KEY);
-    if (!raw) {
-      localStorage.setItem(VOLUNTEERS_KEY, JSON.stringify(SEED_VOLUNTEERS));
-      return SEED_VOLUNTEERS;
-    }
+    if (!raw) return [];
     const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed) || parsed.length === 0) {
-      localStorage.setItem(VOLUNTEERS_KEY, JSON.stringify(SEED_VOLUNTEERS));
-      return SEED_VOLUNTEERS;
-    }
+    if (!Array.isArray(parsed)) return [];
     return parsed;
   } catch {
-    return SEED_VOLUNTEERS;
+    return [];
   }
 }
 
@@ -423,7 +237,24 @@ export function exportToCsv(filename: string, rows: (string | number)[][], heade
 
 /* ----------------- ADMIN AUTH ----------------- */
 
-export const DEFAULT_ADMIN_PIN = 'Prakash@2006';
+// Cryptographic SHA-256 hash of organizer access passphrase
+// Evaluated in-memory via Web Crypto API. Raw secret is never committed or exposed in bundles.
+const ADMIN_PASS_HASH =
+  (import.meta as any).env?.VITE_ADMIN_HASH ||
+  'a2944fd8244f790d193f80746d69b6b217b8ee06af230cf035736401b8eb8a49';
+
+export async function verifyAdminPassphrase(input: string): Promise<boolean> {
+  try {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input.trim());
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+    return hashHex === ADMIN_PASS_HASH;
+  } catch {
+    return false;
+  }
+}
 
 export function isAdminAuthenticated(): boolean {
   try {

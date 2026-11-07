@@ -50,7 +50,7 @@ import {
   exportToCsv,
   isAdminAuthenticated,
   setAdminAuthenticated,
-  DEFAULT_ADMIN_PIN
+  verifyAdminPassphrase
 } from '../services/adminService';
 import { sendInstantConfirmationEmail, SENDER_EMAIL } from '../services/emailService';
 
@@ -63,6 +63,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
   const [isAuthenticated, setIsAuthenticated] = useState(isAdminAuthenticated());
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // Active Tab
   const [activeTab, setActiveTab] = useState<'participants' | 'teams' | 'volunteers' | 'tshirts'>('participants');
@@ -108,10 +109,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
     }
   }, [isAuthenticated]);
 
-  // Auth Submit
-  const handlePinSubmit = (e: React.FormEvent) => {
+  // Auth Submit with cryptographic SHA-256 verification
+  const handlePinSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (pinInput.trim() === DEFAULT_ADMIN_PIN) {
+    if (!pinInput.trim()) return;
+    setIsVerifying(true);
+    const isValid = await verifyAdminPassphrase(pinInput);
+    setIsVerifying(false);
+    if (isValid) {
       setAdminAuthenticated(true);
       setIsAuthenticated(true);
       setPinError(false);
@@ -389,10 +394,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
 
               <button
                 type="submit"
-                className="w-full py-3 bg-geeko-500 hover:bg-geeko-400 text-black font-black text-xs uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] transition-all cursor-pointer flex items-center justify-center gap-2"
+                disabled={isVerifying}
+                className="w-full py-3 bg-geeko-500 hover:bg-geeko-400 text-black font-black text-xs uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 <Unlock className="w-4 h-4" />
-                <span>Unlock Control Center</span>
+                <span>{isVerifying ? 'Verifying...' : 'Unlock Control Center'}</span>
               </button>
             </form>
 
