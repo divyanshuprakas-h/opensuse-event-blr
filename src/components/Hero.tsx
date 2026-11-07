@@ -115,6 +115,14 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Direct Action Buttons */}
             <div className="flex flex-wrap items-center gap-2.5 pt-1">
               <a
+                href={`${import.meta.env.BASE_URL}proposal/`}
+                className="px-3.5 py-2 bg-gradient-to-r from-[#0d261b] to-[#0a1a12] hover:from-geeko-500 hover:to-emerald-400 hover:text-black border border-geeko-400 text-xs text-geeko-300 font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(115,186,37,0.2)]"
+              >
+                <span className="w-2 h-2 rounded-full bg-geeko-400 animate-ping"></span>
+                <span>Interactive Proposal &amp; Boot OS ⚡</span>
+              </a>
+
+              <a
                 href="#schedule"
                 className="px-3.5 py-2 bg-obsidian-900 hover:bg-slate-800 border border-slate-700 text-xs text-slate-200 uppercase tracking-wider flex items-center gap-1.5 transition-colors"
               >

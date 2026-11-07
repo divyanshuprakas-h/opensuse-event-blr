@@ -26,6 +26,8 @@ export function App() {
       const hash = window.location.hash.toLowerCase();
       if (hash === '#admin' || hash === '#/admin') {
         setIsAdminView(true);
+      } else if (hash === '#proposal' || hash === '#/proposal') {
+        window.location.href = `${import.meta.env.BASE_URL}proposal/`;
       } else {
         setIsAdminView(false);
       }

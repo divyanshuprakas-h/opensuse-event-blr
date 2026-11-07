@@ -33,7 +33,21 @@ The website design combines **minimalism** and **neo-brutalism** with canonical 
 
 ## ⚡ Key Website Features
 
-1. **Pre-Registration & Dynamic Digital Pass Generator:**
+1. **Interactive Proposal & Linux Boot Sequence (`proposal/`):**
+   - Built on the concept of **Synergy'26** with an authentic openSUSE GRUB v2.06 & Linux kernel systemd bootloader.
+   - Zero stock image bloat; high-concept retro-modern arcade aesthetic (`#06030f`), scanlines, phosphor glow, and synthesized 8-bit Web Audio SFX.
+   - Comprehensive interactive breakdown of the revised 18-page proposal:
+     - **01. Executive HUD & Approval Status** (Decision-ready plan, goals & measures).
+     - **02. Six Geeko Buildathon Tracks** (Terminal Titans, Root Access, GeekoOps, Desktop Reboot, Upstream Heroes, What Does Linux Need Next?).
+     - **03. 20-Hour Operational Agenda** (Day 1 14:30 to Day 2 10:30 non-stop clock).
+     - **04. Geeko Arcade, Quest & Midnight Bug Hunt** (Playable Terminal Escape mini-game, Trivia Blitz, QR digital passport, Rookie/Expert bug hunt).
+     - **05. Demo Arena & Judging Rubrics** (Interactive 5-factor weighted scoring calculator, ₹50,000 top-3 prize pool, trophies & 25 reward T-shirts).
+     - **06. Itemized Budget & Sponsorship Gap** (₹1,20,400 catering + ₹64,000 operations + ₹50,000 cash prizes + 10% reserve = ₹2,57,840 total envelope; interactive live gap simulator).
+     - **07. Venue Operations & Safety Gates** (Newton School of Technology specs, 350+ Wi-Fi devices, 30-person roster, Go/No-Go Gates T-21 & T-7).
+     - **08. Operational Timeline & Formal Sign-off** (Milestones from Nov 2026 to T+30, print/PDF export, funding.json integration).
+   - Accessible at `/opensuse-event-blr/proposal/` and via the "⚡ PROPOSAL & BOOT" navigation button.
+
+2. **Pre-Registration & Dynamic Digital Pass Generator:**
    - Dedicated pre-registration system for participants to reserve priority entry before exact January 2027 dates are locked.
    - Generates a personalized **Neo-Brutalist Digital Ticket / Pass** with unique ID (`OSBLR-2027-XXXX`), attendee info, barcode telemetry, and instant sharing to X/Twitter or clipboard.
    - Built to easily switch to `datesConfirmed: true` once final dates are finalized without layout shifts.

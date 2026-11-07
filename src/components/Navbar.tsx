@@ -78,6 +78,15 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Brutalist Action CTAs on the far right (matching screenshot) */}
         <div className="hidden sm:flex items-center gap-3 font-mono shrink-0">
+          <a
+            href={`${import.meta.env.BASE_URL}proposal/`}
+            className="px-3 py-2 bg-gradient-to-r from-[#0d261b] to-[#081510] hover:from-geeko-500 hover:to-emerald-400 hover:text-black border-2 border-geeko-400 text-geeko-300 font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#173f35] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5 cursor-pointer"
+            title="Open Interactive 18-Page Proposal with openSUSE Bootloader"
+          >
+            <span className="w-2 h-2 rounded-full bg-geeko-400 animate-pulse"></span>
+            <span>⚡ PROPOSAL &amp; BOOT</span>
+          </a>
+
           <button
             onClick={onOpenHackathonRegister}
             className="px-4 py-2 bg-obsidian-900 hover:bg-pine-950 border-2 border-geeko-500 text-white font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#173f35] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5 cursor-pointer"
@@ -125,6 +134,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="pt-2 flex flex-col gap-3">
+            <a
+              href={`${import.meta.env.BASE_URL}proposal/`}
+              className="w-full py-2.5 bg-gradient-to-r from-geeko-500/20 to-emerald-500/20 text-geeko-300 border-2 border-geeko-400 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2"
+            >
+              <span className="w-2 h-2 rounded-full bg-geeko-400 animate-pulse"></span>
+              <span>⚡ VIEW INTERACTIVE PROPOSAL (BOOT OS)</span>
+            </a>
+
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
