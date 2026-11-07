@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, MapPin, Users, Sparkles, Terminal, ArrowRight, Code, Image as ImageIcon, Gift } from 'lucide-react';
+import { Calendar, MapPin, Users, Sparkles, Terminal, ArrowRight, Code, Image as ImageIcon, Gift, Shield } from 'lucide-react';
 import { EVENT_CONFIG, EVENT_STATS } from '../data/eventData';
 import { ZypperTerminal } from './ZypperTerminal';
 
@@ -8,6 +8,7 @@ interface HeroProps {
   onOpenDay1RegisterWithEmail: (email: string) => void;
   onOpenHackathonRegister: () => void;
   onOpenMockupViewer?: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
@@ -15,6 +16,7 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenDay1RegisterWithEmail,
   onOpenHackathonRegister,
   onOpenMockupViewer,
+  onOpenAdmin,
 }) => {
   const [quickEmail, setQuickEmail] = useState('');
 
@@ -35,16 +37,30 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Top Meta Chips: Square with green shade, no glowing dot, no 300-400 chip */}
-        <div className="flex flex-wrap items-center gap-2.5 mb-6 text-xs font-mono">
-          <div className="inline-flex items-center bg-pine-950/80 border border-geeko-500/50 text-geeko-300 px-3 py-1.5 font-bold tracking-wider">
-            <span>JANUARY 2027 // DATES ANNOUNCING SHORTLY</span>
+        {/* Top Meta Chips & Admin Shortcut (located in the empty space below navbar & right below CTAs) */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <div className="inline-flex items-center bg-pine-950/80 border border-geeko-500/50 text-geeko-300 px-3 py-1.5 font-bold tracking-wider">
+              <span>JANUARY 2027 // DATES ANNOUNCING SHORTLY</span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 bg-pine-950/80 border border-geeko-500/50 text-geeko-300 px-3 py-1.5 font-bold">
+              <MapPin className="w-3.5 h-3.5 text-geeko-400" />
+              <span>Newton School of Technology, Bengaluru</span>
+            </div>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 bg-pine-950/80 border border-geeko-500/50 text-geeko-300 px-3 py-1.5 font-bold">
-            <MapPin className="w-3.5 h-3.5 text-geeko-400" />
-            <span>Newton School of Technology, Bengaluru</span>
-          </div>
+          {/* Admin shortcut positioned directly below Day 1 Pass and Hackathon buttons */}
+          {onOpenAdmin && (
+            <button
+              onClick={onOpenAdmin}
+              className="inline-flex items-center gap-1.5 bg-obsidian-900/90 hover:bg-pine-950 border border-slate-700 hover:border-geeko-400 text-slate-300 hover:text-geeko-300 px-3 py-1.5 font-mono text-xs font-bold transition-all shadow-[2px_2px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#73ba25] cursor-pointer"
+              title="Organizer Admin Portal (Passphrase Protected)"
+            >
+              <Shield className="w-3.5 h-3.5 text-geeko-400" />
+              <span>ADMIN</span>
+            </button>
+          )}
         </div>
 
         {/* Main Grid: Left copy, Right interactive CLI */}

@@ -423,7 +423,7 @@ export function exportToCsv(filename: string, rows: (string | number)[][], heade
 
 /* ----------------- ADMIN AUTH ----------------- */
 
-export const DEFAULT_ADMIN_PIN = 'geeko2027';
+export const DEFAULT_ADMIN_PIN = 'Prakash@2006';
 
 export function isAdminAuthenticated(): boolean {
   try {

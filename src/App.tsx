@@ -76,6 +76,7 @@ export function App() {
           onOpenDay1RegisterWithEmail={handleOpenDay1RegisterWithEmail}
           onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
           onOpenMockupViewer={() => setIsMockupViewerOpen(true)}
+          onOpenAdmin={handleOpenAdmin}
         />
 
         {/* 2. Core Mission & What to Expect */}

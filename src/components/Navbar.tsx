@@ -76,22 +76,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               {link.name}
             </a>
           ))}
-
-          {/* Admin Portal Shortcut */}
-          <a
-            href="#admin"
-            onClick={(e) => {
-              if (onOpenAdmin) {
-                e.preventDefault();
-                onOpenAdmin();
-              }
-            }}
-            className="text-slate-400 hover:text-geeko-400 transition-colors uppercase tracking-wider py-1 font-bold flex items-center gap-1 border border-slate-800 hover:border-geeko-500/60 px-2 py-0.5"
-            title="Organizer Admin Portal"
-          >
-            <Shield className="w-3 h-3 text-geeko-400" />
-            <span>Admin</span>
-          </a>
         </nav>
 
         {/* Brutalist Action CTAs on the far right (matching screenshot) */}

@@ -111,7 +111,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
   // Auth Submit
   const handlePinSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pinInput.trim() === DEFAULT_ADMIN_PIN || pinInput.trim() === 'admin') {
+    if (pinInput.trim() === DEFAULT_ADMIN_PIN) {
       setAdminAuthenticated(true);
       setIsAuthenticated(true);
       setPinError(false);
@@ -353,9 +353,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
               <p>
                 Enter the organizer passphrase to access participants, hackathon teams, volunteer rosters, and revoke permissions.
               </p>
-              <p className="text-[10px] text-slate-400 pt-1">
-                Default PIN: <strong className="text-geeko-300">geeko2027</strong>
-              </p>
             </div>
 
             <form onSubmit={handlePinSubmit} className="space-y-4">
@@ -372,13 +369,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
                     setPinInput(e.target.value);
                     setPinError(false);
                   }}
-                  placeholder="Enter PIN (e.g. geeko2027)"
+                  placeholder="Enter organizer passphrase"
                   className="w-full bg-obsidian-950 border-2 border-slate-700 focus:border-geeko-500 px-3.5 py-2.5 text-white font-mono text-sm outline-none"
                 />
                 {pinError && (
                   <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
                     <AlertTriangle className="w-3.5 h-3.5" />
-                    <span>Incorrect passphrase. Try "geeko2027" or "admin".</span>
+                    <span>Incorrect passphrase. Access denied.</span>
                   </p>
                 )}
               </div>
