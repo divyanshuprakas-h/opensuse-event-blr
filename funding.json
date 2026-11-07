@@ -1,0 +1,37 @@
+{
+  "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+  "version": "1.0.2",
+  "entity": {
+    "type": "group",
+    "role": "owner",
+    "name": "openSUSE India - Bengaluru Connect 2027 Organizing Team",
+    "email": "divyanshuprakash914@gmail.com",
+    "description": "We are the organizing team for openSUSE India - Bengaluru Connect 2027: Divyanshu Prakash, Dushyant Acharya and Rithull Raj Kallat. The event is planned for two consecutive days in January 2027 at Newton School of Technology, Bengaluru, in collaboration with the college. Exact dates and overnight permission remain to be confirmed. Participation is capped at 250, with 30 staff/support separately catered. The college provides the venue, internet and basic facilities at no cash cost, as advised by the organizers.\n\nThe program combines three 30-minute Linux/openSUSE talks, parallel Starter Lab and Idea Lab sessions, a 20-hour Geeko Buildathon (Day 1 2:30 PM to Day 2 10:30 AM), a QR-based Geeko Quest, optional Rookie/Expert Midnight Bug Hunt, four Arcade games and a Demo Arena for every submitting team. Six finalists pitch on stage. Tracks are Terminal Titans, Root Access, GeekoOps, Desktop Reboot, Upstream Heroes, and What Does Linux Need Next?\n\nWe seek FOSS United event support and community collaboration to introduce students to Linux, encourage useful FOSS contributions and connect new contributors with the wider community. We also plan to seek sponsorship from openSUSE. FOSS United and openSUSE are prospective partners; no sponsorship is confirmed.",
+    "webpageUrl": {
+      "url": "https://divyanshuprakas-h.github.io/opensuse-event-blr/"
+    }
+  },
+  "funding": {
+    "channels": [
+      {
+        "guid": "organizer-contact",
+        "type": "other",
+        "description": "Please contact divyanshuprakash914@gmail.com to agree the authorized recipient and payment arrangements. No payment account or fiscal sponsor is asserted in this manifest."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "bengaluru-connect-2027",
+        "status": "active",
+        "name": "FOSS United partial event grant - Bengaluru Connect 2027",
+        "description": "We request a one-time partial event grant of INR 50000 from FOSS United toward openSUSE India - Bengaluru Connect 2027. The overall event planning budget is INR 257840; we are not asking FOSS United to fund the full amount. We would welcome discussion of a smaller contribution if the full request cannot be supported.\n\nProposed allocation of the INR 50000 FOSS United request: Day 1 vegetarian lunch for 250 participants and 30 staff/support, 280 servings x INR 140 = INR 39200; welcome refreshments, 280 x INR 30 = INR 8400; and INR 2400 toward the existing INR 7000 evening refreshment budget. These allocations total INR 50000 and are already included in the overall event budget. Final supported categories will be agreed with FOSS United. If INR 50000 is approved and received, the remaining event funding gap will be INR 207840.\n\nAdditional sponsorship strategy: we plan to approach openSUSE for event sponsorship alongside other cash and in-kind partners. The openSUSE contribution amount is to be discussed; no amount, approval or payment is assumed. FOSS United and openSUSE are prospective sponsors. Neither is presented as a confirmed sponsor. We will disclose confirmed contributions, reconcile any restricted expense allocations to avoid double funding, and notify stakeholders as support is secured.\n\nItemized cash planning budget: catering INR 120400; operations and rewards INR 64000 (including 25 printed reward T-shirts at INR 300 each = INR 7500); conditional top-three team cash prizes INR 50000 (INR 25000/15000/10000). Direct costs total INR 234400. Contingency is 10%, INR 23440. Total: INR 257840. College venue, internet and basic facilities are included at zero cash cost. All rates are estimates, not vendor quotes. All planned expenses are included before future sponsorship offsets; no cash sponsorship is confirmed. Confirmed cash will reduce the funding gap, while confirmed donated items will reduce the corresponding cash expense without double counting. Prize payments depend on sponsor funding. Optional paid merchandise sales are not assumed as event revenue.\n\nThe proposed grant supports meals and refreshments, helping keep the beginner-friendly FOSS program accessible without an entry fee; final permitted use will be agreed with FOSS United. Goals are 100 Starter Lab completions, 60 or more valid project submissions, an every-team public showcase and 10 documented upstream submissions or community-useful follow-ups. These are targets, not achieved results. We propose public project repositories, valid FOSS licenses, clear attribution and reproducible demos, and will discuss alignment with FOSS United hackathon rules before representing those rules as accepted.\n\nWe plan to publish an opt-in project directory, share a reconciled expense and outcome report within 14 days, and host contributor follow-up within 30 days. The team will notify stakeholders as sponsorship is confirmed and the funding gap changes. No funding approval, partnership, vendor commitment or overnight permission is claimed.",
+        "amount": 50000,
+        "currency": "INR",
+        "frequency": "one-time",
+        "channels": [
+          "organizer-contact"
+        ]
+      }
+    ]
+  }
+}
