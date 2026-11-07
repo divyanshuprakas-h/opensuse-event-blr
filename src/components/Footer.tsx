@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Github, Globe, MessageSquare, Heart, ArrowUp } from 'lucide-react';
+import { Terminal, Github, Globe, ArrowUp } from 'lucide-react';
 import { EVENT_CONFIG } from '../data/eventData';
 
 export const Footer: React.FC = () => {
@@ -8,23 +8,23 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-obsidian-950 border-t-2 border-slate-800 text-slate-400 font-mono text-xs">
+    <footer className="bg-[#050807] border-t border-white/[0.08] text-slate-400 font-mono text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b-2 border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/[0.08]">
           
           {/* Col 1: Identity & Motto */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-lg bg-[#0b1f16] border border-geeko-500/40 p-1.5 flex items-center justify-center shrink-0">
                 <img src={`${import.meta.env.BASE_URL}geeko.svg`} alt="openSUSE" className="w-full h-full object-contain" />
               </div>
               <div>
                 <div className="text-white font-black text-base tracking-tight flex items-baseline">
-                  <span className="font-black text-white text-base tracking-tight">
-                    <span className="lowercase">open</span><span className="uppercase">SUSE</span>
+                  <span className="font-sans font-black text-white text-base tracking-tight">
+                    <span className="lowercase">open</span><span className="uppercase text-geeko-400">SUSE</span>
                   </span>
-                  <span className="text-geeko-400 font-bold uppercase text-xs ml-1.5 font-mono">India</span>
+                  <span className="text-slate-400 font-bold uppercase text-[10px] ml-1.5 font-mono tracking-widest">India</span>
                 </div>
                 <div className="text-slate-300 text-xs">
                   Bengaluru Connect 2027
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
 
           {/* Col 2: Navigation */}
           <div className="md:col-span-3 space-y-3">
-            <div className="text-white font-black uppercase tracking-wider text-xs border-b border-slate-800 pb-2">
+            <div className="text-white font-bold uppercase tracking-wider text-xs border-b border-white/[0.08] pb-2">
               NAVIGATION
             </div>
             <ul className="space-y-2 text-xs">
@@ -55,13 +55,18 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="#tracks" className="hover:text-geeko-400 transition-colors uppercase">
+                  // 6 Innovation Tracks
+                </a>
+              </li>
+              <li>
                 <a href="#schedule" className="hover:text-geeko-400 transition-colors uppercase">
-                  // 2-Day Schedule
+                  // 20H Schedule
                 </a>
               </li>
               <li>
                 <a href="#prizes" className="hover:text-geeko-400 transition-colors uppercase">
-                  // Prizes & Swag
+                  // Prizes &amp; Swag
                 </a>
               </li>
               <li>
@@ -71,7 +76,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#sponsors" className="hover:text-geeko-400 transition-colors uppercase">
-                  // Organizer & Sponsors
+                  // Collaborations
                 </a>
               </li>
               <li>
@@ -84,8 +89,8 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: openSUSE Ecosystem */}
           <div className="md:col-span-4 space-y-3">
-            <div className="text-white font-black uppercase tracking-wider text-xs border-b border-slate-800 pb-2">
-              OPENSUSE ECOSYSTEM
+            <div className="text-white font-bold uppercase tracking-wider text-xs border-b border-white/[0.08] pb-2">
+              OPENSUSE ECOSYSTEM &amp; PROPOSAL
             </div>
             <ul className="space-y-2 text-xs">
               <li>
@@ -94,7 +99,7 @@ export const Footer: React.FC = () => {
                   className="hover:text-geeko-400 transition-colors flex items-center gap-1.5 font-bold text-geeko-300"
                 >
                   <Terminal className="w-3.5 h-3.5 text-geeko-400" />
-                  <span>⚡ Proposal OS &amp; Bootloader</span>
+                  <span>⚡ Proposal OS &amp; Bootloader (18 Pages)</span>
                 </a>
               </li>
               <li>
@@ -154,11 +159,11 @@ export const Footer: React.FC = () => {
 
           <div className="flex items-center gap-4">
             <span className="text-geeko-400 font-bold">
-              [STATUS: PRE-REGISTRATION ACTIVE]
+              [STATUS: PRE-REGISTRATION ACTIVE • 250 BUILDER CAP]
             </span>
             <button
               onClick={scrollToTop}
-              className="p-1.5 bg-obsidian-900 border border-slate-700 hover:border-geeko-400 text-slate-300 hover:text-white transition-colors"
+              className="p-2 rounded-lg bg-[#091510] border border-geeko-500/30 hover:border-geeko-400 text-slate-300 hover:text-white transition-colors cursor-pointer"
               title="Back to Top"
             >
               <ArrowUp className="w-3.5 h-3.5" />

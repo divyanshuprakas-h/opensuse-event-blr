@@ -1,28 +1,37 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Terminal, CornerDownLeft, Play, RefreshCw } from 'lucide-react';
+import { Terminal, CornerDownLeft, Sparkles, RefreshCw, Layers, FileText } from 'lucide-react';
 
 interface ZypperTerminalProps {
   onPreRegisterTrigger?: () => void;
+  onRegisterHackathon?: () => void;
 }
 
-export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTrigger }) => {
+export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({
+  onPreRegisterTrigger,
+  onRegisterHackathon,
+}) => {
+  const [activeTab, setActiveTab] = useState<'terminal' | 'boot' | 'tracks' | 'ascii'>('terminal');
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState<Array<{ command?: string; output: React.ReactNode }>>([
     {
       output: (
         <div className="text-slate-400 space-y-1">
-          <p className="text-geeko-400 font-bold">Welcome to openSUSE Tumbleweed // Bengaluru Connect 2027 Shell</p>
-          <p>Type <span className="text-white bg-slate-800 px-1.5 py-0.5 rounded font-mono">zypper in opensuse-blr</span> to register or <span className="text-white bg-slate-800 px-1.5 py-0.5 rounded font-mono">help</span> for commands.</p>
+          <p className="text-geeko-400 font-bold">openSUSE Tumbleweed // Bengaluru Connect 2027 Console</p>
+          <p className="text-xs">
+            Type <span className="text-white bg-slate-800 px-1.5 py-0.5 rounded font-mono">zypper in opensuse-blr</span> to register or <span className="text-white bg-slate-800 px-1.5 py-0.5 rounded font-mono">help</span>.
+          </p>
         </div>
-      )
-    }
+      ),
+    },
   ]);
 
   const terminalEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [history]);
+    if (activeTab === 'terminal') {
+      terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [history, activeTab]);
 
   const handleCommand = (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
@@ -30,28 +39,26 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
 
     if (trimmed === 'help') {
       res = (
-        <div className="space-y-1 text-slate-300">
+        <div className="space-y-1 text-slate-300 text-xs">
           <p className="text-geeko-400 font-bold">AVAILABLE COMMANDS:</p>
-          <p>• <span className="text-geeko-300 font-mono">zypper in opensuse-blr</span> : Launch priority pre-registration</p>
-          <p>• <span className="text-geeko-300 font-mono">proposal</span> : Launch 18-page proposal OS &amp; bootloader</p>
-          <p>• <span className="text-geeko-300 font-mono">zypper info event</span> : View event stats, dates &amp; venue</p>
-          <p>• <span className="text-geeko-300 font-mono">zypper lr</span> : List event repositories (Tracks & workshops)</p>
-          <p>• <span className="text-geeko-300 font-mono">geeko</span> : Display openSUSE ASCII Chameleon</p>
-          <p>• <span className="text-geeko-300 font-mono">yast</span> : Launch system control overview</p>
-          <p>• <span className="text-geeko-300 font-mono">obs</span> : Open Build Service packaging status</p>
+          <p>• <span className="text-geeko-300 font-mono">zypper in opensuse-blr</span> : Launch priority pass registration</p>
+          <p>• <span className="text-geeko-300 font-mono">proposal</span> : Launch 18-page proposal OS &amp; GRUB bootloader</p>
+          <p>• <span className="text-geeko-300 font-mono">zypper info event</span> : View 250 builder capacity, venue &amp; dates</p>
+          <p>• <span className="text-geeko-300 font-mono">zypper lr</span> : List 20H Buildathon repositories &amp; tracks</p>
+          <p>• <span className="text-geeko-300 font-mono">geeko</span> : Display openSUSE ASCII Chameleon mascot</p>
           <p>• <span className="text-geeko-300 font-mono">clear</span> : Clear screen</p>
         </div>
       );
     } else if (trimmed === 'proposal' || trimmed === 'boot' || trimmed === 'grub') {
       res = (
-        <div className="space-y-1 text-slate-200">
+        <div className="space-y-1.5 text-slate-200 text-xs">
           <p className="text-geeko-400 font-bold">Booting openSUSE Bengaluru Connect 2027 Proposal OS...</p>
           <p className="text-slate-300">18 sections verified: 20H Buildathon, 6 tracks, itemized ₹2,57,840 budget matrix.</p>
           <a
             href={`${import.meta.env.BASE_URL}proposal/`}
-            className="mt-2 inline-flex items-center gap-2 bg-geeko-500 text-black px-3 py-1 text-xs font-bold font-mono border border-black hover:bg-geeko-400 cursor-pointer"
+            className="mt-2 inline-flex items-center gap-2 bg-geeko-500 text-obsidian-950 px-3 py-1.5 text-xs font-bold font-mono rounded hover:bg-geeko-400 cursor-pointer shadow-md"
           >
-            [PRESS ENTER OR CLICK HERE TO LAUNCH PROPOSAL OS &amp; BOOTLOADER →]
+            [LAUNCH INTERACTIVE PROPOSAL OS &amp; BOOTLOADER →]
           </a>
         </div>
       );
@@ -60,17 +67,18 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
       return;
     } else if (trimmed.includes('zypper in') || trimmed.includes('zypper install') || trimmed === 'register') {
       res = (
-        <div className="space-y-1 text-slate-200">
+        <div className="space-y-1 text-slate-200 text-xs">
           <p className="text-geeko-400">Loading repository data...</p>
           <p className="text-slate-400">Reading installed packages...</p>
-          <p className="text-white font-semibold">Resolving dependencies for package 'opensuse-bengaluru-connect-2027'...</p>
-          <p className="text-geeko-300">Package 'opensuse-bengaluru-connect-2027-1.0.0-1.x86_64' ready to install.</p>
-          <p className="text-yellow-400">STATUS: Pre-registration priority queue activated!</p>
+          <p className="text-white font-semibold">Resolving dependencies for 'opensuse-bengaluru-connect-2027'...</p>
+          <p className="text-geeko-300">Package 'opensuse-blr-2027-1.0.0-1.x86_64' ready to install.</p>
+          <p className="text-yellow-400 font-bold">STATUS: Priority pass queue activated (Strict 250 Cap)!</p>
           <button 
             onClick={onPreRegisterTrigger}
-            className="mt-2 inline-flex items-center gap-2 bg-geeko-500 text-black px-3 py-1 text-xs font-bold font-mono border border-black hover:bg-geeko-400 cursor-pointer"
+            className="mt-2 inline-flex items-center gap-1.5 bg-geeko-500 text-black px-3 py-1.5 text-xs font-bold font-mono rounded hover:bg-geeko-400 cursor-pointer shadow-md"
           >
-            [PRESS ENTER OR CLICK HERE TO OPEN PRE-REGISTRATION PASS FORM]
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>[CLICK HERE TO GENERATE DIGITAL PASS]</span>
           </button>
         </div>
       );
@@ -79,185 +87,212 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
       }
     } else if (trimmed === 'zypper info' || trimmed === 'zypper info event' || trimmed === 'info') {
       res = (
-        <div className="space-y-1 text-slate-300">
-          <p><span className="text-geeko-400 font-mono font-bold">Information for package opensuse-blr-2027:</span></p>
+        <div className="space-y-1 text-slate-300 text-xs">
+          <p><span className="text-geeko-400 font-mono font-bold">Package: opensuse-bengaluru-connect-2027</span></p>
           <p>Repository      : openSUSE-India-Bengaluru-2027</p>
-          <p>Name            : opensuse-bengaluru-connect</p>
-          <p>Version         : 2027.01-preview</p>
-          <p>Arch            : all-developers</p>
-          <p>Proposed Dates  : January 2027 (exact dates to be confirmed)</p>
-          <p>Venue           : Newton School of Technology (P3 Building, Sattva Global City)</p>
-          <p>Capacity        : 250 Builders (Working Headcount: 280)</p>
-          <p>Admission       : 100% Free (Community Open Access)</p>
-          <p>Summary         : 2 Days, 3 Phases, 20-Hour Geeko Buildathon & Technical Workshops</p>
+          <p>Target Dates    : January 2027 (Two consecutive days)</p>
+          <p>Venue           : Newton School of Technology, Bengaluru</p>
+          <p>Capacity        : 250 Builders (Site Working Headcount: 280)</p>
+          <p>Signature Event : 20-Hour Geeko Buildathon (Day 1 14:30 → Day 2 10:30)</p>
+          <p>Budget Envelope : ₹2,57,840 (Direct ₹2,34,400 + 10% Reserve ₹23,440)</p>
+          <p>Admission       : 100% Free FOSS Community Gathering</p>
         </div>
       );
-    } else if (trimmed === 'zypper lr') {
+    } else if (trimmed === 'zypper lr' || trimmed === 'tracks') {
       res = (
-        <div className="space-y-1 text-slate-300">
-          <p className="text-geeko-400 font-bold"># | Alias               | Name                         | Enabled | GPG Check</p>
-          <p>--+---------------------+------------------------------+---------+----------</p>
-          <p>1 | phase-01-talks      | Phase 1: Tech Talks & OBS    | Yes     | (r ) Yes </p>
-          <p>2 | phase-02-workshops  | Phase 2: YaST, Zypper & openQA| Yes     | (r ) Yes </p>
-          <p>3 | phase-03-buildathon | Phase 3: 20H Geeko Buildathon| Yes     | (r ) Yes </p>
-          <p>4 | openSUSE-conf-india | Road to openSUSE Conf India  | Yes     | (r ) Yes </p>
+        <div className="space-y-1 text-slate-300 text-xs">
+          <p className="text-geeko-400 font-bold"># | Arena Track Code    | Focus &amp; Difficulty               | Status</p>
+          <p>--+---------------------+------------------------------------+-------</p>
+          <p>1 | 01. Terminal Titans | Linux CLI, Zypper helper, TUI      | OPEN  </p>
+          <p>2 | 02. Root Access     | Security, PAM, AppArmor hardening  | OPEN  </p>
+          <p>3 | 03. GeekoOps        | DevOps, OBS dashboard, openQA REST | OPEN  </p>
+          <p>4 | 04. Desktop Reboot  | Linux desktop UX, a11y, launchers  | OPEN  </p>
+          <p>5 | 05. Upstream Heroes | Real Bugzilla &amp; GitHub FOSS PRs    | OPEN  </p>
+          <p>6 | 06. Linux Next?     | Community impact, mesh &amp; AI triage | OPEN  </p>
         </div>
       );
     } else if (trimmed === 'geeko') {
       res = (
-        <pre className="text-geeko-400 font-mono text-[11px] leading-tight">
+        <pre className="text-geeko-400 font-mono text-[10px] leading-tight">
 {`
           ___
-       .-'   \`'.
-      /         \\
-     |   O       |    Have a lot of fun...
-     \\           /    openSUSE India – Bengaluru Connect 2027
-      '.       .'
-        \`'---'\`
-         /   \\
-      .-'     \`-.
-     /           \\
+       .-"   "-.
+     .'         '.
+    /   O     O   \\     openSUSE India
+   :               :    Have a lot of fun...
+   |   \\_______/   |    Bengaluru Connect '27
+    \\             /
+     '.         .'
+       '-.....-'
 `}
         </pre>
       );
-    } else if (trimmed === 'yast') {
-      res = (
-        <div className="space-y-1 text-slate-300">
-          <p className="text-geeko-400 font-bold">YaST2 Control Center - Event Modules</p>
-          <p>✔ [Hardware]  : Newton School of Technology (P3 Building, Sattva Global City)</p>
-          <p>✔ [Software]  : Open Build Service, Zypper, YaST, openQA, Git</p>
-          <p>✔ [Security]  : Inclusive Open Source Code of Conduct</p>
-          <p>✔ [Support]   : Community-sponsored food, refreshments & hackathon awards</p>
-        </div>
-      );
-    } else if (trimmed === 'obs') {
-      res = (
-        <div className="space-y-1 text-slate-300">
-          <p className="text-geeko-400 font-bold">Open Build Service (OBS) status: OK</p>
-          <p>Target arches: x86_64, aarch64, riscv64</p>
-          <p>Project: home:openSUSE:India:Bengaluru2027</p>
-          <p>Packages: talks, workshops, hackathon-starter-kits</p>
-          <p className="text-geeko-300">All repos building successfully for openSUSE Leap & Tumbleweed.</p>
-        </div>
-      );
-    } else if (trimmed === 'prizes' || trimmed === 'swag') {
-      res = (
-        <div className="space-y-1 text-slate-300">
-          <p className="text-geeko-400 font-bold">Package 'event-rewards-and-swag':</p>
-          <p>• Winners    : Exciting Tech Prizes, Trophies & Swag Hampers</p>
-          <p>• Attendees  : Free Official openSUSE T-Shirt (Sizes S/M/L/XL/XXL)</p>
-          <p>• Check-in   : Holographic Geeko Sticker Packs & Conference Badges</p>
-          <p className="text-geeko-300">Run 'zypper in opensuse-blr' to claim pass and select your T-shirt size.</p>
-        </div>
-      );
     } else {
       res = (
-        <p className="text-rose-400">
-          Command '{cmd}' not recognized. Type <span className="underline text-white font-mono">help</span> or <span className="underline text-white font-mono">zypper in opensuse-blr</span>.
+        <p className="text-rose-400 text-xs">
+          Command not found: '{trimmed}'. Type <span className="text-white underline">help</span> for available commands.
         </p>
       );
     }
 
-    setHistory((prev) => [
-      ...prev,
-      {
-        command: cmd,
-        output: res
-      }
-    ]);
-  };
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputVal.trim()) return;
-    handleCommand(inputVal);
+    setHistory((prev) => [...prev, { command: cmd, output: res }]);
     setInputVal('');
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (inputVal.trim()) {
+        handleCommand(inputVal);
+      }
+    }
+  };
+
   return (
-    <div className="bg-obsidian-950 border-2 border-slate-700 text-left font-mono text-xs overflow-hidden shadow-[6px_6px_0px_0px_#173f35]">
-      {/* Brutalist Titlebar */}
-      <div className="bg-slate-900 border-b-2 border-slate-800 px-4 py-2.5 flex items-center justify-between">
+    <div className="rounded-2xl border border-geeko-500/30 bg-[#060c09] shadow-[0_10px_35px_-10px_rgba(0,0,0,0.8),0_0_25px_rgba(115,186,37,0.12)] overflow-hidden font-mono flex flex-col h-[400px]">
+      
+      {/* Sleek Dribbble Window Chrome / Tabs Bar */}
+      <div className="bg-[#040806] border-b border-geeko-500/20 px-4 py-2.5 flex items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block border border-rose-700"></span>
-            <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block border border-amber-700"></span>
-            <span className="w-3 h-3 rounded-full bg-geeko-500 inline-block border border-geeko-600"></span>
-          </div>
-          <span className="text-slate-400 font-mono text-[11px] ml-2 flex items-center gap-1.5">
-            <Terminal className="w-3.5 h-3.5 text-geeko-400" />
-            geeko@bengaluru-connect-2027:~
+          <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-geeko-500"></div>
+          <span className="text-[11px] text-slate-400 ml-2 font-bold hidden sm:inline">
+            geeko@tumbleweed:~
           </span>
         </div>
-        <div className="flex items-center gap-2 text-[10px] text-slate-400">
-          <span className="bg-slate-800 px-2 py-0.5 border border-slate-700">bash 5.2</span>
-          <button 
-            onClick={() => setHistory([])}
-            className="text-slate-400 hover:text-white transition-colors"
-            title="Reset Terminal"
+
+        {/* Tab Switchers */}
+        <div className="flex items-center gap-1 text-[11px]">
+          <button
+            onClick={() => setActiveTab('terminal')}
+            className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
+              activeTab === 'terminal'
+                ? 'bg-geeko-500/20 text-geeko-300 font-bold border border-geeko-500/40'
+                : 'text-slate-400 hover:text-white'
+            }`}
           >
-            <RefreshCw className="w-3 h-3" />
+            zypper.sh
+          </button>
+          <button
+            onClick={() => setActiveTab('tracks')}
+            className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
+              activeTab === 'tracks'
+                ? 'bg-geeko-500/20 text-geeko-300 font-bold border border-geeko-500/40'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            tracks.json
+          </button>
+          <button
+            onClick={() => setActiveTab('boot')}
+            className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
+              activeTab === 'boot'
+                ? 'bg-geeko-500/20 text-geeko-300 font-bold border border-geeko-500/40'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            systemd.log
           </button>
         </div>
       </div>
 
-      {/* Terminal Output Area */}
-      <div className="p-4 h-64 overflow-y-auto terminal-scroll space-y-3 bg-obsidian-950/90 font-mono">
-        {history.map((item, idx) => (
-          <div key={idx} className="space-y-1">
-            {item.command !== undefined && (
-              <div className="flex items-center gap-2 text-geeko-400">
-                <span className="text-slate-500 select-none">geeko@opensuse-blr:~$</span>
-                <span className="text-white font-bold">{item.command}</span>
+      {/* Terminal Body */}
+      {activeTab === 'terminal' && (
+        <div className="flex-1 p-4 overflow-y-auto terminal-scroll text-xs text-slate-200 flex flex-col justify-between">
+          <div className="space-y-3">
+            {history.map((item, index) => (
+              <div key={index} className="space-y-1">
+                {item.command && (
+                  <div className="flex items-center gap-2 text-geeko-400 font-semibold">
+                    <span className="text-slate-500 font-bold select-none">&gt;</span>
+                    <span>{item.command}</span>
+                  </div>
+                )}
+                <div>{item.output}</div>
               </div>
-            )}
-            <div className="pl-0">{item.output}</div>
+            ))}
+            <div ref={terminalEndRef} />
           </div>
+
+          {/* Prompt input row */}
+          <div className="pt-3 border-t border-geeko-500/20 flex items-center gap-2">
+            <span className="text-geeko-400 font-bold select-none">&gt;</span>
+            <input
+              type="text"
+              value={inputVal}
+              onChange={(e) => setInputVal(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="type zypper in opensuse-blr, proposal, info, clear..."
+              className="flex-1 bg-transparent text-white focus:outline-none text-xs placeholder:text-slate-600 font-mono"
+              autoFocus
+            />
+            <button
+              onClick={() => inputVal.trim() && handleCommand(inputVal)}
+              className="px-2.5 py-1 rounded bg-[#0b261b] hover:bg-geeko-500 hover:text-obsidian-950 text-geeko-300 border border-geeko-500/30 text-[11px] font-bold transition-all cursor-pointer"
+            >
+              <CornerDownLeft className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Tab: Tracks JSON */}
+      {activeTab === 'tracks' && (
+        <div className="flex-1 p-4 overflow-y-auto terminal-scroll text-xs text-slate-300 space-y-2">
+          <div className="text-[11px] text-geeko-400 font-bold">// 6 GEEKO BUILDATHON TRACKS SPEC</div>
+          <pre className="text-[11px] text-emerald-300 font-mono leading-relaxed">
+{`{
+  "buildathon": "20 Hours Overnight",
+  "window": "Day 1 14:30 to Day 2 10:30",
+  "tracks": [
+    { "id": "01", "name": "Terminal Titans", "domain": "CLI & Productivity" },
+    { "id": "02", "name": "Root Access", "domain": "Security & PAM" },
+    { "id": "03", "name": "GeekoOps", "domain": "OBS & openQA Infrastructure" },
+    { "id": "04", "name": "Desktop Reboot", "domain": "Desktop UX & a11y" },
+    { "id": "05", "name": "Upstream Heroes", "domain": "Real FOSS Upstream PRs" },
+    { "id": "06", "name": "Linux Next?", "domain": "Original Open Innovation" }
+  ],
+  "prizes": { "1st": "₹25,000", "2nd": "₹15,000", "3rd": "₹10,000", "side": "₹6,000" }
+}`}
+          </pre>
+        </div>
+      )}
+
+      {/* Tab: Systemd Boot Log */}
+      {activeTab === 'boot' && (
+        <div className="flex-1 p-4 overflow-y-auto terminal-scroll text-xs text-slate-300 space-y-1.5 font-mono">
+          <div className="text-[11px] text-geeko-400 font-bold">// SYSTEMD KERNEL BOOTLOG TELEMETRY</div>
+          <p className="text-slate-400">[  0.000000] Linux version 6.12.0-geeko-bengaluru-connect (x86_64)</p>
+          <p className="text-emerald-400 font-bold">[  OK  ] Mounted /dev/venue (Newton School of Technology, Bengaluru).</p>
+          <p className="text-emerald-400 font-bold">[  OK  ] Configured Wi-Fi Network Interface for 350+ Devices.</p>
+          <p className="text-emerald-400 font-bold">[  OK  ] Initialized 20-Hour Geeko Buildathon Engine (83 Team Slots).</p>
+          <p className="text-emerald-400 font-bold">[  OK  ] Validated Itemized Budget Matrix: ₹2,57,840.</p>
+          <p className="text-emerald-400 font-bold">[  OK  ] Activated QR Passport Quest &amp; Midnight Bug Hunt Sandboxes.</p>
+          <div className="pt-2">
+            <a
+              href={`${import.meta.env.BASE_URL}proposal/`}
+              className="text-geeko-300 hover:text-white underline font-bold"
+            >
+              Open Full Interactive Bootloader &amp; Proposal Deck →
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Quick Action Chips Footer */}
+      <div className="bg-[#040806] border-t border-geeko-500/20 px-3 py-2 flex flex-wrap items-center gap-1.5 text-[10px] text-slate-400">
+        <span className="font-bold text-slate-500">TRY:</span>
+        {['zypper in opensuse-blr', 'proposal', 'info', 'tracks', 'geeko'].map((c) => (
+          <button
+            key={c}
+            onClick={() => handleCommand(c)}
+            className="px-2 py-0.5 rounded bg-[#091510] text-geeko-300 hover:bg-geeko-500 hover:text-black border border-geeko-500/20 transition-colors cursor-pointer"
+          >
+            {c}
+          </button>
         ))}
-        <div ref={terminalEndRef} />
       </div>
-
-      {/* Quick chips */}
-      <div className="bg-slate-900/80 border-t border-slate-800 px-3 py-1.5 flex flex-wrap items-center gap-1.5 text-[10px]">
-        <span className="text-slate-500 uppercase">Quick run:</span>
-        <button
-          onClick={() => handleCommand('zypper in opensuse-blr')}
-          className="bg-slate-800 hover:bg-geeko-500 hover:text-black text-slate-300 px-2 py-0.5 border border-slate-700 transition-colors"
-        >
-          zypper in opensuse-blr
-        </button>
-        <button
-          onClick={() => handleCommand('zypper info event')}
-          className="bg-slate-800 hover:bg-geeko-500 hover:text-black text-slate-300 px-2 py-0.5 border border-slate-700 transition-colors"
-        >
-          zypper info event
-        </button>
-        <button
-          onClick={() => handleCommand('geeko')}
-          className="bg-slate-800 hover:bg-geeko-500 hover:text-black text-slate-300 px-2 py-0.5 border border-slate-700 transition-colors"
-        >
-          geeko
-        </button>
-      </div>
-
-      {/* Command Input line */}
-      <form onSubmit={onSubmit} className="border-t-2 border-slate-800 bg-obsidian-900 flex items-center px-4 py-2">
-        <span className="text-geeko-400 font-bold mr-2 select-none">geeko@opensuse-blr:~$</span>
-        <input
-          type="text"
-          value={inputVal}
-          onChange={(e) => setInputVal(e.target.value)}
-          placeholder="type 'zypper in opensuse-blr' or 'help'..."
-          className="flex-1 bg-transparent border-none outline-none text-white font-mono text-xs placeholder:text-slate-600"
-        />
-        <button 
-          type="submit"
-          className="text-slate-400 hover:text-geeko-400 p-1"
-          aria-label="Send command"
-        >
-          <CornerDownLeft className="w-4 h-4" />
-        </button>
-      </form>
     </div>
   );
 };

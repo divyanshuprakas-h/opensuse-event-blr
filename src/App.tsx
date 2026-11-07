@@ -64,7 +64,7 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-obsidian-950 text-slate-100 flex flex-col selection:bg-geeko-500 selection:text-black">
+    <div className="min-h-screen bg-[#070c0a] text-slate-100 flex flex-col selection:bg-geeko-500 selection:text-black font-sans">
       {/* Minimalist Neo-Brutalist Navigation */}
       <Navbar
         onOpenDay1Register={handleOpenDay1Register}

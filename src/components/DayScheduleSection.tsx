@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { DAY1_SESSIONS, DAY2_SESSIONS, SessionItem, HACKATHON_TRACKS } from '../data/eventData';
-import { Calendar, Clock, MapPin, Tag, CheckCircle2, Flame, Sparkles, Code2, ArrowRight, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { DAY1_SESSIONS, DAY2_SESSIONS, HACKATHON_TRACKS, SessionItem } from '../data/eventData';
+import { Calendar, Clock, MapPin, Code2, Filter, ChevronDown, ChevronUp, Sparkles, ArrowRight } from 'lucide-react';
 
 interface DayScheduleSectionProps {
   onOpenHackathonRegister: () => void;
@@ -22,44 +22,43 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
     return true;
   });
 
-  const visibleDay1 = showAllDay1 ? filteredDay1 : filteredDay1.slice(0, 3);
-  const visibleDay2 = showAllDay2 ? DAY2_SESSIONS : DAY2_SESSIONS.slice(0, 3);
+  const visibleDay1 = showAllDay1 ? filteredDay1 : filteredDay1.slice(0, 4);
+  const visibleDay2 = showAllDay2 ? DAY2_SESSIONS : DAY2_SESSIONS.slice(0, 4);
 
   return (
-    <section id="schedule" className="py-20 border-b-2 border-slate-800 bg-obsidian-950 font-mono">
+    <section id="schedule" className="py-20 border-b border-white/[0.08] bg-[#070c0a] font-mono">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-2">
-              // 02. TWO-DAY PROGRAM ARCHITECTURE
+            <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-1">
+              // 02. EVENT TIMELINE &amp; TRACKS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight leading-tight">
-              Day 1 Talks & Workshops <br />
-              <span className="text-geeko-400">//</span> Day 2 20H Buildathon
+            <h2 className="text-3xl sm:text-4xl font-sans font-black text-white uppercase tracking-tight">
+              Day 1 Talks &amp; Labs <span className="text-geeko-400">//</span> 20H Buildathon
             </h2>
           </div>
           
           {/* Day Switcher Buttons */}
-          <div className="flex border-2 border-slate-700 bg-obsidian-900 text-xs">
+          <div className="flex rounded-xl border border-geeko-500/30 bg-[#091510] p-1 text-xs">
             <button
               onClick={() => setActiveDay('day1')}
-              className={`px-5 py-2.5 font-bold uppercase transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-4 py-2 rounded-lg font-bold uppercase transition-all cursor-pointer flex items-center gap-2 ${
                 activeDay === 'day1'
-                  ? 'bg-geeko-500 text-black border-r-2 border-black'
-                  : 'text-slate-300 hover:text-white border-r border-slate-700'
+                  ? 'bg-geeko-500 text-obsidian-950 shadow-md'
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               <Calendar className="w-3.5 h-3.5" />
-              <span>Day 1: Talks & Workshops</span>
+              <span>Day 1: Talks &amp; Labs</span>
             </button>
 
             <button
               onClick={() => setActiveDay('day2')}
-              className={`px-5 py-2.5 font-bold uppercase transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-4 py-2 rounded-lg font-bold uppercase transition-all cursor-pointer flex items-center gap-2 ${
                 activeDay === 'day2'
-                  ? 'bg-geeko-500 text-black'
+                  ? 'bg-geeko-500 text-obsidian-950 shadow-md'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
@@ -73,245 +72,203 @@ export const DayScheduleSection: React.FC<DayScheduleSectionProps> = ({
         {activeDay === 'day1' && (
           <div className="space-y-6">
             
-            {/* Day 1 Filter Controls */}
-            <div className="flex flex-wrap items-center justify-between gap-3 bg-obsidian-900 border border-slate-800 p-3 text-xs">
-              <div className="flex items-center gap-2 text-slate-400">
+            {/* Filter bar */}
+            <div className="flex flex-wrap items-center justify-between gap-3 bg-[#091510] border border-geeko-500/20 rounded-xl p-3 text-xs">
+              <div className="flex items-center gap-2 text-slate-300">
                 <Filter className="w-3.5 h-3.5 text-geeko-400" />
                 <span>Filter Day 1 Sessions:</span>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                <button
-                  onClick={() => setDay1Filter('all')}
-                  className={`px-3 py-1 border text-[11px] uppercase transition-colors ${
-                    day1Filter === 'all'
-                      ? 'bg-slate-800 text-white border-geeko-500 font-bold'
-                      : 'border-slate-800 text-slate-400 hover:text-white'
-                  }`}
-                >
-                  All Sessions ({DAY1_SESSIONS.length})
-                </button>
-                <button
-                  onClick={() => setDay1Filter('mandatory')}
-                  className={`px-3 py-1 border text-[11px] uppercase transition-colors ${
-                    day1Filter === 'mandatory'
-                      ? 'bg-emerald-950 text-geeko-300 border-geeko-500 font-bold'
-                      : 'border-slate-800 text-slate-400 hover:text-white'
-                  }`}
-                >
-                  [Mandatory Core Only]
-                </button>
-                <button
-                  onClick={() => setDay1Filter('optional')}
-                  className={`px-3 py-1 border text-[11px] uppercase transition-colors ${
-                    day1Filter === 'optional'
-                      ? 'bg-pine-950 text-cyan-300 border-cyan-500 font-bold'
-                      : 'border-slate-800 text-slate-400 hover:text-white'
-                  }`}
-                >
-                  [Optional Elective Workshops]
-                </button>
+              <div className="flex items-center gap-1.5">
+                {[
+                  { id: 'all', label: 'All Sessions' },
+                  { id: 'mandatory', label: 'Keynotes & Talks' },
+                  { id: 'optional', label: 'Workshops & Labs' },
+                ].map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => setDay1Filter(f.id as any)}
+                    className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
+                      day1Filter === f.id
+                        ? 'bg-geeko-500/20 text-geeko-300 border border-geeko-500/40 font-bold'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Session Cards */}
+            {/* Sessions Stream */}
             <div className="space-y-3">
               {visibleDay1.map((session) => (
                 <div
                   key={session.id}
-                  className={`p-5 border-2 text-left transition-all ${
-                    session.isMandatory
-                      ? 'bg-obsidian-900 border-slate-700 hover:border-geeko-500 shadow-[3px_3px_0px_0px_#173f35]'
-                      : 'bg-obsidian-950 border-slate-800/80 hover:border-cyan-500/60 shadow-[3px_3px_0px_0px_#0e2a25]'
-                  }`}
+                  className="p-5 rounded-xl bg-[#09130e] border border-geeko-500/20 hover:border-geeko-500/40 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-2.5 mb-3 text-xs">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-bold text-white bg-slate-800 px-2 py-0.5 border border-slate-700 flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-geeko-400" />
-                        {session.time}
-                      </span>
-
-                      {session.isMandatory ? (
-                        <span className="bg-geeko-500/20 text-geeko-300 border border-geeko-500/40 px-2 py-0.5 font-bold uppercase text-[10px]">
-                          [ MANDATORY // CORE KEYNOTE ]
-                        </span>
-                      ) : (
-                        <span className="bg-cyan-950 text-cyan-300 border border-cyan-800 px-2 py-0.5 font-bold uppercase text-[10px]">
-                          [ OPTIONAL // ELECTIVE TRACK ]
-                        </span>
-                      )}
-
-                      <span className="bg-slate-900 text-slate-400 border border-slate-800 px-2 py-0.5 text-[10px]">
-                        {session.type}
-                      </span>
+                  <div className="flex items-start sm:items-center gap-4">
+                    <div className="w-28 text-xs font-bold text-geeko-400 shrink-0">
+                      {session.time}
                     </div>
-
-                    {session.location && (
-                      <span className="text-[11px] text-slate-400 flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-geeko-400" />
-                        {session.location}
-                      </span>
-                    )}
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <span className="text-sm font-bold text-white tracking-tight">
+                          {session.title}
+                        </span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-[#0d2217] text-geeko-300 border border-geeko-500/30 font-bold">
+                          {session.track}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-300 font-sans max-w-2xl leading-relaxed">
+                        {session.description}
+                      </p>
+                    </div>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-tight mb-2">
-                    {session.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-300 font-sans leading-relaxed mb-3">
-                    {session.description}
-                  </p>
-
-                  {session.speakerOrLead && (
-                    <div className="text-[11px] text-slate-400 flex items-center gap-2 border-t border-slate-800/80 pt-2">
-                      <span className="text-slate-500 uppercase">Faculty / Speaker:</span>
-                      <span className="text-geeko-300 font-bold">{session.speakerOrLead}</span>
-                    </div>
-                  )}
+                  <div className="shrink-0 self-start sm:self-center text-xs text-slate-400 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-geeko-400" />
+                    <span>{session.location}</span>
+                  </div>
                 </div>
               ))}
             </div>
 
-            {/* View More / Show Less Toggle Button */}
-            {filteredDay1.length > 3 && (
-              <div className="pt-2 text-center">
+            {/* Expand / Collapse Button */}
+            {filteredDay1.length > 4 && (
+              <div className="text-center pt-2">
                 <button
                   onClick={() => setShowAllDay1(!showAllDay1)}
-                  className="w-full sm:w-auto px-6 py-2.5 bg-obsidian-900 hover:bg-pine-950 border-2 border-geeko-500 text-geeko-300 hover:text-white font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#173f35] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#0a1812] hover:bg-[#0f281e] border border-geeko-500/30 text-geeko-300 text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"
                 >
                   {showAllDay1 ? (
                     <>
-                      <ChevronUp className="w-4 h-4 text-geeko-400" />
-                      <span>Show Less (Collapse Schedule)</span>
+                      <ChevronUp className="w-4 h-4" />
+                      <span>Collapse Schedule</span>
                     </>
                   ) : (
                     <>
-                      <ChevronDown className="w-4 h-4 text-geeko-400" />
-                      <span>View More Sessions ({filteredDay1.length - 3} More)</span>
+                      <ChevronDown className="w-4 h-4" />
+                      <span>View All Day 1 Sessions ({filteredDay1.length - 4} More)</span>
                     </>
                   )}
                 </button>
               </div>
             )}
 
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-obsidian-900 border-2 border-geeko-500 p-5">
-              <div>
-                <span className="text-geeko-400 font-bold text-xs uppercase block">
-                  READY FOR DAY 1 TALKS & WORKSHOPS?
-                </span>
-                <span className="text-xs text-slate-300">
-                  Pre-register for Day 1 free admission. (Hackathon is separate).
-                </span>
-              </div>
-              <button
-                onClick={onOpenDay1Register}
-                className="px-5 py-2.5 bg-geeko-500 hover:bg-geeko-400 text-black font-bold text-xs uppercase tracking-wider border-2 border-black whitespace-nowrap cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
-              >
-                Pre-Register for Day 1 Talks & Workshops →
-              </button>
-            </div>
           </div>
         )}
 
-        {/* DAY 2 VIEW */}
+        {/* DAY 2 VIEW: 20H BUILDATHON & 6 TRACKS */}
         {activeDay === 'day2' && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             
-            {/* Separate Hackathon Notice Box */}
-            <div className="bg-pine-900/40 border-2 border-geeko-500 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[4px_4px_0px_0px_#173f35]">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-xs font-bold text-geeko-400 uppercase">
-                  <Code2 className="w-4 h-4" />
-                  <span>SEPARATE REGISTRATION REQUIRED FOR DAY 2 HACKATHON</span>
+            {/* 20H Hackathon Banner */}
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-[#0d261b] to-[#07130e] border border-geeko-400/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-bold text-geeko-300 uppercase mb-1">
+                  <Sparkles className="w-4 h-4 text-geeko-400" />
+                  <span>20-HOUR GEEKO BUILDATHON ENGINE</span>
                 </div>
-                <p className="text-xs text-slate-200 font-sans max-w-2xl">
-                  Day 1 pass holders who want to hack on Day 2 must register their team (1–4 members) or enter as a solo hacker below.
+                <p className="text-xs sm:text-sm text-slate-200 font-sans max-w-2xl">
+                  Starts Day 1 at 14:30 (First Commit Ceremony) and locks Day 2 at 10:30 (Commit Freeze). All submitting teams demo live in the Demo Arena; 6 finalists pitch on the main stage.
                 </p>
               </div>
 
               <button
                 onClick={onOpenHackathonRegister}
-                className="px-5 py-3 bg-geeko-500 hover:bg-geeko-400 text-black text-xs font-black uppercase tracking-wider border-2 border-black whitespace-nowrap cursor-pointer shadow-[3px_3px_0px_0px_#ffffff]"
+                className="px-5 py-2.5 rounded-xl bg-geeko-500 hover:bg-geeko-400 text-obsidian-950 font-black text-xs uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer shadow-md"
               >
-                Apply for Hackathon Separately →
+                Apply for Buildathon →
               </button>
             </div>
 
-            {/* 5 Hackathon Tracks Preview */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {HACKATHON_TRACKS.map((track) => (
-                <div
-                  key={track.id}
-                  className="bg-obsidian-900 border-2 border-slate-800 p-4 font-mono flex flex-col justify-between hover:border-geeko-500 transition-colors shadow-[3px_3px_0px_0px_#173f35]"
-                >
-                  <div>
-                    <div className="flex items-center justify-between text-[10px] text-geeko-400 font-bold mb-1.5">
-                      <span>{track.code}</span>
-                      <span className="text-slate-500">20H BUILDATHON</span>
+            {/* 6 Geeko Buildathon Tracks Grid */}
+            <div id="tracks" className="scroll-mt-24 space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-bold text-geeko-400 uppercase tracking-wider">
+                  // SIX INNOVATION TRACKS (UP TO 83 TEAMS):
+                </h3>
+                <span className="text-xs text-slate-400">Teams of 3–4 members</span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {HACKATHON_TRACKS.map((track) => (
+                  <div
+                    key={track.id}
+                    className="p-5 rounded-xl bg-[#09130e] border border-geeko-500/20 hover:border-geeko-400/50 transition-colors flex flex-col justify-between group shadow-sm"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between text-[10px] text-geeko-400 font-bold mb-2">
+                        <span>{track.code}</span>
+                        <span className="text-slate-500">20H SPRINT</span>
+                      </div>
+                      <h4 className="text-base font-bold text-white mb-2 group-hover:text-geeko-300 transition-colors">
+                        {track.title}
+                      </h4>
+                      <p className="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+                        {track.description}
+                      </p>
                     </div>
-                    <h4 className="text-sm font-black text-white uppercase mb-2">
-                      {track.title}
-                    </h4>
-                    <p className="text-[11px] text-slate-300 font-sans leading-relaxed mb-4">
-                      {track.description}
-                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-geeko-500/10">
+                      {track.tech.map((t, i) => (
+                        <span key={i} className="px-2 py-0.5 rounded bg-[#060c09] border border-geeko-500/20 text-[10px] text-slate-300 font-bold">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="flex flex-wrap gap-1 text-[10px]">
-                    {track.tech.map((t, i) => (
-                      <span key={i} className="bg-obsidian-950 border border-slate-700 px-1.5 py-0.5 text-slate-400">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            {/* Day 2 Timeline Slots */}
+            {/* Day 2 Timeline Chronology */}
             <div className="space-y-3 pt-4">
               <h4 className="text-xs font-bold uppercase text-geeko-400 tracking-wider">
-                DAY 2 SPRINT CHRONOLOGY (20-HOUR BUILDATHON TIMELINE):
+                // DAY 2 TIMELINE (FROM SUNRISE SPRINT TO AWARDS):
               </h4>
 
               {visibleDay2.map((session) => (
                 <div
                   key={session.id}
-                  className="p-4 bg-obsidian-900 border-2 border-slate-800 text-left font-mono"
+                  className="p-4 rounded-xl bg-[#09130e] border border-geeko-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                 >
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2 mb-2 text-xs">
-                    <span className="font-bold text-white bg-slate-800 px-2 py-0.5 border border-slate-700">
+                  <div className="flex items-start sm:items-center gap-4">
+                    <span className="w-28 text-xs font-bold text-emerald-400 shrink-0">
                       {session.time}
                     </span>
-                    <span className="text-geeko-400 text-[11px] font-bold">
-                      {session.location}
-                    </span>
+                    <div>
+                      <h5 className="text-sm font-bold text-white">
+                        {session.title}
+                      </h5>
+                      <p className="text-xs text-slate-400 font-sans mt-0.5">
+                        {session.description}
+                      </p>
+                    </div>
                   </div>
 
-                  <h4 className="text-sm font-bold text-white uppercase mb-1">
-                    {session.title}
-                  </h4>
-                  <p className="text-xs text-slate-300 font-sans">
-                    {session.description}
-                  </p>
+                  <span className="text-xs text-slate-500 shrink-0">
+                    {session.location}
+                  </span>
                 </div>
               ))}
 
-              {DAY2_SESSIONS.length > 3 && (
-                <div className="pt-2 text-center">
+              {DAY2_SESSIONS.length > 4 && (
+                <div className="text-center pt-2">
                   <button
                     onClick={() => setShowAllDay2(!showAllDay2)}
-                    className="w-full sm:w-auto px-6 py-2.5 bg-obsidian-900 hover:bg-pine-950 border-2 border-geeko-500 text-geeko-300 hover:text-white font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0px_0px_#173f35] hover:shadow-[1px_1px_0px_0px_#173f35] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 mx-auto cursor-pointer"
+                    className="px-5 py-2 rounded-xl bg-[#0a1812] hover:bg-[#0f281e] border border-geeko-500/30 text-geeko-300 text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"
                   >
                     {showAllDay2 ? (
                       <>
-                        <ChevronUp className="w-4 h-4 text-geeko-400" />
-                        <span>Show Less</span>
+                        <ChevronUp className="w-4 h-4" />
+                        <span>Collapse Timeline</span>
                       </>
                     ) : (
                       <>
-                        <ChevronDown className="w-4 h-4 text-geeko-400" />
-                        <span>View Full Timeline ({DAY2_SESSIONS.length - 3} More Slots)</span>
+                        <ChevronDown className="w-4 h-4" />
+                        <span>View All Day 2 Slots ({DAY2_SESSIONS.length - 4} More)</span>
                       </>
                     )}
                   </button>
