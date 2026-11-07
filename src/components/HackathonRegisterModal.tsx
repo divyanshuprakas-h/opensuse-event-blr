@@ -103,11 +103,21 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-sm animate-in fade-in duration-200 p-3 sm:p-6 flex items-start sm:items-center justify-center"
     >
+      {/* Floating Screen-Level Close Button - ALWAYS visible in viewport */}
+      <button
+        onClick={onClose}
+        className="fixed top-3 right-3 sm:top-5 sm:right-5 z-[60] flex items-center gap-1.5 bg-obsidian-950 text-geeko-400 hover:bg-geeko-500 hover:text-black border-2 border-geeko-500 px-3 py-1.5 font-mono text-xs font-black uppercase tracking-wider shadow-[4px_4px_0px_0px_#173f35] cursor-pointer transition-all hover:translate-x-[-1px] hover:translate-y-[1px]"
+        aria-label="Close modal"
+      >
+        <span>CLOSE</span>
+        <X className="w-4 h-4 stroke-[3]" />
+      </button>
+
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-xl max-h-[92vh] flex flex-col bg-obsidian-950 border-2 border-geeko-500 shadow-[8px_8px_0px_0px_#173f35] text-slate-100 overflow-hidden my-auto"
+        className="relative w-full max-w-xl max-h-[88vh] flex flex-col min-h-0 bg-obsidian-950 border-2 border-geeko-500 shadow-[8px_8px_0px_0px_#173f35] text-slate-100 overflow-hidden my-auto sm:my-6"
       >
         {/* Header - Sticky, Always Visible */}
         <div className="bg-geeko-500 text-black px-4 py-2.5 font-mono text-xs font-black uppercase tracking-wider flex items-center justify-between border-b-2 border-black shrink-0 select-none">
@@ -125,8 +135,8 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
           </button>
         </div>
 
-        {/* Body - Scrollable */}
-        <div className="p-6 overflow-y-auto">
+        {/* Body - Scrollable with min-h-0 */}
+        <div className="flex-1 min-h-0 p-6 overflow-y-auto">
           {!submittedHackPass ? (
             <div className="space-y-5">
               
