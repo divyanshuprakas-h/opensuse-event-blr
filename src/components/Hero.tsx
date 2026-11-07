@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { MapPin, Sparkles, ArrowRight, Code, Gift, Terminal, ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Sparkles, ArrowRight, Code, Gift, Terminal, ArrowUpRight, Clock, Users, ShieldCheck } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import { EVENT_STATS } from '../data/eventData';
 import { ZypperTerminal } from './ZypperTerminal';
 
@@ -16,9 +17,48 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenHackathonRegister,
 }) => {
   const [quickEmail, setQuickEmail] = useState('');
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  const claimedCount = 194;
+  const totalSpots = 250;
+
+  useEffect(() => {
+    // January 23, 2027 (Indicative opening)
+    const targetDate = new Date('2027-01-23T09:00:00+05:30').getTime();
+
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff > 0) {
+        setTimeLeft({
+          days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((diff / 1000 / 60) % 60),
+          seconds: Math.floor((diff / 1000) % 60),
+        });
+      }
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleQuickSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#73ba25', '#8fe038', '#10b981', '#ffffff'],
+    });
+
     if (!quickEmail.trim()) {
       onOpenDay1Register();
     } else {
@@ -27,25 +67,35 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section className="relative pt-10 sm:pt-14 pb-16 border-b border-white/[0.08] bg-[#070c0a] font-mono overflow-hidden">
-      {/* Subtle Dribbble ambient radial lights */}
-      <div className="pointer-events-none absolute top-0 left-1/3 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-geeko-500/[0.08] via-emerald-500/[0.03] to-transparent blur-3xl"></div>
+    <section className="relative pt-8 sm:pt-12 pb-16 border-b border-white/[0.08] bg-[#070c0a] font-mono overflow-hidden">
+      {/* Subtle ambient lighting */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-b from-geeko-500/[0.09] via-emerald-500/[0.03] to-transparent blur-3xl" />
       
-      {/* Subtle hairline grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(115,186,37,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(115,186,37,0.03)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none"></div>
+      {/* Hairline grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(115,186,37,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(115,186,37,0.03)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Top Telemetry Tag */}
-        <div className="flex flex-wrap items-center gap-2.5 mb-6 text-xs">
-          <div className="inline-flex items-center gap-2 bg-[#0d2217] border border-geeko-500/40 text-geeko-300 px-3 py-1.5 rounded-full font-bold">
-            <span className="w-2 h-2 rounded-full bg-geeko-400 animate-ping"></span>
-            <span>JANUARY 2027 // TWO CONSECUTIVE DAYS</span>
+        {/* Top Telemetry & Status Badges */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <div className="flex flex-wrap items-center gap-2.5 text-xs">
+            <div className="inline-flex items-center gap-2 bg-[#0d2217] border border-geeko-500/40 text-geeko-300 px-3 py-1.5 rounded-full font-bold">
+              <span className="w-2 h-2 rounded-full bg-geeko-400 animate-ping" />
+              <span>JANUARY 2027 // TWO CONSECUTIVE DAYS</span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 bg-[#0a1811] border border-geeko-500/30 text-slate-300 px-3 py-1.5 rounded-full">
+              <MapPin className="w-3.5 h-3.5 text-geeko-400" />
+              <span>Newton School of Technology, Bengaluru</span>
+            </div>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 bg-[#0a1811] border border-geeko-500/30 text-slate-300 px-3 py-1.5 rounded-full">
-            <MapPin className="w-3.5 h-3.5 text-geeko-400" />
-            <span>Newton School of Technology, Bengaluru</span>
+          {/* Spots Remaining Indicator */}
+          <div className="inline-flex items-center gap-2 bg-[#091510] border border-geeko-500/30 px-3 py-1.5 rounded-full text-xs text-slate-300">
+            <Users className="w-3.5 h-3.5 text-geeko-400" />
+            <span>Capacity: <strong className="text-white">250 Builders</strong></span>
+            <span className="text-slate-500">•</span>
+            <span className="text-geeko-400 font-bold">{totalSpots - claimedCount} SPOTS LEFT</span>
           </div>
         </div>
 
@@ -55,9 +105,16 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Left Column: Headlines & Actions */}
           <div className="lg:col-span-7 space-y-5 text-left">
             <div>
-              <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest block mb-1">
-                // OPEN-SOURCE LINUX GATHERING
-              </span>
+              <div className="flex items-center gap-2 mb-2">
+                <img
+                  src={`${import.meta.env.BASE_URL}geeko.svg`}
+                  alt="openSUSE Geeko"
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-geeko-400 text-xs font-bold uppercase tracking-widest">
+                  // OPEN-SOURCE LINUX GATHERING &amp; BUILDATHON
+                </span>
+              </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-black text-white tracking-tight leading-[1.06]">
                 <span className="lowercase">open</span><span className="uppercase text-geeko-400">SUSE</span>{' '}
@@ -76,13 +133,13 @@ export const Hero: React.FC<HeroProps> = ({
             </p>
 
             {/* Instant Priority Pass Claim Station */}
-            <div className="bg-[#0a1812] border border-geeko-500/40 rounded-2xl p-4 shadow-[0_4px_25px_rgba(0,0,0,0.5)] max-w-xl">
+            <div className="bg-[#0a1812] border border-geeko-500/40 rounded-2xl p-4 sm:p-5 shadow-[0_4px_25px_rgba(0,0,0,0.5)] max-w-xl">
               <div className="flex items-center justify-between mb-2 text-xs">
                 <span className="text-geeko-300 font-bold uppercase flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-geeko-400" />
                   <span>Free Priority Pass // 250 Participant Cap</span>
                 </span>
-                <span className="text-slate-400 text-[10px]">Instant Pass</span>
+                <span className="text-slate-400 text-[10px]">Instant Confirmation</span>
               </div>
 
               <form onSubmit={handleQuickSubmit} className="flex flex-col sm:flex-row gap-2">
@@ -102,15 +159,24 @@ export const Hero: React.FC<HeroProps> = ({
                 </button>
               </form>
 
-              <div className="mt-2.5 pt-2 border-t border-geeko-500/15 flex items-center justify-between text-[11px] text-slate-400">
-                <span>✦ Free commemorative T-shirt for attendees</span>
-                <button
-                  type="button"
-                  onClick={onOpenHackathonRegister}
-                  className="text-geeko-400 hover:text-white underline font-bold cursor-pointer"
-                >
-                  Hackathon registration →
-                </button>
+              {/* Progress bar */}
+              <div className="mt-3">
+                <div className="w-full h-1.5 rounded-full bg-black/60 overflow-hidden border border-geeko-500/20">
+                  <div
+                    className="h-full bg-gradient-to-r from-geeko-500 to-emerald-400"
+                    style={{ width: `${(claimedCount / totalSpots) * 100}%` }}
+                  />
+                </div>
+                <div className="mt-1.5 flex items-center justify-between text-[11px] text-slate-400">
+                  <span>✦ 6 Catered meals &amp; commemorative T-shirt</span>
+                  <button
+                    type="button"
+                    onClick={onOpenHackathonRegister}
+                    className="text-geeko-400 hover:text-white underline font-bold cursor-pointer"
+                  >
+                    Hackathon registration →
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -158,11 +224,28 @@ export const Hero: React.FC<HeroProps> = ({
               onPreRegisterTrigger={onOpenDay1Register}
               onRegisterHackathon={onOpenHackathonRegister}
             />
+
+            {/* Minimalist Live Countdown Bar */}
+            <div className="p-3.5 rounded-xl bg-[#08120d] border border-geeko-500/30 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2 text-slate-400">
+                <Clock className="w-4 h-4 text-geeko-400 animate-pulse" />
+                <span className="font-bold text-slate-300 uppercase">COUNTDOWN:</span>
+              </div>
+              <div className="flex items-center gap-2 font-mono text-sm">
+                <span className="text-white font-bold">{timeLeft.days}d</span>
+                <span className="text-slate-600">:</span>
+                <span className="text-white font-bold">{timeLeft.hours}h</span>
+                <span className="text-slate-600">:</span>
+                <span className="text-white font-bold">{timeLeft.minutes}m</span>
+                <span className="text-slate-600">:</span>
+                <span className="text-geeko-400 font-bold">{timeLeft.seconds}s</span>
+              </div>
+            </div>
           </div>
 
         </div>
 
-        {/* 4 Clean Metric Cards (Dribbble Grid) */}
+        {/* 4 Clean Metric Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 pt-8 border-t border-white/[0.08]">
           {EVENT_STATS.map((stat, i) => (
             <div

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, Ticket, Sparkles, Copy, Check, ArrowRight, Share2, Terminal, Shirt, Mail } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import { EVENT_CONFIG } from '../data/eventData';
 import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL, isAutomatedEmailConfigured, getGmailWebComposeUrl } from '../services/emailService';
 
@@ -92,6 +93,13 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
 
     setIsSubmitting(false);
     setSubmittedPass(passRecord);
+
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#73ba25', '#8fe038', '#10b981', '#ffffff'],
+    });
   };
 
   const copyTicketId = () => {

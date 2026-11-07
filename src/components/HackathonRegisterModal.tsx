@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Code2, CheckCircle2, Sparkles, Terminal, Copy, Check, Users, ShieldAlert, Shirt, Mail } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import { HACKATHON_TRACKS, EVENT_CONFIG } from '../data/eventData';
 import { sendInstantConfirmationEmail, generateEmailContent, SENDER_EMAIL, isAutomatedEmailConfigured, getGmailWebComposeUrl } from '../services/emailService';
 
@@ -91,6 +92,13 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
 
     setIsSubmitting(false);
     setSubmittedHackPass(passRecord);
+
+    confetti({
+      particleCount: 90,
+      spread: 75,
+      origin: { y: 0.6 },
+      colors: ['#73ba25', '#8fe038', '#10b981', '#fcd34d', '#ffffff'],
+    });
   };
 
   const copyId = () => {

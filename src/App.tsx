@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
+import { TracksSection } from './components/TracksSection';
+import { ArcadeSection } from './components/ArcadeSection';
 import { DayScheduleSection } from './components/DayScheduleSection';
 import { PrizesSection } from './components/PrizesSection';
 import { VenueSection } from './components/VenueSection';
@@ -84,35 +86,43 @@ export function App() {
         {/* 2. Core Mission & 3-Phase Structure */}
         <AboutSection />
 
-        {/* 3. Day 1 & Day 2 Schedule (Talks, Labs & 20H Buildathon Tracks) */}
+        {/* 3. Six Geeko Buildathon Tracks (Bento Grid) */}
+        <TracksSection
+          onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
+        />
+
+        {/* 4. Geeko Arcade & Side Quests (Terminal Escape, Trivia Blitz, Bug Hunt) */}
+        <ArcadeSection />
+
+        {/* 5. Day 1 & Day 2 Schedule */}
         <DayScheduleSection
           onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
           onOpenDay1Register={handleOpenDay1Register}
         />
 
-        {/* 4. Hackathon Prizes & Community Swag (Updated Awards & Bounties) */}
+        {/* 6. Hackathon Prizes & Community Swag (Podiums & Bounties) */}
         <PrizesSection
           onOpenDay1Register={handleOpenDay1Register}
           onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
         />
 
-        {/* 5. Host Venue & Campus Coordinates */}
+        {/* 7. Host Venue & Campus Coordinates (Newton School of Technology) */}
         <VenueSection />
 
-        {/* 6. Transparency & Community Sponsorship */}
+        {/* 8. Community & Corporate Partners */}
         <SponsorsSection />
 
-        {/* 7. Organizing Committee */}
+        {/* 9. Organizing Committee & Student Leads */}
         <TeamSection onOpenPreRegister={handleOpenDay1Register} />
 
-        {/* 8. Frequently Asked Questions */}
+        {/* 10. Frequently Asked Questions */}
         <FAQSection />
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Modals */}
+      {/* Interactive Registration Modals */}
       <PreRegistrationModal
         isOpen={isDay1ModalOpen}
         onClose={() => setIsDay1ModalOpen(false)}
@@ -124,6 +134,7 @@ export function App() {
         onClose={() => setIsHackathonModalOpen(false)}
       />
 
+      {/* Interactive Design Mockup Viewer Modal */}
       <MockupViewerModal
         isOpen={isMockupViewerOpen}
         onClose={() => setIsMockupViewerOpen(false)}
@@ -131,5 +142,4 @@ export function App() {
     </div>
   );
 }
-
 export default App;
