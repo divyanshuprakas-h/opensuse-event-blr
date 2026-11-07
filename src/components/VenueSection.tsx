@@ -10,9 +10,10 @@ export const VenueSection: React.FC = () => {
     { icon: Coffee, title: "Food & Drinks", desc: "Lunch, evening tea, and hydration included." }
   ];
 
-  const mapEmbedUrl = "https://www.openstreetmap.org/export/embed.html?bbox=77.6065%2C12.7370%2C77.6465%2C12.7770&layer=mapnik&marker=12.7570%2C77.6265";
-  const googleMapsSearchUrl = "https://www.google.com/maps/search/?api=1&query=Newton+School+of+Technology+Bengaluru";
-  const googleMapsDirectionsUrl = "https://www.google.com/maps/dir/?api=1&destination=12.7570,77.6265";
+  // Coordinates for Newton School of Technology / S-VYASA, P3 Building, Sattva Global City (12.9212° N, 77.5007° E)
+  const mapEmbedUrl = "https://www.openstreetmap.org/export/embed.html?bbox=77.4927%2C12.9132%2C77.5087%2C12.9292&layer=mapnik&marker=12.9212%2C77.5007";
+  const googleMapsSearchUrl = "https://www.google.com/maps/search/?api=1&query=Newton+School+of+Technology+P3+Building+S-VYASA+Sattva+Global+City+Bengaluru";
+  const googleMapsDirectionsUrl = "https://www.google.com/maps/dir/?api=1&destination=12.9212,77.5007";
 
   return (
     <section id="venue" className="py-16 border-b-2 border-slate-800 bg-obsidian-950 font-mono">
@@ -27,6 +28,9 @@ export const VenueSection: React.FC = () => {
             <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
               Newton School of Technology, Bengaluru
             </h2>
+            <div className="text-xs text-geeko-300 font-bold mt-1 tracking-wider">
+              P3 BUILDING // S-VYASA // SATTVA GLOBAL CITY
+            </div>
           </div>
           <div className="text-xs text-slate-400 flex items-center gap-2">
             <span className="bg-slate-900 border border-slate-800 px-3 py-1 text-slate-300">
@@ -46,14 +50,14 @@ export const VenueSection: React.FC = () => {
                 <span>CAMPUS SPECIFICATIONS</span>
               </div>
               <p className="text-sm font-sans text-slate-200 leading-relaxed">
-                Newton School of Technology serves as the proposed host venue for openSUSE India – Bengaluru Connect 2027. The modern campus is equipped for 300–400 attendees with dual-projection auditoriums, computer labs for workshops, and open hacking zones with high-speed connectivity.
+                Newton School of Technology (P3 Building, S-VYASA, Sattva Global City) serves as the proposed host venue for openSUSE India – Bengaluru Connect 2027. Embedded inside the prestigious Sattva Global City tech park off Mysore Road, the modern campus is equipped for 300–400 attendees with dual-projection auditoriums, specialized computer labs for packaging workshops, and open hacking zones with high-speed connectivity.
               </p>
 
               {/* Specs Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs pt-3 border-t border-slate-800">
                 <div>
-                  <span className="text-slate-500 uppercase text-[10px] block">CITY</span>
-                  <span className="text-white font-bold">Bengaluru, KA</span>
+                  <span className="text-slate-500 uppercase text-[10px] block">LOCATION</span>
+                  <span className="text-white font-bold">P3, Sattva Global City</span>
                 </div>
                 <div>
                   <span className="text-slate-500 uppercase text-[10px] block">CAPACITY</span>
@@ -61,11 +65,11 @@ export const VenueSection: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-slate-500 uppercase text-[10px] block">TRANSIT</span>
-                  <span className="text-slate-300">Metro & BMTC</span>
+                  <span className="text-slate-300">Pattanagere Metro</span>
                 </div>
                 <div>
                   <span className="text-slate-500 uppercase text-[10px] block">PARKING</span>
-                  <span className="text-slate-300">Available</span>
+                  <span className="text-slate-300">Campus & Visitor</span>
                 </div>
               </div>
             </div>
@@ -83,7 +87,7 @@ export const VenueSection: React.FC = () => {
                   PROPOSED VENUE
                 </div>
                 <div className="absolute bottom-2.5 right-3 bg-obsidian-950/90 text-slate-300 text-[10px] font-mono px-2 py-0.5 rounded border border-slate-800">
-                  Bengaluru Campus
+                  P3 Building, Sattva Global City
                 </div>
               </div>
 
@@ -95,7 +99,7 @@ export const VenueSection: React.FC = () => {
                     <span>Newton School of Technology</span>
                   </h4>
                   <p className="text-[11px] text-slate-400 font-sans mt-0.5">
-                    S-VYASA Campus, Jigani, Bengaluru, KA
+                    P3 Building, S-VYASA, Sattva Global City, Bengaluru 560059
                   </p>
                 </div>
                 <div className="text-right shrink-0">
@@ -123,7 +127,7 @@ export const VenueSection: React.FC = () => {
                   <span className="text-[10px] text-geeko-400 font-bold bg-pine-950 border border-geeko-500/40 px-1.5 py-0.2">LIVE EMBED</span>
                 </h3>
                 <p className="text-xs text-slate-400 font-sans">
-                  S-VYASA University (Prashanti Kutiram), Jigani, Bengaluru, Karnataka 560105
+                  P3 Building, S-VYASA Campus, Sattva Global City, Mysore Road, Rajarajeshwari Nagar / Kengeri, Bengaluru, Karnataka 560059
                 </p>
               </div>
             </div>
@@ -155,7 +159,7 @@ export const VenueSection: React.FC = () => {
           {/* Interactive Map Iframe with Dark Mode Filter */}
           <div className="relative w-full h-72 sm:h-80 lg:h-96 bg-obsidian-950">
             <iframe
-              title="Newton School of Technology Live Campus Map"
+              title="Newton School of Technology Live Campus Map - P3 Building, Sattva Global City"
               src={mapEmbedUrl}
               className="w-full h-full border-0 filter invert-[90%] hue-rotate-180 contrast-[110%] brightness-[95%]"
               loading="lazy"
@@ -166,24 +170,24 @@ export const VenueSection: React.FC = () => {
               <div className="flex items-center justify-between gap-2 text-geeko-400 font-bold mb-1">
                 <span className="flex items-center gap-1.5 uppercase">
                   <MapPin className="w-3.5 h-3.5 text-geeko-400" />
-                  Newton School of Tech
+                  NST // P3 Building
                 </span>
                 <span className="text-[10px] text-geeko-300 bg-pine-950 border border-geeko-500/40 px-1.5 py-0.2">
                   HOST VENUE
                 </span>
               </div>
               <p className="text-[11px] text-slate-300 font-sans leading-relaxed mb-2">
-                S-VYASA Campus, Jigani, Bengaluru, Karnataka 560105
+                P3 Building, S-VYASA, Sattva Global City, Mysore Road, Bengaluru 560059
               </p>
               <div className="text-[10px] text-slate-400 flex items-center justify-between border-t border-slate-800 pt-1.5">
-                <span>GPS: 12.7570° N, 77.6265° E</span>
+                <span>GPS: 12.9212° N, 77.5007° E</span>
                 <a
                   href={googleMapsDirectionsUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="text-geeko-400 hover:underline font-bold"
                 >
-                  Get Directions →
+                  Directions →
                 </a>
               </div>
             </div>

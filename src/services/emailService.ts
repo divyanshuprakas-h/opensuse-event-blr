@@ -58,7 +58,7 @@ PASS TYPE:     ${payload.eventType}
 ATTENDEE:      ${payload.recipientName}
 ${payload.teamName ? `TEAM NAME:     ${payload.teamName}\n` : ''}T-SHIRT SIZE:  Size ${payload.tshirtSize} (100% Free - Reserved at Check-in)
 TRACK:         ${payload.eventTrack}
-VENUE:         Newton School of Technology, Bengaluru, KA
+VENUE:         Newton School of Technology, P3 Building, S-VYASA, Sattva Global City, Bengaluru, KA (560059)
 PROPOSED DATE: January 2027
 -----------------------------------------------------------
 

@@ -417,7 +417,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase block">VENUE</span>
-                    <span className="text-slate-200 block text-[11px]">Newton School of Tech, BLR</span>
+                    <span className="text-slate-200 block text-[11px]">NST, P3 Building, Sattva Global City</span>
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase block">PROPOSED DATE</span>

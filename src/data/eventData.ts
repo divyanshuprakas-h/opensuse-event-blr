@@ -33,8 +33,8 @@ export const EVENT_CONFIG = {
   datesNotice: "Target: January 2027 (Exact dates announcing soon)",
   duration: "2 Days (Day 1: Talks & Labs • Day 2: 10H Hackathon)",
   location: "Bengaluru, Karnataka, India",
-  venue: "Newton School of Technology",
-  venueAddress: "Bengaluru Campus, Karnataka, India",
+  venue: "Newton School of Technology, P3 Building, S-VYASA, Sattva Global City",
+  venueAddress: "P3 Building, S-VYASA Campus, Sattva Global City, Mysore Road, Bengaluru 560059",
   expectedAttendees: "300–400 Hackers & Devs",
   organizer: "openSUSE India Community",
 };

@@ -401,7 +401,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 </div>
                 <div className="flex justify-between border-b border-slate-800 pb-1">
                   <span className="text-slate-500">VENUE:</span>
-                  <span className="text-slate-300">Newton School of Technology, BLR</span>
+                  <span className="text-slate-300">NST, P3 Building, Sattva Global City</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-500">STATUS:</span>

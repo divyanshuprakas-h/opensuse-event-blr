@@ -72,7 +72,7 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
           <p>Version         : 2027.01-preview</p>
           <p>Arch            : all-developers</p>
           <p>Proposed Dates  : January 2027 (exact dates to be confirmed)</p>
-          <p>Venue           : Newton School of Technology, Bengaluru</p>
+          <p>Venue           : Newton School of Technology (P3 Building, Sattva Global City)</p>
           <p>Capacity        : 300–400 Attendees</p>
           <p>Admission       : 100% Free (Community Open Access)</p>
           <p>Summary         : 2 Days, 3 Phases, 10-Hour Hackathon & Technical Workshops</p>
@@ -110,7 +110,7 @@ export const ZypperTerminal: React.FC<ZypperTerminalProps> = ({ onPreRegisterTri
       res = (
         <div className="space-y-1 text-slate-300">
           <p className="text-geeko-400 font-bold">YaST2 Control Center - Event Modules</p>
-          <p>✔ [Hardware]  : Newton School of Technology, Bengaluru</p>
+          <p>✔ [Hardware]  : Newton School of Technology (P3 Building, Sattva Global City)</p>
           <p>✔ [Software]  : Open Build Service, Zypper, YaST, openQA, Git</p>
           <p>✔ [Security]  : Inclusive Open Source Code of Conduct</p>
           <p>✔ [Support]   : Community-sponsored food, refreshments & hackathon awards</p>

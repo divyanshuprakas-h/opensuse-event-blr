@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
 
           <div className="inline-flex items-center gap-1.5 bg-pine-950/80 border border-geeko-500/50 text-geeko-300 px-3 py-1.5 font-bold">
             <MapPin className="w-3.5 h-3.5 text-geeko-400" />
-            <span>Newton School of Technology, Bengaluru</span>
+            <span>Newton School of Technology, P3 Building, Sattva Global City</span>
           </div>
         </div>
 
