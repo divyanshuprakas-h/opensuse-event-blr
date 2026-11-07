@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { AboutSection } from './components/AboutSection';
-import { DayScheduleSection } from './components/DayScheduleSection';
-import { PrizesSection } from './components/PrizesSection';
-import { VenueSection } from './components/VenueSection';
-import { SponsorsSection } from './components/SponsorsSection';
-import { TeamSection } from './components/TeamSection';
-import { FAQSection } from './components/FAQSection';
-import { Footer } from './components/Footer';
+import { CreativeBackground } from './components/creative/CreativeBackground';
+import { CreativeNavbar } from './components/creative/CreativeNavbar';
+import { CreativeHero } from './components/creative/CreativeHero';
+import { CreativeManifesto } from './components/creative/CreativeManifesto';
+import { CreativeTracks } from './components/creative/CreativeTracks';
+import { CreativeTimeline } from './components/creative/CreativeTimeline';
+import { CreativePrizes } from './components/creative/CreativePrizes';
+import { CreativeVenue } from './components/creative/CreativeVenue';
+import { CreativeFooter } from './components/creative/CreativeFooter';
 import { PreRegistrationModal } from './components/PreRegistrationModal';
 import { HackathonRegisterModal } from './components/HackathonRegisterModal';
 import { MockupViewerModal } from './components/MockupViewerModal';
@@ -64,55 +63,49 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-obsidian-950 text-slate-100 flex flex-col selection:bg-geeko-500 selection:text-black">
-      {/* Navigation */}
-      <Navbar
+    <div className="min-h-screen bg-[#030605] text-[#f0e8ff] font-sans selection:bg-geeko-500 selection:text-black relative">
+      {/* 60fps Interactive Reactive Canvas Background */}
+      <CreativeBackground />
+
+      {/* Floating Glassmorphic HUD Navbar */}
+      <CreativeNavbar
         onOpenDay1Register={handleOpenDay1Register}
         onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
       />
 
-      {/* Main Content */}
-      <main className="flex-1">
-        {/* 1. Hero Section */}
-        <Hero
+      {/* Main Experience Stream */}
+      <main className="relative z-10">
+        {/* 1. Kinetic Hero with 3D Holographic Geeko */}
+        <CreativeHero
           onOpenDay1Register={handleOpenDay1Register}
           onOpenDay1RegisterWithEmail={handleOpenDay1RegisterWithEmail}
           onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
-          onOpenMockupViewer={() => setIsMockupViewerOpen(true)}
         />
 
-        {/* 2. Core Mission & What to Expect */}
-        <AboutSection />
+        {/* 2. Visual Manifesto & 4 Kinetic Metric Pillars */}
+        <CreativeManifesto />
 
-        {/* 3. Day 1 & Day 2 Schedule (Mandatory vs Optional + Hackathon Tracks) */}
-        <DayScheduleSection
-          onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
-          onOpenDay1Register={handleOpenDay1Register}
-        />
-
-        {/* 4. Hackathon Prizes & Community Swag (Exciting Awards & Free T-Shirts) */}
-        <PrizesSection
-          onOpenDay1Register={handleOpenDay1Register}
+        {/* 3. 6-Track Cybernetic Soundboard / Console */}
+        <CreativeTracks
           onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
         />
 
-        {/* 5. Host Venue & Campus Amenities */}
-        <VenueSection />
+        {/* 4. Interactive 20-Hour Mission Control Timeline */}
+        <CreativeTimeline />
 
-        {/* 6. Organizer & Sponsors: openSUSE Only */}
-        <SponsorsSection />
+        {/* 5. 3D Holographic Prize Vault & Swag Ledger */}
+        <CreativePrizes
+          onOpenHackathonRegister={() => setIsHackathonModalOpen(true)}
+        />
 
-        {/* 7. Organizing Committee */}
-        <TeamSection onOpenPreRegister={handleOpenDay1Register} />
-
-        {/* 8. Frequently Asked Questions */}
-        <FAQSection />
+        {/* 6. Satellite Coordinates & High-Tech Logistics */}
+        <CreativeVenue />
       </main>
 
-      {/* Footer */}
-      <Footer />
+      {/* Kinetic Brutalist Footer */}
+      <CreativeFooter onOpenAdmin={() => setIsAdminView(true)} />
 
-      {/* Modals */}
+      {/* Functional Modals */}
       <PreRegistrationModal
         isOpen={isDay1ModalOpen}
         onClose={() => setIsDay1ModalOpen(false)}

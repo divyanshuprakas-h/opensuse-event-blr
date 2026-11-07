@@ -39,6 +39,7 @@ export default {
         }
       },
       fontFamily: {
+        display: ['Syne', 'Inter', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
         pixel: ['"Press Start 2P"', 'monospace'],
