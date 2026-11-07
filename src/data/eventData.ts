@@ -292,18 +292,18 @@ export const TEAM_MEMBERS = [
     name: "Divyanshu Prakash", 
     role: "Organizer", 
     github: "https://github.com/divyanshuprakas-h",
-    email: "Divyanshuprakash@opensuse.org"
+    email: "divyanshuprakash914@gmail.com"
   },
   { 
     name: "Dushyant Acharya", 
     role: "Organizer", 
     github: "https://github.com",
-    email: "Divyanshuprakash@opensuse.org"
+    email: "divyanshuprakash914@gmail.com"
   },
   { 
     name: "Rithull Raj Kallat", 
     role: "Organizer", 
     github: "https://github.com",
-    email: "Divyanshuprakash@opensuse.org"
+    email: "divyanshuprakash914@gmail.com"
   },
 ];

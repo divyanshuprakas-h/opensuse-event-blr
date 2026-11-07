@@ -1,7 +1,7 @@
 /**
  * openSUSE India – Bengaluru Connect 2027
  * Instant Email Confirmation Service
- * Sender: Divyanshuprakash@opensuse.org
+ * Sender: divyanshuprakash914@gmail.com
  */
 
 export interface EmailDispatchPayload {
@@ -14,7 +14,7 @@ export interface EmailDispatchPayload {
   teamName?: string;
 }
 
-export const SENDER_EMAIL = 'Divyanshuprakash@opensuse.org';
+export const SENDER_EMAIL = 'divyanshuprakash914@gmail.com';
 export const SENDER_NAME = 'Divyanshu Prakash (openSUSE India)';
 
 /**
@@ -55,7 +55,7 @@ Have a lot of fun...
 Best regards,
 Divyanshu Prakash
 Lead Organizer, openSUSE India
-Email: Divyanshuprakash@opensuse.org
+Email: divyanshuprakash914@gmail.com
 Website: https://divyanshuprakas-h.github.io/opensuse-event-blr/
 `;
 

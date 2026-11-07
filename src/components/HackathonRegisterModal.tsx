@@ -60,7 +60,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
       registeredAt: new Date().toISOString(),
     };
 
-    // Trigger immediate email confirmation from Divyanshuprakash@opensuse.org
+    // Trigger immediate email confirmation from divyanshuprakash914@gmail.com
     sendInstantConfirmationEmail({
       recipientEmail: passRecord.leaderEmail,
       recipientName: passRecord.leaderName,
@@ -386,7 +386,7 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                 </button>
 
                 <a
-                  href={`mailto:${submittedHackPass.leaderEmail}?subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Hackathon Pass [${submittedHackPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
+                  href={`mailto:${submittedHackPass.leaderEmail}?cc=${SENDER_EMAIL}&subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Hackathon Pass [${submittedHackPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
                     recipientEmail: submittedHackPass.leaderEmail,
                     recipientName: submittedHackPass.leaderName,
                     passId: submittedHackPass.id,

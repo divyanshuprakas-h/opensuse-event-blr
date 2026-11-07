@@ -61,7 +61,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
       registeredAt: new Date().toISOString(),
     };
 
-    // Trigger immediate email confirmation from Divyanshuprakash@opensuse.org
+    // Trigger immediate email confirmation from divyanshuprakash914@gmail.com
     sendInstantConfirmationEmail({
       recipientEmail: passRecord.email,
       recipientName: passRecord.name,
@@ -434,7 +434,7 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                 </button>
 
                 <a
-                  href={`mailto:${submittedPass.email}?subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Pass [${submittedPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
+                  href={`mailto:${submittedPass.email}?cc=${SENDER_EMAIL}&subject=${encodeURIComponent(`openSUSE Bengaluru Connect 2027 Pass [${submittedPass.id}]`)}&body=${encodeURIComponent(generateEmailContent({
                     recipientEmail: submittedPass.email,
                     recipientName: submittedPass.name,
                     passId: submittedPass.id,

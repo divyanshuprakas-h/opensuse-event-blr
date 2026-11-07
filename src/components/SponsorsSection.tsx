@@ -5,7 +5,7 @@ export const SponsorsSection: React.FC = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const copyContact = () => {
-    navigator.clipboard.writeText('Divyanshuprakash@opensuse.org');
+    navigator.clipboard.writeText('divyanshuprakash914@gmail.com');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
@@ -110,7 +110,7 @@ export const SponsorsSection: React.FC = () => {
 
             <div className="w-full pt-3 border-t border-slate-800 flex items-center justify-center gap-2">
               <a
-                href="mailto:Divyanshuprakash@opensuse.org?subject=Collaboration%20Inquiry%20-%20openSUSE%20Bengaluru%20Connect%202027"
+                href="mailto:divyanshuprakash914@gmail.com?subject=Collaboration%20Inquiry%20-%20openSUSE%20Bengaluru%20Connect%202027"
                 className="px-3 py-1.5 bg-geeko-500 hover:bg-geeko-400 text-black font-black text-xs uppercase tracking-wider transition-colors cursor-pointer"
               >
                 Collaborate
