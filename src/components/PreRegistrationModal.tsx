@@ -48,6 +48,16 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
     }
   }, [prefilledEmail]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -100,28 +110,33 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+    >
       {/* Modal Container */}
-      <div className="relative w-full max-w-xl bg-obsidian-950 border-2 border-geeko-500 shadow-[8px_8px_0px_0px_#173f35] text-slate-100 overflow-hidden my-8">
-        
-        {/* Top Brutalist Bar */}
-        <div className="bg-geeko-500 text-black px-4 py-2.5 font-mono text-xs font-black uppercase tracking-wider flex items-center justify-between border-b-2 border-black">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-xl max-h-[92vh] flex flex-col bg-obsidian-950 border-2 border-geeko-500 shadow-[8px_8px_0px_0px_#173f35] text-slate-100 overflow-hidden my-auto"
+      >
+        {/* Top Brutalist Bar - Sticky, Always Visible */}
+        <div className="bg-geeko-500 text-black px-4 py-2.5 font-mono text-xs font-black uppercase tracking-wider flex items-center justify-between border-b-2 border-black shrink-0 select-none">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 bg-black inline-block"></span>
-            <span>DAY 1 PASS // TALKS & WORKSHOPS PRE-REGISTRATION</span>
+            <span>DAY 1 PASS // PRE-REGISTRATION</span>
           </div>
           <button
             onClick={onClose}
-            className="text-black hover:bg-black hover:text-white p-1 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 bg-black text-geeko-400 hover:bg-black/80 px-2.5 py-1 text-xs font-mono font-black uppercase tracking-wider border border-black cursor-pointer shadow-[1px_1px_0px_0px_#ffffff] transition-transform active:scale-95"
             aria-label="Close modal"
           >
-            <X className="w-4 h-4" />
+            <span>CLOSE</span>
+            <X className="w-4 h-4 stroke-[3]" />
           </button>
         </div>
 
-        {/* Content Body */}
-        <div className="p-6">
+        {/* Content Body - Scrollable */}
+        <div className="p-6 overflow-y-auto">
           {!submittedPass ? (
             <div>
               {/* Context Banner */}
@@ -289,12 +304,12 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                   </span>
                 </div>
 
-                {/* Submit button */}
-                <div className="pt-4">
+                {/* Submit button & Cancel */}
+                <div className="pt-4 flex flex-col sm:flex-row gap-2.5">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-geeko-500 text-black font-mono font-black text-sm uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="flex-1 py-3.5 bg-geeko-500 text-black font-mono font-black text-sm uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <span>Confirming & Sending Pass to Email...</span>
@@ -304,6 +319,15 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
                         <span>Claim Priority Pre-Registration Pass</span>
                       </>
                     )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="sm:w-28 py-3 bg-obsidian-900 border-2 border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-mono text-xs font-bold uppercase transition-colors cursor-pointer flex items-center justify-center gap-1"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    <span>Cancel</span>
                   </button>
                 </div>
               </form>
@@ -425,10 +449,19 @@ export const PreRegistrationModal: React.FC<PreRegistrationModalProps> = ({
 
                   <button
                     onClick={shareOnTwitter}
-                    className="py-2.5 px-4 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-black text-xs font-mono uppercase flex items-center justify-center gap-2 cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
+                    className="py-2.5 px-4 bg-obsidian-900 border-2 border-slate-700 hover:border-geeko-400 text-slate-200 font-mono font-bold text-xs uppercase flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Share2 className="w-4 h-4" />
                     <span>Share on X / Twitter</span>
+                  </button>
+
+                  {/* Big Done & Return to Site Button */}
+                  <button
+                    onClick={onClose}
+                    className="col-span-1 sm:col-span-2 py-3 px-4 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-mono font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-[3px_3px_0px_0px_#ffffff] transition-all hover:translate-x-[1px] hover:translate-y-[1px]"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-black" />
+                    <span>Done // Return to Website</span>
                   </button>
                 </div>
 

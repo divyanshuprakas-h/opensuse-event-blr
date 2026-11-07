@@ -39,6 +39,16 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -91,26 +101,32 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-obsidian-950 border-2 border-geeko-500 shadow-[8px_8px_0px_0px_#173f35] text-slate-100 overflow-hidden my-8">
-        
-        {/* Header */}
-        <div className="bg-geeko-500 text-black px-4 py-2.5 font-mono text-xs font-black uppercase tracking-wider flex items-center justify-between border-b-2 border-black">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-xl max-h-[92vh] flex flex-col bg-obsidian-950 border-2 border-geeko-500 shadow-[8px_8px_0px_0px_#173f35] text-slate-100 overflow-hidden my-auto"
+      >
+        {/* Header - Sticky, Always Visible */}
+        <div className="bg-geeko-500 text-black px-4 py-2.5 font-mono text-xs font-black uppercase tracking-wider flex items-center justify-between border-b-2 border-black shrink-0 select-none">
           <div className="flex items-center gap-2">
             <Code2 className="w-4 h-4" />
-            <span>DAY 2 // 10-HOUR HACKATHON REGISTRATION</span>
+            <span>DAY 2 // HACKATHON REGISTRATION</span>
           </div>
           <button
             onClick={onClose}
-            className="text-black hover:bg-black hover:text-white p-1 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 bg-black text-geeko-400 hover:bg-black/80 px-2.5 py-1 text-xs font-mono font-black uppercase tracking-wider border border-black cursor-pointer shadow-[1px_1px_0px_0px_#ffffff] transition-transform active:scale-95"
             aria-label="Close modal"
           >
-            <X className="w-4 h-4" />
+            <span>CLOSE</span>
+            <X className="w-4 h-4 stroke-[3]" />
           </button>
         </div>
 
-        {/* Body */}
-        <div className="p-6 max-h-[80vh] overflow-y-auto">
+        {/* Body - Scrollable */}
+        <div className="p-6 overflow-y-auto">
           {!submittedHackPass ? (
             <div className="space-y-5">
               
@@ -292,14 +308,23 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
                   </span>
                 </div>
 
-                {/* Submit */}
-                <div className="pt-2">
+                {/* Submit & Cancel */}
+                <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 bg-geeko-500 text-black font-mono font-black text-xs uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="flex-1 py-3 bg-geeko-500 text-black font-mono font-black text-xs uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_#ffffff] hover:shadow-[1px_1px_0px_0px_#ffffff] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? <span>Reserving Table & Sending Pass to Email...</span> : <span>Claim Day 2 Hackathon Pass</span>}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="sm:w-28 py-3 bg-obsidian-900 border-2 border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-mono text-xs font-bold uppercase transition-colors cursor-pointer flex items-center justify-center gap-1"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    <span>Cancel</span>
                   </button>
                 </div>
 
@@ -385,9 +410,9 @@ export const HackathonRegisterModal: React.FC<HackathonRegisterModalProps> = ({ 
 
                 <button
                   onClick={onClose}
-                  className="px-5 py-2.5 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-mono font-black text-xs uppercase cursor-pointer shadow-[2px_2px_0px_0px_#ffffff]"
+                  className="px-5 py-2.5 bg-geeko-500 hover:bg-geeko-400 text-black border-2 border-black font-mono font-black text-xs uppercase cursor-pointer shadow-[2px_2px_0px_0px_#ffffff] transition-all hover:translate-x-[1px] hover:translate-y-[1px]"
                 >
-                  Close Desk
+                  Done // Return to Website
                 </button>
               </div>
             </div>
