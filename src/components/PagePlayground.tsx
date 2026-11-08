@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Gamepad2, Terminal, Award, Bug, CheckCircle2, RefreshCw, Sparkles, Send } from 'lucide-react';
+import { ArrowLeft, Terminal, Award, Bug, CheckCircle2, RefreshCw, Sparkles, Send } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playButtonThud, playSuccessChime } from '../utils/audio';
 
 interface PagePlaygroundProps {
   onBackToHome: () => void;
-  standalone?: boolean;
 }
 
-export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, standalone = true }) => {
+export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome }) => {
   const [activeTab, setActiveTab] = useState<'escape' | 'trivia' | 'bughunt'>('escape');
 
   // Terminal Escape state
@@ -116,86 +115,85 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
   };
 
   return (
-    <div
-      className={`relative w-full rounded-[32px] border-2 border-[#10351f] p-5 sm:p-7 flex flex-col justify-between overflow-hidden shadow-2xl select-none bg-[#f5f6ed] text-[#10351f] transition-all ${
-        standalone ? 'max-w-3xl mx-auto min-h-[680px]' : 'w-full h-full min-h-[640px]'
-      }`}
-    >
+    <div className="w-full min-h-screen bg-[#f5f6ed] flex flex-col justify-between p-6 sm:p-12 relative overflow-y-auto select-none animate-fadeIn">
+      
       {/* Top Header Row */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="w-full flex items-center justify-between z-20 mb-6">
         {/* Top Tag: 06 / PLAYGROUND */}
-        <div className="bg-[#10351f] text-white text-[11px] font-mono font-bold px-3.5 py-1.5 rounded-br-2xl -mt-5 -ml-5 sm:-mt-7 sm:-ml-7 shadow-md">
+        <div className="bg-[#10351f] text-white text-xs sm:text-sm font-mono font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-br-2xl shadow-lg -mt-6 -ml-6 sm:-mt-12 sm:-ml-12 tracking-wider">
           06 / GEEKO PLAYGROUND
         </div>
 
-        {/* Back Button [ ← ] */}
+        {/* Back Button [ ← Return to Home ] */}
         <button
           onClick={() => {
             playButtonThud();
             onBackToHome();
           }}
           title="Return to Home Menu"
-          className="w-8 h-8 rounded-xl bg-[#f7f9ee] border-2 border-[#ccd5b8] text-[#14281a] flex items-center justify-center hover:bg-white active:translate-y-0.5 shadow-sm transition-all cursor-pointer"
+          className="px-3.5 py-2 rounded-xl bg-white/80 hover:bg-white border-2 border-[#10351f]/20 text-[#10351f] font-mono text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:translate-y-0.5 transition-all cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
+          <span>RETURN TO HOME</span>
         </button>
       </div>
 
-      {/* Mode Sub-Tabs */}
-      <div className="flex bg-[#e4e8d8] p-1 rounded-xl border border-[#10351f]/20 text-xs font-mono font-bold mb-4 gap-1">
-        <button
-          onClick={() => { playButtonThud(); setActiveTab('escape'); }}
-          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
-            activeTab === 'escape' ? 'bg-[#10351f] text-white shadow-sm' : 'text-[#10351f]/80 hover:bg-black/5'
-          }`}
-        >
-          <Terminal className="w-3.5 h-3.5" />
-          <span>ESCAPE ROOM</span>
-        </button>
-        <button
-          onClick={() => { playButtonThud(); setActiveTab('trivia'); }}
-          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
-            activeTab === 'trivia' ? 'bg-[#10351f] text-white shadow-sm' : 'text-[#10351f]/80 hover:bg-black/5'
-          }`}
-        >
-          <Award className="w-3.5 h-3.5" />
-          <span>TRIVIA BLITZ</span>
-        </button>
-        <button
-          onClick={() => { playButtonThud(); setActiveTab('bughunt'); }}
-          className={`flex-1 py-2 rounded-lg transition-all flex items-center justify-center gap-1.5 ${
-            activeTab === 'bughunt' ? 'bg-[#10351f] text-white shadow-sm' : 'text-[#10351f]/80 hover:bg-black/5'
-          }`}
-        >
-          <Bug className="w-3.5 h-3.5" />
-          <span>BUG HUNT</span>
-        </button>
-      </div>
+      {/* Main Content Stage */}
+      <div className="max-w-4xl mx-auto w-full space-y-6 my-auto py-4">
+        
+        {/* Mode Sub-Tabs */}
+        <div className="flex bg-[#e4e8d8] p-1.5 rounded-2xl border border-[#10351f]/20 text-xs sm:text-sm font-mono font-bold gap-2">
+          <button
+            onClick={() => { playButtonThud(); setActiveTab('escape'); }}
+            className={`flex-1 py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
+              activeTab === 'escape' ? 'bg-[#10351f] text-white shadow-md' : 'text-[#10351f]/80 hover:bg-black/5'
+            }`}
+          >
+            <Terminal className="w-4 h-4" />
+            <span>ESCAPE ROOM</span>
+          </button>
+          <button
+            onClick={() => { playButtonThud(); setActiveTab('trivia'); }}
+            className={`flex-1 py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
+              activeTab === 'trivia' ? 'bg-[#10351f] text-white shadow-md' : 'text-[#10351f]/80 hover:bg-black/5'
+            }`}
+          >
+            <Award className="w-4 h-4" />
+            <span>TRIVIA BLITZ</span>
+          </button>
+          <button
+            onClick={() => { playButtonThud(); setActiveTab('bughunt'); }}
+            className={`flex-1 py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
+              activeTab === 'bughunt' ? 'bg-[#10351f] text-white shadow-md' : 'text-[#10351f]/80 hover:bg-black/5'
+            }`}
+          >
+            <Bug className="w-4 h-4" />
+            <span>BUG HUNT</span>
+          </button>
+        </div>
 
-      {/* Main Content Body */}
-      <div className="space-y-5 overflow-y-auto pr-1 flex-1">
         {activeTab === 'escape' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-display font-black uppercase text-[#10351f]">
+                <h3 className="text-xl font-display font-black uppercase text-[#10351f]">
                   MicroOS Escape Chamber
                 </h3>
-                <p className="text-xs text-[#10351f]/70 font-mono">
-                  Can you decrypt the flag? Hints: <code className="bg-black/5 px-1 py-0.5 rounded font-bold">ls</code>, <code className="bg-black/5 px-1 py-0.5 rounded font-bold">zypper in geeko</code>, and <code className="bg-black/5 px-1 py-0.5 rounded font-bold">cat flag.enc</code>
+                <p className="text-xs sm:text-sm text-[#10351f]/70 font-mono mt-0.5">
+                  Decrypt the flag: <code className="bg-black/5 px-1.5 py-0.5 rounded font-bold">ls</code>, <code className="bg-black/5 px-1.5 py-0.5 rounded font-bold">zypper in geeko</code>, and <code className="bg-black/5 px-1.5 py-0.5 rounded font-bold">cat flag.enc</code>
                 </p>
               </div>
               {flagFound && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#73ba25]/20 border border-[#73ba25] text-[#10351f] text-xs font-mono font-bold animate-pulse">
-                  <Sparkles className="w-3.5 h-3.5 text-[#73ba25]" />
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#73ba25]/20 border border-[#73ba25] text-[#10351f] text-xs font-mono font-bold animate-pulse">
+                  <Sparkles className="w-4 h-4 text-[#73ba25]" />
                   FLAG SOLVED!
                 </span>
               )}
             </div>
 
             {/* Terminal Screen */}
-            <div className="bg-[#0b1c11] text-[#9df26a] font-mono text-xs rounded-2xl p-4 border-2 border-[#10351f] shadow-inner h-64 overflow-y-auto flex flex-col justify-between">
-              <div className="space-y-1.5">
+            <div className="bg-[#0b1c11] text-[#9df26a] font-mono text-xs sm:text-sm rounded-3xl p-5 border-2 border-[#10351f] shadow-2xl h-80 overflow-y-auto flex flex-col justify-between">
+              <div className="space-y-2">
                 {cliHistory.map((line, idx) => (
                   <div
                     key={idx}
@@ -214,34 +212,34 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
                 ))}
               </div>
 
-              <form onSubmit={handleCliSubmit} className="mt-3 pt-2 border-t border-[#73ba25]/20 flex items-center gap-2">
-                <span className="text-[#73ba25] font-bold select-none">&gt;</span>
+              <form onSubmit={handleCliSubmit} className="mt-4 pt-3 border-t border-[#73ba25]/20 flex items-center gap-3">
+                <span className="text-[#73ba25] font-bold select-none text-base">&gt;</span>
                 <input
                   type="text"
                   value={cliInput}
                   onChange={(e) => setCliInput(e.target.value)}
                   placeholder="Type command here (e.g. ls, help)..."
-                  className="flex-1 bg-transparent text-white focus:outline-none placeholder-white/30 font-mono text-xs"
+                  className="flex-1 bg-transparent text-white focus:outline-none placeholder-white/30 font-mono text-xs sm:text-sm"
                   autoFocus
                 />
                 <button
                   type="submit"
-                  className="px-2.5 py-1 bg-[#73ba25] hover:bg-[#64a51e] text-[#10351f] font-bold rounded text-[10px] uppercase flex items-center gap-1 cursor-pointer"
+                  className="px-3.5 py-1.5 bg-[#73ba25] hover:bg-[#64a51e] text-[#10351f] font-bold rounded-xl text-xs uppercase flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
                   <span>Exec</span>
-                  <Send className="w-3 h-3" />
+                  <Send className="w-3.5 h-3.5" />
                 </button>
               </form>
             </div>
 
             {/* Quick Command Pills */}
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono pt-1">
               <span className="text-[#10351f]/60 font-bold">Quick hints:</span>
               {['help', 'ls', 'zypper in geeko', 'cat flag.enc', 'clear'].map((cmd) => (
                 <button
                   key={cmd}
                   onClick={() => setCliInput(cmd)}
-                  className="px-2.5 py-1 rounded bg-[#e8e9dc] hover:bg-[#dcdfcb] border border-[#10351f]/20 text-[#10351f] font-bold active:scale-95 transition-all cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-white hover:bg-[#eaece0] border border-[#10351f]/20 text-[#10351f] font-bold active:scale-95 transition-all cursor-pointer shadow-sm"
                 >
                   {cmd}
                 </button>
@@ -251,27 +249,27 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
         )}
 
         {activeTab === 'trivia' && (
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div>
-              <h3 className="text-lg font-display font-black uppercase text-[#10351f]">
+              <h3 className="text-xl font-display font-black uppercase text-[#10351f]">
                 openSUSE Community Blitz Trivia
               </h3>
-              <p className="text-xs text-[#10351f]/70 font-mono">
+              <p className="text-xs sm:text-sm text-[#10351f]/70 font-mono mt-0.5">
                 Test your Linux and openSUSE pedigree! Score 3/3 to claim the Master Geeko title.
               </p>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {triviaQuestions.map((item, qIdx) => (
-                <div key={qIdx} className="p-3.5 rounded-xl bg-white border border-[#10351f]/15 shadow-sm space-y-2.5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-full bg-[#10351f] text-[#73ba25] text-xs font-mono font-bold flex items-center justify-center">
+                <div key={qIdx} className="p-4 sm:p-5 rounded-2xl bg-white border border-[#10351f]/15 shadow-sm space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="w-6 h-6 rounded-full bg-[#10351f] text-[#73ba25] text-xs font-mono font-bold flex items-center justify-center">
                       {qIdx + 1}
                     </span>
-                    <h4 className="font-bold text-xs text-[#10351f]">{item.q}</h4>
+                    <h4 className="font-bold text-sm sm:text-base text-[#10351f]">{item.q}</h4>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 font-mono text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 font-mono text-xs sm:text-sm">
                     {item.options.map((opt, optIdx) => {
                       const isSelected = triviaAnswers[qIdx] === optIdx;
                       const isCorrect = item.correct === optIdx;
@@ -284,14 +282,14 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
                           btnStyle = 'bg-red-100 border-red-500 text-red-900 line-through';
                         }
                       } else if (isSelected) {
-                        btnStyle = 'bg-[#10351f] text-white font-bold border-[#10351f]';
+                        btnStyle = 'bg-[#10351f] text-white font-bold border-[#10351f] shadow-sm';
                       }
 
                       return (
                         <button
                           key={optIdx}
                           onClick={() => handleTriviaOption(qIdx, optIdx)}
-                          className={`p-2.5 rounded-lg border text-left flex items-center justify-between transition-all active:scale-[0.98] cursor-pointer ${btnStyle}`}
+                          className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all active:scale-[0.98] cursor-pointer ${btnStyle}`}
                         >
                           <span>{opt}</span>
                           {triviaSubmitted && isCorrect && <CheckCircle2 className="w-4 h-4 text-green-600" />}
@@ -310,16 +308,16 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
                   setTriviaAnswers({});
                   setTriviaSubmitted(false);
                 }}
-                className="px-4 py-2 rounded-xl border border-[#10351f]/20 text-[#10351f] font-mono text-xs font-bold hover:bg-black/5 flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2.5 rounded-xl border border-[#10351f]/20 text-[#10351f] font-mono text-xs font-bold hover:bg-black/5 flex items-center gap-1.5 cursor-pointer bg-white"
               >
-                <RefreshCw className="w-3.5 h-3.5" />
+                <RefreshCw className="w-4 h-4" />
                 <span>Reset</span>
               </button>
 
               <button
                 onClick={handleTriviaSubmit}
                 disabled={Object.keys(triviaAnswers).length < triviaQuestions.length}
-                className="px-6 py-2.5 rounded-xl bg-[#73ba25] hover:bg-[#64a51e] text-[#10351f] font-display font-black text-xs uppercase tracking-wider shadow-beveled-green active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
+                className="px-8 py-3 rounded-2xl bg-[#73ba25] hover:bg-[#64a51e] text-[#10351f] font-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-beveled-green active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
               >
                 Submit Answers
               </button>
@@ -328,29 +326,29 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
         )}
 
         {activeTab === 'bughunt' && (
-          <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-[#10351f] text-white space-y-2">
+          <div className="space-y-5">
+            <div className="p-6 rounded-3xl bg-[#10351f] text-white space-y-3 shadow-xl">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded bg-[#73ba25] text-[#10351f] font-mono font-black text-[10px] uppercase">
+                <span className="px-3 py-1 rounded-full bg-[#73ba25] text-[#10351f] font-mono font-black text-xs uppercase">
                   Day 2 · 01:00 AM - 04:00 AM
                 </span>
                 <span className="text-xs font-mono text-[#73ba25] font-bold">₹2,000 Cash Pool</span>
               </div>
-              <h3 className="text-lg font-display font-black tracking-wide uppercase">
+              <h3 className="text-2xl font-display font-black tracking-wide uppercase">
                 THE MIDNIGHT BUG HUNT &amp; TRIAGE
               </h3>
-              <p className="text-xs text-white/80 leading-relaxed">
+              <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-2xl">
                 When the rest of Bengaluru sleeps, open source contributors shine! Hunt down, reproduce, and file verified patches or PRs against openSUSE packages, YaST modules, or Open Build Service issues.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#eef1e1] border border-[#10351f]/20 flex items-center justify-between">
+            <div className="p-6 rounded-3xl bg-[#eef1e1] border border-[#10351f]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <h4 className="font-display font-black uppercase text-xs text-[#10351f]">
+                <h4 className="font-display font-black uppercase text-sm sm:text-base text-[#10351f]">
                   Reserve Midnight Bug Hunt Slot
                 </h4>
-                <p className="text-[11px] text-[#10351f]/70 font-mono">
-                  Limited to 40 verified participants with laptops.
+                <p className="text-xs font-mono text-[#10351f]/70 mt-0.5">
+                  Limited to 40 verified participants with laptops. Mentors present on campus.
                 </p>
               </div>
               <button
@@ -359,9 +357,9 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
                   setBugHuntRsvp(!bugHuntRsvp);
                   if (!bugHuntRsvp) confetti({ particleCount: 50, spread: 60 });
                 }}
-                className={`px-5 py-2.5 rounded-xl font-display font-black text-xs uppercase tracking-wider transition-all active:scale-95 cursor-pointer ${
+                className={`px-6 py-3 rounded-2xl font-display font-black text-xs sm:text-sm uppercase tracking-wider transition-all active:scale-95 cursor-pointer whitespace-nowrap ${
                   bugHuntRsvp
-                    ? 'bg-green-600 text-white shadow-sm'
+                    ? 'bg-green-600 text-white shadow-md'
                     : 'bg-[#10351f] text-white hover:bg-[#1a4a2c] shadow-beveled'
                 }`}
               >
@@ -373,15 +371,15 @@ export const PagePlayground: React.FC<PagePlaygroundProps> = ({ onBackToHome, st
       </div>
 
       {/* Bottom Sub-Bar */}
-      <div className="pt-4 border-t border-[#10351f]/15 flex items-center justify-between text-xs font-mono text-[#10351f]/70">
+      <div className="max-w-4xl mx-auto w-full pt-6 border-t border-[#10351f]/15 flex items-center justify-between text-xs sm:text-sm font-mono text-[#10351f]/70">
         <button
           onClick={() => {
             playButtonThud();
             onBackToHome();
           }}
-          className="flex items-center gap-1 hover:text-[#10351f] font-bold cursor-pointer"
+          className="flex items-center gap-1.5 hover:text-[#10351f] font-bold cursor-pointer"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-4 h-4" />
           <span>Home Menu</span>
         </button>
         <span>Interactive Zone · Bengaluru Connect 2027</span>

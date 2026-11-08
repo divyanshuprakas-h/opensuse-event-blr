@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { playButtonThud } from '../utils/audio';
-import { Sparkles, ArrowRight } from 'lucide-react';
 
 interface PanelHomeProps {
   onNavigate: (page: 'discover' | 'buildathon' | 'playground' | 'merch') => void;
-  standalone?: boolean;
 }
 
-export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate, standalone = false }) => {
+export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate }) => {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
   const handleAction = (page: 'discover' | 'buildathon' | 'playground' | 'merch') => {
@@ -16,23 +14,20 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate, standalone = f
   };
 
   return (
-    <div
-      className={`relative w-full rounded-[32px] border-2 border-[#10351f] overflow-hidden shadow-2xl select-none bg-[#f5f6ed] flex flex-col items-center justify-center transition-all ${
-        standalone ? 'max-w-md mx-auto min-h-[680px]' : 'w-full h-full min-h-[640px]'
-      }`}
-    >
-      {/* Background Graphic from Mockup */}
-      <div className="relative w-full aspect-[472/670] max-h-[82vh] overflow-hidden flex items-center justify-center">
+    <div className="w-full min-h-screen h-screen bg-[#f5f6ed] flex items-center justify-center overflow-hidden select-none relative animate-fadeIn">
+      
+      {/* Top Tag: 02 / HOME (Fixed at top-left of the screen) */}
+      <div className="absolute top-0 left-0 bg-[#10351f] text-white text-xs sm:text-sm font-mono font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-br-2xl shadow-lg z-30 tracking-wider">
+        02 / HOME
+      </div>
+
+      {/* Main Full-Height Kiosk Stage */}
+      <div className="relative h-screen max-h-screen w-auto aspect-[472/670] max-w-full flex items-center justify-center overflow-hidden shadow-2xl">
         <img
           src={`${import.meta.env.BASE_URL}panel-home.jpg`}
           alt="openSUSE Bengaluru Connect '27 Home Screen"
           className="w-full h-full object-cover pointer-events-none select-none"
         />
-
-        {/* Top Tag: 02 / HOME */}
-        <div className="absolute top-0 left-0 bg-[#10351f] text-white text-[11px] font-mono font-bold px-3.5 py-1.5 rounded-br-2xl shadow-md z-20">
-          02 / HOME
-        </div>
 
         {/* 4 Precise Interactive Hotspot Overlays on the 4 Buttons */}
         
@@ -53,12 +48,12 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate, standalone = f
           <div
             className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
               hoveredButton === 'discover'
-                ? 'ring-2 ring-[#10351f] bg-white/25 shadow-lg scale-[1.02]'
+                ? 'ring-2 ring-[#10351f] bg-white/30 shadow-xl scale-[1.02]'
                 : 'bg-transparent'
             }`}
           >
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-mono font-bold text-[#10351f] bg-white/90 px-1.5 py-0.5 rounded shadow">
-              Open ↗
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] sm:text-xs font-mono font-bold text-[#10351f] bg-white/95 px-2 py-0.5 rounded shadow">
+              Open Details ↗
             </span>
           </div>
         </button>
@@ -80,12 +75,12 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate, standalone = f
           <div
             className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
               hoveredButton === 'buildathon'
-                ? 'ring-2 ring-white/90 bg-white/20 shadow-xl scale-[1.02]'
+                ? 'ring-2 ring-white/90 bg-white/25 shadow-2xl scale-[1.02]'
                 : 'bg-transparent'
             }`}
           >
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-mono font-black text-white bg-[#10351f] px-2 py-0.5 rounded shadow-sm">
-              Register ⚡
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] sm:text-xs font-mono font-black text-white bg-[#10351f] px-2 py-0.5 rounded shadow">
+              Register Pass ⚡
             </span>
           </div>
         </button>
@@ -107,12 +102,12 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate, standalone = f
           <div
             className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
               hoveredButton === 'playground'
-                ? 'ring-2 ring-[#10351f] bg-white/25 shadow-lg scale-[1.02]'
+                ? 'ring-2 ring-[#10351f] bg-white/30 shadow-xl scale-[1.02]'
                 : 'bg-transparent'
             }`}
           >
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-mono font-bold text-[#10351f] bg-white/90 px-1.5 py-0.5 rounded shadow">
-              Play 🎮
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] sm:text-xs font-mono font-bold text-[#10351f] bg-white/95 px-2 py-0.5 rounded shadow">
+              Play Arcade 🎮
             </span>
           </div>
         </button>
@@ -134,12 +129,12 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate, standalone = f
           <div
             className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
               hoveredButton === 'merch'
-                ? 'ring-2 ring-[#10351f] bg-white/25 shadow-lg scale-[1.02]'
+                ? 'ring-2 ring-[#10351f] bg-white/30 shadow-xl scale-[1.02]'
                 : 'bg-transparent'
             }`}
           >
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-mono font-bold text-[#10351f] bg-white/90 px-1.5 py-0.5 rounded shadow">
-              Reveal 👕
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] sm:text-xs font-mono font-bold text-[#10351f] bg-white/95 px-2 py-0.5 rounded shadow">
+              Reveal Merch 👕
             </span>
           </div>
         </button>
@@ -147,7 +142,7 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate, standalone = f
         {/* Bottom Pill: JANUARY 2027 · DATES TBA (Y: ~91%) */}
         <button
           onClick={() => handleAction('discover')}
-          className="absolute bottom-5 z-20 cursor-pointer px-4 py-1.5 rounded-full hover:bg-black/5 transition-all text-transparent"
+          className="absolute z-20 cursor-pointer px-4 py-1.5 rounded-full hover:bg-black/5 transition-all text-transparent"
           style={{
             bottom: '4.5%',
             left: '22%',

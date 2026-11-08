@@ -1,18 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { ArrowLeft, ShoppingBag, Sparkles, Check, Heart } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowLeft, ShoppingBag, Sparkles } from 'lucide-react';
 import { playButtonThud, playSuccessChime } from '../utils/audio';
 
 interface PanelMerchProps {
   onBackToHome: () => void;
-  onOpenPreorderModal?: () => void;
-  standalone?: boolean;
 }
 
-export const PanelMerch: React.FC<PanelMerchProps> = ({
-  onBackToHome,
-  onOpenPreorderModal,
-  standalone = false,
-}) => {
+export const PanelMerch: React.FC<PanelMerchProps> = ({ onBackToHome }) => {
   const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -63,36 +57,35 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
       onMouseUp={handleMouseUp}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className={`relative bg-[#f5f6ed] rounded-[32px] border-2 border-[#10351f] p-5 sm:p-6 flex flex-col justify-between overflow-hidden shadow-2xl select-none transition-all ${
-        standalone ? 'max-w-md mx-auto min-h-[680px]' : 'w-full h-full min-h-[640px]'
-      }`}
+      className="w-full min-h-screen bg-[#f5f6ed] flex flex-col justify-between p-6 sm:p-12 relative overflow-x-hidden select-none animate-fadeIn"
     >
       {/* Top Header Row */}
-      <div className="flex items-center justify-between">
+      <div className="w-full flex items-center justify-between z-20">
         {/* Top Tag: 03 / MERCH REVEAL */}
-        <div className="bg-[#10351f] text-white text-[11px] font-mono font-bold px-3.5 py-1.5 rounded-br-2xl -mt-5 -ml-5 sm:-mt-6 sm:-ml-6 shadow-md">
+        <div className="bg-[#10351f] text-white text-xs sm:text-sm font-mono font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-br-2xl shadow-lg -mt-6 -ml-6 sm:-mt-12 sm:-ml-12 tracking-wider">
           03 / MERCH REVEAL
         </div>
 
-        {/* Back Button [ ← ] */}
+        {/* Back Button [ ← Return to Home ] */}
         <button
           onClick={() => {
             playButtonThud();
             onBackToHome();
           }}
           title="Return to Home Menu"
-          className="w-8 h-8 rounded-xl bg-[#f7f9ee] border-2 border-[#ccd5b8] text-[#14281a] flex items-center justify-center hover:bg-white active:translate-y-0.5 shadow-sm transition-all cursor-pointer"
+          className="px-3.5 py-2 rounded-xl bg-white/80 hover:bg-white border-2 border-[#10351f]/20 text-[#10351f] font-mono text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-sm active:translate-y-0.5 transition-all cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
+          <span>RETURN TO HOME</span>
         </button>
       </div>
 
-      {/* Main Merchandise Display */}
-      <div className="flex flex-col items-center justify-center my-auto py-2">
+      {/* Main Merchandise Display Area */}
+      <div className="flex flex-col items-center justify-center my-auto py-4 max-w-xl mx-auto w-full text-center">
         
-        {/* Bold Headline: WEAR YOUR OPEN SOURCE. */}
-        <div className="text-center mb-4">
-          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#10351f] tracking-tight uppercase leading-tight">
+        {/* Bold Headline */}
+        <div className="mb-4">
+          <h2 className="font-display font-black text-3xl sm:text-5xl text-[#10351f] tracking-tight uppercase leading-tight">
             WEAR YOUR <br />
             OPEN SOURCE.
           </h2>
@@ -102,11 +95,11 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
         <div
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
-          className="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center cursor-grab active:cursor-grabbing"
+          className="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center cursor-grab active:cursor-grabbing my-2"
         >
           {/* Glowing Orbital Neon Rings */}
           <div className="absolute inset-0 rounded-full border border-[#73ba25]/40 animate-ping opacity-30 pointer-events-none" style={{ animationDuration: '4s' }} />
-          <div className="absolute w-56 h-56 rounded-full border border-dashed border-[#8fe038]/60 animate-spin opacity-50 pointer-events-none" style={{ animationDuration: '20s' }} />
+          <div className="absolute w-64 h-64 rounded-full border border-dashed border-[#8fe038]/60 animate-spin opacity-50 pointer-events-none" style={{ animationDuration: '22s' }} />
 
           {/* Interactive Rotatable T-Shirt */}
           <div
@@ -114,11 +107,11 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
               transform: `perspective(800px) rotateY(${rotation}deg)`,
               transition: isDragging ? 'none' : 'transform 0.3s ease-out',
             }}
-            className="relative z-10 w-48 sm:w-56 drop-shadow-[0_20px_25px_rgba(0,0,0,0.18)]"
+            className="relative z-10 w-56 sm:w-64 drop-shadow-[0_25px_30px_rgba(0,0,0,0.18)]"
           >
             {/* SVG T-Shirt Silhouette */}
             <svg viewBox="0 0 200 200" className="w-full h-full">
-              {/* T-Shirt Base Body (Off-white) */}
+              {/* T-Shirt Base Body */}
               <path
                 d="M 60 25 L 80 40 C 90 45, 110 45, 120 40 L 140 25 L 185 55 L 165 90 L 150 80 L 150 185 L 50 185 L 50 80 L 35 90 L 15 55 Z"
                 fill="#fcfcf8"
@@ -153,7 +146,7 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
                 <circle cx="122" cy="25" r="6" fill="#173f35" />
               </g>
 
-              {/* Front Print: Text Typography */}
+              {/* Front Print: Typography */}
               <text
                 x="100"
                 y="135"
@@ -182,11 +175,11 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
           </div>
 
           {/* Pedestal Base with Glowing LED segments */}
-          <div className="absolute -bottom-2 w-48 sm:w-56 h-8 rounded-full bg-[#1b3d22] border-2 border-[#73ba25] shadow-[0_0_20px_rgba(115,186,37,0.6)] flex items-center justify-center">
-            <div className="flex gap-1.5">
-              <span className="w-5 h-1.5 rounded-full bg-[#8fe038] shadow-[0_0_8px_#8fe038] animate-pulse" />
-              <span className="w-5 h-1.5 rounded-full bg-[#8fe038] shadow-[0_0_8px_#8fe038] animate-pulse" style={{ animationDelay: '0.2s' }} />
-              <span className="w-5 h-1.5 rounded-full bg-[#8fe038] shadow-[0_0_8px_#8fe038] animate-pulse" style={{ animationDelay: '0.4s' }} />
+          <div className="absolute -bottom-2 w-56 sm:w-64 h-8 rounded-full bg-[#1b3d22] border-2 border-[#73ba25] shadow-[0_0_25px_rgba(115,186,37,0.6)] flex items-center justify-center">
+            <div className="flex gap-2">
+              <span className="w-6 h-1.5 rounded-full bg-[#8fe038] shadow-[0_0_8px_#8fe038] animate-pulse" />
+              <span className="w-6 h-1.5 rounded-full bg-[#8fe038] shadow-[0_0_8px_#8fe038] animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <span className="w-6 h-1.5 rounded-full bg-[#8fe038] shadow-[0_0_8px_#8fe038] animate-pulse" style={{ animationDelay: '0.4s' }} />
             </div>
           </div>
         </div>
@@ -198,22 +191,22 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
             <span>🖱️</span>
             <span>→</span>
           </div>
-          <span className="text-[11px] font-semibold tracking-wide mt-0.5">
+          <span className="text-xs font-semibold tracking-wide mt-0.5">
             Drag to explore in 3D
           </span>
         </div>
 
         {/* Interactive Size Selector & Action */}
-        <div className="mt-4 flex flex-col items-center gap-2.5">
-          <div className="flex items-center gap-1.5">
+        <div className="mt-4 flex flex-col items-center gap-3 w-full max-w-xs">
+          <div className="flex items-center justify-center gap-2">
             {['S', 'M', 'L', 'XL', 'XXL'].map((sz) => (
               <button
                 key={sz}
                 onClick={() => setSelectedSize(sz)}
-                className={`w-7 h-7 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                className={`w-8 h-8 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
                   selectedSize === sz
-                    ? 'bg-[#10351f] text-white border-2 border-[#73ba25]'
-                    : 'bg-[#f7f9ee] text-[#14281a] border border-[#ccd5b8] hover:bg-white'
+                    ? 'bg-[#10351f] text-white border-2 border-[#73ba25] shadow-sm'
+                    : 'bg-white text-[#10351f] border border-[#ccd5b8] hover:bg-[#f7f9ee]'
                 }`}
               >
                 {sz}
@@ -223,23 +216,21 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
 
           <button
             onClick={handlePreorder}
-            className="px-5 py-2 rounded-xl bg-gradient-to-r from-geeko-500 to-geeko-400 text-white font-display font-bold text-xs uppercase tracking-wider shadow-beveled-green active:translate-y-0.5 transition-all cursor-pointer flex items-center gap-1.5"
+            className="w-full py-3 rounded-2xl bg-[#73ba25] hover:bg-[#64a51e] text-[#10351f] font-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-beveled-green active:translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-2"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
+            <ShoppingBag className="w-4 h-4" />
             <span>{preordered ? `Size ${selectedSize} Reserved!` : `Reserve Size ${selectedSize} T-Shirt`}</span>
           </button>
         </div>
-
       </div>
 
       {/* Bottom Green Badge */}
-      <div className="pt-2">
-        <div className="w-full py-2 px-3 rounded-full bg-[#10351f] text-white text-[11px] font-mono text-center font-bold tracking-wide shadow-sm border border-[#73ba25]/40 flex items-center justify-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-[#8fe038]" />
+      <div className="w-full max-w-md mx-auto pt-2 z-20">
+        <div className="w-full py-2.5 px-4 rounded-full bg-[#10351f] text-white text-xs font-mono text-center font-bold tracking-wide shadow-md border border-[#73ba25]/40 flex items-center justify-center gap-2">
+          <Sparkles className="w-4 h-4 text-[#8fe038]" />
           <span>Paid merchandise + selected winner rewards</span>
         </div>
       </div>
-
     </div>
   );
 };
