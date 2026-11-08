@@ -57,19 +57,19 @@ export const PanelBoot: React.FC<PanelBootProps> = ({ onBootComplete }) => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#f5f6ed] flex flex-col justify-between p-6 sm:p-12 relative overflow-hidden select-none animate-fadeIn">
+    <div className="w-screen h-screen min-h-screen bg-[#f5f6ed] flex flex-col justify-between p-5 sm:p-8 md:p-12 relative overflow-hidden select-none animate-fadeIn">
       
       {/* Top Header Row */}
       <div className="w-full flex items-center justify-between z-20">
         {/* Top Tag: 01 / BOOT */}
-        <div className="bg-[#10351f] text-white text-xs sm:text-sm font-mono font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-br-2xl shadow-lg -mt-6 -ml-6 sm:-mt-12 sm:-ml-12 tracking-wider">
+        <div className="bg-[#10351f] text-white text-xs sm:text-sm font-mono font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-br-2xl shadow-md -mt-5 -ml-5 sm:-mt-8 sm:-ml-8 md:-mt-12 md:-ml-12 tracking-wider">
           01 / BOOT
         </div>
 
         <button
           onClick={handleRestart}
           title="Reboot Sequence"
-          className="text-xs sm:text-sm font-mono text-[#10351f]/70 hover:text-[#10351f] font-bold cursor-pointer flex items-center gap-1.5 bg-white/60 hover:bg-white px-3 py-1.5 rounded-xl border border-[#10351f]/10 transition-all"
+          className="text-xs sm:text-sm font-mono text-[#10351f]/70 hover:text-[#10351f] font-bold cursor-pointer flex items-center gap-1.5 bg-white/70 hover:bg-white px-3 py-1.5 rounded-xl border border-[#10351f]/10 transition-all shadow-sm"
         >
           <RefreshCw className="w-3.5 h-3.5" />
           <span>Reboot</span>
@@ -77,9 +77,9 @@ export const PanelBoot: React.FC<PanelBootProps> = ({ onBootComplete }) => {
       </div>
 
       {/* Center Logo & Branding Stage */}
-      <div className="flex flex-col items-center justify-center my-auto py-6 text-center max-w-lg mx-auto w-full">
+      <div className="flex flex-col items-center justify-center my-auto py-4 text-center max-w-lg mx-auto w-full">
         {/* openSUSE Chameleon Icon with Pulse Aura */}
-        <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center mb-6">
+        <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 flex items-center justify-center mb-5">
           <div className="absolute inset-0 rounded-full bg-[#73ba25]/20 animate-ping opacity-40 pointer-events-none" style={{ animationDuration: '3.5s' }} />
           <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-2xl relative z-10">
             <circle cx="50" cy="50" r="46" fill="#73ba25" />
@@ -111,7 +111,7 @@ export const PanelBoot: React.FC<PanelBootProps> = ({ onBootComplete }) => {
       </div>
 
       {/* Bottom Progress Bar & Action Area */}
-      <div className="max-w-md mx-auto w-full space-y-4 pb-4 z-20">
+      <div className="max-w-md mx-auto w-full space-y-3.5 pb-2 z-20">
         {/* Progress Bar Track */}
         <div className="w-full h-3.5 sm:h-4 rounded-full bg-[#dbe3cb] p-0.5 overflow-hidden border border-[#b8c5a2] shadow-inner">
           <div

@@ -14,19 +14,21 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="w-full min-h-screen h-screen bg-[#f5f6ed] flex items-center justify-center overflow-hidden select-none relative animate-fadeIn">
+    <div className="w-screen h-screen min-h-screen bg-[#f5f6ed] flex items-center justify-center overflow-hidden select-none relative animate-fadeIn">
       
-      {/* Top Tag: 02 / HOME (Fixed at top-left of the screen) */}
-      <div className="absolute top-0 left-0 bg-[#10351f] text-white text-xs sm:text-sm font-mono font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-br-2xl shadow-lg z-30 tracking-wider">
-        02 / HOME
-      </div>
+      {/* Centered High-Resolution Full-Height Artwork Stage */}
+      <div className="relative h-screen max-h-screen w-auto aspect-[472/670] max-w-full flex items-center justify-center overflow-hidden">
+        
+        {/* Top Tag: 02 / HOME (Positioned directly on the top-left of the panel) */}
+        <div className="absolute top-0 left-0 bg-[#10351f] text-white text-xs sm:text-sm font-mono font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-br-2xl shadow-md z-30 tracking-wider">
+          02 / HOME
+        </div>
 
-      {/* Main Full-Height Kiosk Stage */}
-      <div className="relative h-screen max-h-screen w-auto aspect-[472/670] max-w-full flex items-center justify-center overflow-hidden shadow-2xl">
+        {/* Ultra-High-Definition (1888x2680 4K) Artwork */}
         <img
           src={`${import.meta.env.BASE_URL}panel-home.jpg`}
           alt="openSUSE Bengaluru Connect '27 Home Screen"
-          className="w-full h-full object-cover pointer-events-none select-none"
+          className="w-full h-full object-contain pointer-events-none select-none drop-shadow-none"
         />
 
         {/* 4 Precise Interactive Hotspot Overlays on the 4 Buttons */}
@@ -46,7 +48,7 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate }) => {
           aria-label="Discover the Event - Details, Venue & Schedule"
         >
           <div
-            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
+            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3.5 ${
               hoveredButton === 'discover'
                 ? 'ring-2 ring-[#10351f] bg-white/30 shadow-xl scale-[1.02]'
                 : 'bg-transparent'
@@ -73,7 +75,7 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate }) => {
           aria-label="Geeko Buildathon - Tracks, ₹50,000 Prizes & Registration"
         >
           <div
-            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
+            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3.5 ${
               hoveredButton === 'buildathon'
                 ? 'ring-2 ring-white/90 bg-white/25 shadow-2xl scale-[1.02]'
                 : 'bg-transparent'
@@ -100,7 +102,7 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate }) => {
           aria-label="Geeko Playground - Terminal Escape Room, Trivia Blitz & Bug Hunt"
         >
           <div
-            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
+            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3.5 ${
               hoveredButton === 'playground'
                 ? 'ring-2 ring-[#10351f] bg-white/30 shadow-xl scale-[1.02]'
                 : 'bg-transparent'
@@ -127,7 +129,7 @@ export const PanelHome: React.FC<PanelHomeProps> = ({ onNavigate }) => {
           aria-label="Geeko Merch - 3D T-Shirt Reveal & Pre-Orders"
         >
           <div
-            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3 ${
+            className={`w-full h-full rounded-2xl transition-all flex items-center justify-between px-3.5 ${
               hoveredButton === 'merch'
                 ? 'ring-2 ring-[#10351f] bg-white/30 shadow-xl scale-[1.02]'
                 : 'bg-transparent'
