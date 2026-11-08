@@ -2,109 +2,93 @@ import React, { useState, useEffect } from 'react';
 import { PanelBoot } from './components/PanelBoot';
 import { PanelHome } from './components/PanelHome';
 import { PanelMerch } from './components/PanelMerch';
-import { ModalDiscover } from './components/ModalDiscover';
-import { ModalBuildathon } from './components/ModalBuildathon';
-import { ModalPlayground } from './components/ModalPlayground';
+import { PageDiscover } from './components/PageDiscover';
+import { PageBuildathon } from './components/PageBuildathon';
+import { PagePlayground } from './components/PagePlayground';
 import { AdminDashboard } from './components/AdminDashboard';
-import { Columns, Smartphone, Volume2, VolumeX, Shield, FileText, Sparkles } from 'lucide-react';
-import { playButtonThud, playSuccessChime, toggleMute } from './utils/audio';
+import { Smartphone, LayoutGrid, Volume2, VolumeX, Shield, FileText } from 'lucide-react';
+import { playButtonThud, playTabClick, toggleMute } from './utils/audio';
+
+type PageRoute = 'boot' | 'home' | 'merch' | 'discover' | 'buildathon' | 'playground';
 
 export function App() {
+  const [activePage, setActivePage] = useState<PageRoute>('boot');
   const [isAdminView, setIsAdminView] = useState(false);
-  const [viewMode, setViewMode] = useState<'panoramic' | 'single'>('panoramic');
-  const [activeSingleTab, setActiveSingleTab] = useState<'boot' | 'home' | 'merch'>('home');
+  const [isArtboardView, setIsArtboardView] = useState(false);
   const [muted, setMuted] = useState(false);
 
-  // Modals state
-  const [isDiscoverOpen, setIsDiscoverOpen] = useState(false);
-  const [isBuildathonOpen, setIsBuildathonOpen] = useState(false);
-  const [isPlaygroundOpen, setIsPlaygroundOpen] = useState(false);
-
-  // Hash route listener for #admin or #proposal
+  // Sync state with URL Hash
   useEffect(() => {
-    const checkHash = () => {
-      const hash = window.location.hash.toLowerCase();
-      if (hash === '#admin' || hash === '#/admin') {
+    const handleHashChange = () => {
+      const hash = window.location.hash.toLowerCase().replace('#/', '').replace('#', '');
+      if (hash === 'admin') {
         setIsAdminView(true);
-      } else if (hash === '#proposal' || hash === '#/proposal') {
+      } else if (hash === 'proposal') {
         window.location.href = `${import.meta.env.BASE_URL}proposal/`;
+      } else if (['boot', 'home', 'merch', 'discover', 'buildathon', 'playground'].includes(hash)) {
+        setIsAdminView(false);
+        setActivePage(hash as PageRoute);
       } else {
         setIsAdminView(false);
+        // Default on first visit: boot sequence
+        setActivePage('boot');
       }
     };
-    checkHash();
-    window.addEventListener('hashchange', checkHash);
-    window.addEventListener('popstate', checkHash);
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
     return () => {
-      window.removeEventListener('hashchange', checkHash);
-      window.removeEventListener('popstate', checkHash);
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
     };
   }, []);
 
-  // Set default view based on screen width on initial load
-  useEffect(() => {
-    if (window.innerWidth < 1024) {
-      setViewMode('single');
-      setActiveSingleTab('home');
-    }
-  }, []);
+  const navigateTo = (page: PageRoute) => {
+    playTabClick();
+    setActivePage(page);
+    window.location.hash = `#/${page}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleSoundToggle = () => {
     const nextMuted = toggleMute();
     setMuted(nextMuted);
-    if (!nextMuted) {
-      playButtonThud();
-    }
+    if (!nextMuted) playButtonThud();
   };
 
   const handleBackToSite = () => {
     setIsAdminView(false);
-    if (window.location.hash.toLowerCase().startsWith('#admin')) {
-      window.history.pushState(null, '', window.location.pathname + window.location.search);
-    }
+    navigateTo('home');
   };
 
-  const handleGoToMerch = () => {
-    playButtonThud();
-    if (viewMode === 'single') {
-      setActiveSingleTab('merch');
-    } else {
-      const merchEl = document.getElementById('panel-merch-view');
-      merchEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
-
-  const handleBackFromMerch = () => {
-    playButtonThud();
-    if (viewMode === 'single') {
-      setActiveSingleTab('home');
-    } else {
-      const homeEl = document.getElementById('panel-home-view');
-      homeEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
-
-  const handleBootComplete = () => {
-    if (viewMode === 'single' && activeSingleTab === 'boot') {
-      setActiveSingleTab('home');
-    }
-  };
-
-  // If Admin Portal is active
+  // If Admin Dashboard is active
   if (isAdminView) {
     return <AdminDashboard onBackToSite={handleBackToSite} />;
   }
 
+  const pageNavItems: Array<{ id: PageRoute; label: string; tag: string }> = [
+    { id: 'boot', label: 'Boot', tag: '01' },
+    { id: 'home', label: 'Home', tag: '02' },
+    { id: 'merch', label: 'Merch', tag: '03' },
+    { id: 'discover', label: 'Discover', tag: '04' },
+    { id: 'buildathon', label: 'Buildathon', tag: '05' },
+    { id: 'playground', label: 'Playground', tag: '06' },
+  ];
+
   return (
     <div className="min-h-screen bg-[#ecefe2] text-[#10351f] flex flex-col justify-between selection:bg-[#73ba25] selection:text-[#10351f] font-sans antialiased overflow-x-hidden">
       
-      {/* Top Header / View Controller */}
-      <header className="w-full bg-[#f5f6ed]/90 backdrop-blur-md border-b border-[#2b4c30]/20 py-2.5 px-4 sm:px-8 sticky top-0 z-40 transition-all">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      {/* Top Header & Page Switcher */}
+      <header className="w-full bg-[#f5f6ed]/95 backdrop-blur-md border-b border-[#10351f]/15 py-2.5 px-3 sm:px-6 sticky top-0 z-40 transition-all shadow-sm">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
-          {/* Logo & Event Tag */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-[#73ba25] flex items-center justify-center p-1 shadow-sm border border-[#10351f]/20">
+          {/* Logo & Branding */}
+          <button
+            onClick={() => navigateTo('home')}
+            className="flex items-center gap-2.5 text-left cursor-pointer group"
+          >
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#73ba25] flex items-center justify-center p-1 shadow-sm border border-[#10351f]/20 group-hover:scale-105 transition-transform">
               <svg viewBox="0 0 100 100" className="w-full h-full">
                 <circle cx="50" cy="50" r="46" fill="#10351f" />
                 <path
@@ -116,71 +100,59 @@ export function App() {
               </svg>
             </div>
             <div>
-              <div className="font-display font-black text-sm tracking-tight text-[#10351f] leading-none uppercase">
-                openSUSE India · Bengaluru Connect '27
+              <div className="font-display font-black text-xs sm:text-sm tracking-tight text-[#10351f] leading-none uppercase">
+                openSUSE Connect '27
               </div>
-              <div className="text-[10px] font-mono text-[#10351f]/70 font-semibold leading-tight">
-                Newton School of Technology Campus · January 2027
+              <div className="text-[9px] sm:text-[10px] font-mono text-[#10351f]/70 font-semibold leading-tight hidden xs:block">
+                Bengaluru · Newton School of Tech
               </div>
             </div>
-          </div>
+          </button>
 
-          {/* Center Tabs for Single-View Mode on Mobile/Tablet */}
-          {viewMode === 'single' && (
-            <div className="flex items-center bg-[#e4e8d8] p-1 rounded-xl border border-[#2b4c30]/20 text-xs font-mono font-bold">
-              <button
-                onClick={() => { playButtonThud(); setActiveSingleTab('boot'); }}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  activeSingleTab === 'boot'
-                    ? 'bg-[#10351f] text-white shadow-sm'
-                    : 'text-[#10351f]/80 hover:bg-black/5'
-                }`}
-              >
-                01 / BOOT
-              </button>
-              <button
-                onClick={() => { playButtonThud(); setActiveSingleTab('home'); }}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  activeSingleTab === 'home'
-                    ? 'bg-[#10351f] text-white shadow-sm'
-                    : 'text-[#10351f]/80 hover:bg-black/5'
-                }`}
-              >
-                02 / HOME
-              </button>
-              <button
-                onClick={() => { playButtonThud(); setActiveSingleTab('merch'); }}
-                className={`px-3 py-1 rounded-lg transition-all ${
-                  activeSingleTab === 'merch'
-                    ? 'bg-[#10351f] text-white shadow-sm'
-                    : 'text-[#10351f]/80 hover:bg-black/5'
-                }`}
-              >
-                03 / MERCH
-              </button>
-            </div>
-          )}
+          {/* Center Page Nav Bar */}
+          <nav className="flex items-center bg-[#e4e8d8] p-1 rounded-xl border border-[#10351f]/15 text-[11px] sm:text-xs font-mono font-bold overflow-x-auto max-w-[50vw] sm:max-w-none">
+            {pageNavItems.map((item) => {
+              const isActive = activePage === item.id && !isArtboardView;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setIsArtboardView(false);
+                    navigateTo(item.id);
+                  }}
+                  className={`px-2.5 sm:px-3 py-1 rounded-lg transition-all whitespace-nowrap cursor-pointer flex items-center gap-1 ${
+                    isActive
+                      ? 'bg-[#10351f] text-white shadow-sm'
+                      : 'text-[#10351f]/80 hover:bg-black/5'
+                  }`}
+                >
+                  <span className={isActive ? 'text-[#73ba25]' : 'opacity-60'}>{item.tag}</span>
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
 
-          {/* Right Controls */}
-          <div className="flex items-center gap-2">
-            {/* View Mode Toggle Button */}
+          {/* Right Action Tools */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* View Mode Toggle: Single Page vs Artboard Comparison */}
             <button
               onClick={() => {
                 playButtonThud();
-                setViewMode(viewMode === 'panoramic' ? 'single' : 'panoramic');
+                setIsArtboardView(!isArtboardView);
               }}
-              className="px-3 py-1.5 rounded-xl bg-[#f5f6ed] hover:bg-white border border-[#2b4c30]/20 text-[#10351f] text-xs font-mono font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition-all"
-              title="Toggle between 3-Panel Panoramic View and Single Panel Focus"
+              className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-[#f5f6ed] hover:bg-white border border-[#10351f]/15 text-[#10351f] text-xs font-mono font-bold flex items-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer"
+              title={isArtboardView ? 'Switch to Full Page Mode' : 'View All 3 Mockup Artboards Side-by-Side'}
             >
-              {viewMode === 'panoramic' ? (
+              {isArtboardView ? (
                 <>
-                  <Smartphone className="w-3.5 h-3.5 text-[#73ba25]" />
-                  <span className="hidden sm:inline">FOCUS VIEW</span>
+                  <Smartphone className="w-4 h-4 text-[#73ba25]" />
+                  <span className="hidden md:inline">PAGE MODE</span>
                 </>
               ) : (
                 <>
-                  <Columns className="w-3.5 h-3.5 text-[#73ba25]" />
-                  <span className="hidden sm:inline">3-PANEL VIEW</span>
+                  <LayoutGrid className="w-4 h-4 text-[#73ba25]" />
+                  <span className="hidden md:inline">ARTBOARD VIEW</span>
                 </>
               )}
             </button>
@@ -188,7 +160,7 @@ export function App() {
             {/* Sound FX Toggle */}
             <button
               onClick={handleSoundToggle}
-              className={`p-2 rounded-xl border border-[#2b4c30]/20 text-xs font-bold transition-all shadow-sm active:scale-95 ${
+              className={`p-2 rounded-xl border border-[#10351f]/15 text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer ${
                 muted ? 'bg-red-50 text-red-700' : 'bg-[#f5f6ed] text-[#10351f] hover:bg-white'
               }`}
               title={muted ? 'Unmute Sound Effects' : 'Mute Sound Effects'}
@@ -196,11 +168,11 @@ export function App() {
               {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-[#73ba25]" />}
             </button>
 
-            {/* Admin Dashboard shortcut */}
+            {/* Admin Shield shortcut */}
             <button
               onClick={() => setIsAdminView(true)}
-              className="p-2 rounded-xl bg-[#f5f6ed] hover:bg-white border border-[#2b4c30]/20 text-[#10351f] text-xs font-mono font-bold transition-all shadow-sm active:scale-95"
-              title="Admin & Registration Dashboard"
+              className="p-2 rounded-xl bg-[#f5f6ed] hover:bg-white border border-[#10351f]/15 text-[#10351f] text-xs font-mono font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+              title="Admin Portal"
             >
               <Shield className="w-4 h-4 text-[#10351f]" />
             </button>
@@ -208,93 +180,92 @@ export function App() {
         </div>
       </header>
 
-      {/* Main Showcase Stage */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex items-center justify-center">
-        {viewMode === 'panoramic' ? (
-          /* PANORAMIC 3-PANEL ROW (EXACT MOCKUP LAYOUT) */
+      {/* Main Page Stage */}
+      <main className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 flex items-center justify-center">
+        {isArtboardView ? (
+          /* ARTBOARD VIEW: All 3 Reference Screens Side-by-Side */
           <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-6 items-stretch justify-center max-w-6xl">
-            {/* Panel 1: 01 / BOOT (3 / 12 width) */}
             <div className="md:col-span-3 min-h-[580px] lg:min-h-[640px] flex flex-col">
-              <PanelBoot onBootComplete={handleBootComplete} standalone={false} />
+              <PanelBoot onBootComplete={() => navigateTo('home')} standalone={false} />
             </div>
-
-            {/* Panel 2: 02 / HOME (5.5 / 12 width - Centerpiece) */}
-            <div id="panel-home-view" className="md:col-span-5 min-h-[580px] lg:min-h-[640px] flex flex-col">
-              <PanelHome
-                onOpenDiscover={() => setIsDiscoverOpen(true)}
-                onOpenBuildathon={() => setIsBuildathonOpen(true)}
-                onOpenPlayground={() => setIsPlaygroundOpen(true)}
-                onOpenMerch={handleGoToMerch}
-                standalone={false}
-              />
+            <div className="md:col-span-5 min-h-[580px] lg:min-h-[640px] flex flex-col">
+              <PanelHome onNavigate={(p) => { setIsArtboardView(false); navigateTo(p); }} standalone={false} />
             </div>
-
-            {/* Panel 3: 03 / MERCH REVEAL (3.5 / 12 width) */}
-            <div id="panel-merch-view" className="md:col-span-4 min-h-[580px] lg:min-h-[640px] flex flex-col">
-              <PanelMerch
-                onBackToHome={handleBackFromMerch}
-                standalone={false}
-              />
+            <div className="md:col-span-4 min-h-[580px] lg:min-h-[640px] flex flex-col">
+              <PanelMerch onBackToHome={() => navigateTo('home')} standalone={false} />
             </div>
           </div>
         ) : (
-          /* SINGLE PANEL FOCUS MODE (CAROUSEL / MOBILE FRIENDLY) */
-          <div className="w-full max-w-md mx-auto my-auto py-2">
-            {activeSingleTab === 'boot' && (
-              <PanelBoot onBootComplete={() => setActiveSingleTab('home')} standalone={true} />
+          /* PAGE MODE: Dedicated Full Page Experience */
+          <div className="w-full flex items-center justify-center py-2 animate-fadeIn">
+            {activePage === 'boot' && (
+              <PanelBoot onBootComplete={() => navigateTo('home')} standalone={true} />
             )}
-            {activeSingleTab === 'home' && (
-              <PanelHome
-                onOpenDiscover={() => setIsDiscoverOpen(true)}
-                onOpenBuildathon={() => setIsBuildathonOpen(true)}
-                onOpenPlayground={() => setIsPlaygroundOpen(true)}
-                onOpenMerch={() => setActiveSingleTab('merch')}
+
+            {activePage === 'home' && (
+              <PanelHome onNavigate={(p) => navigateTo(p)} standalone={true} />
+            )}
+
+            {activePage === 'merch' && (
+              <PanelMerch onBackToHome={() => navigateTo('home')} standalone={true} />
+            )}
+
+            {activePage === 'discover' && (
+              <PageDiscover
+                onBackToHome={() => navigateTo('home')}
+                onGoToBuildathon={() => navigateTo('buildathon')}
                 standalone={true}
               />
             )}
-            {activeSingleTab === 'merch' && (
-              <PanelMerch
-                onBackToHome={() => setActiveSingleTab('home')}
-                standalone={true}
-              />
+
+            {activePage === 'buildathon' && (
+              <PageBuildathon onBackToHome={() => navigateTo('home')} standalone={true} />
+            )}
+
+            {activePage === 'playground' && (
+              <PagePlayground onBackToHome={() => navigateTo('home')} standalone={true} />
             )}
           </div>
         )}
       </main>
 
-      {/* Bottom Sub-Bar: Quick Actions & Live Stats */}
-      <footer className="w-full bg-[#f5f6ed]/80 backdrop-blur-md border-t border-[#2b4c30]/20 py-3 px-4 sm:px-8 text-xs font-mono text-[#10351f]/80">
+      {/* Bottom Sub-Bar: Live Telemetry & Quick Links */}
+      <footer className="w-full bg-[#f5f6ed]/90 backdrop-blur-md border-t border-[#10351f]/15 py-3 px-4 sm:px-8 text-xs font-mono text-[#10351f]/80">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#73ba25] animate-ping" />
-            <span className="font-bold">LIVE STATUS:</span>
-            <span>Pre-Registrations &amp; Buildathon Proposals Active · NST Campus</span>
+            <span className="font-bold">PAGE:</span>
+            <span className="uppercase text-[#10351f] font-bold">
+              {activePage.toUpperCase()}
+            </span>
+            <span className="text-slate-400">·</span>
+            <span>openSUSE Bengaluru Connect '27</span>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px] font-bold">
+          <div className="flex items-center gap-3 sm:gap-4 text-[11px] font-bold">
             <button
-              onClick={() => { playButtonThud(); setIsDiscoverOpen(true); }}
-              className="hover:text-[#73ba25] transition-colors"
+              onClick={() => navigateTo('discover')}
+              className="hover:text-[#73ba25] transition-colors cursor-pointer"
             >
-              [ VENUE &amp; PILLARS ]
+              [ 04 / DISCOVER ]
             </button>
             <button
-              onClick={() => { playButtonThud(); setIsBuildathonOpen(true); }}
-              className="hover:text-[#73ba25] transition-colors"
+              onClick={() => navigateTo('buildathon')}
+              className="hover:text-[#73ba25] transition-colors cursor-pointer"
             >
-              [ PRIZES &amp; TRACKS ]
+              [ 05 / BUILDATHON ]
             </button>
             <button
-              onClick={() => { playButtonThud(); setIsPlaygroundOpen(true); }}
-              className="hover:text-[#73ba25] transition-colors"
+              onClick={() => navigateTo('playground')}
+              className="hover:text-[#73ba25] transition-colors cursor-pointer"
             >
-              [ ESCAPE ROOM &amp; TRIVIA ]
+              [ 06 / PLAYGROUND ]
             </button>
             <a
               href={`${import.meta.env.BASE_URL}proposal/`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#73ba25] transition-colors flex items-center gap-1"
+              className="hover:text-[#73ba25] transition-colors flex items-center gap-1 cursor-pointer"
             >
               <FileText className="w-3.5 h-3.5" />
               <span>PROPOSAL PDF</span>
@@ -302,26 +273,6 @@ export function App() {
           </div>
         </div>
       </footer>
-
-      {/* Interactive Modals */}
-      <ModalDiscover
-        isOpen={isDiscoverOpen}
-        onClose={() => setIsDiscoverOpen(false)}
-        onOpenBuildathon={() => {
-          setIsDiscoverOpen(false);
-          setIsBuildathonOpen(true);
-        }}
-      />
-
-      <ModalBuildathon
-        isOpen={isBuildathonOpen}
-        onClose={() => setIsBuildathonOpen(false)}
-      />
-
-      <ModalPlayground
-        isOpen={isPlaygroundOpen}
-        onClose={() => setIsPlaygroundOpen(false)}
-      />
     </div>
   );
 }

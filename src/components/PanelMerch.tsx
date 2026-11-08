@@ -63,14 +63,14 @@ export const PanelMerch: React.FC<PanelMerchProps> = ({
       onMouseUp={handleMouseUp}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className={`relative bg-[#f5f6ed] rounded-[28px] border-2 border-[#2b4c30] p-5 flex flex-col justify-between overflow-hidden shadow-2xl select-none ${
-        standalone ? 'min-h-[640px] sm:min-h-[700px]' : 'h-full min-h-[560px]'
+      className={`relative bg-[#f5f6ed] rounded-[32px] border-2 border-[#10351f] p-5 sm:p-6 flex flex-col justify-between overflow-hidden shadow-2xl select-none transition-all ${
+        standalone ? 'max-w-md mx-auto min-h-[680px]' : 'w-full h-full min-h-[640px]'
       }`}
     >
       {/* Top Header Row */}
       <div className="flex items-center justify-between">
         {/* Top Tag: 03 / MERCH REVEAL */}
-        <div className="bg-[#10351f] text-white text-[11px] font-mono font-bold px-3 py-1 rounded-br-xl -mt-5 -ml-5 shadow-sm">
+        <div className="bg-[#10351f] text-white text-[11px] font-mono font-bold px-3.5 py-1.5 rounded-br-2xl -mt-5 -ml-5 sm:-mt-6 sm:-ml-6 shadow-md">
           03 / MERCH REVEAL
         </div>
 
